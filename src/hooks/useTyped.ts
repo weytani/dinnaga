@@ -23,6 +23,8 @@ export function useTyped(lines: BootLine[]) {
           out[lineIdx] = line.text.slice(0, charIdx + 1);
           charIdx += 1;
           setRendered([...out]);
+          // Per-character cadence — the `delay === 30` branch is a verbatim
+          // port artifact from the UI kit's terminal; kept for fidelity.
           await sleep(line.delay === 30 ? 10 : 14);
         } else {
           lineIdx += 1;
