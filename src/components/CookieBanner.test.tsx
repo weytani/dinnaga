@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the CookieBanner consent overlay component.
+// ABOUTME: Verifies Accept and Decline buttons both dismiss the banner and fire the onDismiss callback.
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';

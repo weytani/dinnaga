@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the Practices accordion component listing the three service areas.
+// ABOUTME: Verifies expand/collapse on click and Enter keypress interactions.
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';

@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the SiteFooter component with three link columns and brand block.
+// ABOUTME: Verifies all three footer columns and the copyright notice render correctly.
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { SiteFooter } from './SiteFooter';

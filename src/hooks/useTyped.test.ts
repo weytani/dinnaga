@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the useTyped hook that drives character-by-character terminal animation.
+// ABOUTME: Covers full reveal, initial empty state, and cancellation on unmount.
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { useTyped } from './useTyped';

@@ -1,3 +1,5 @@
+// ABOUTME: Integration test for the Home route — the full long-scroll homepage composition.
+// ABOUTME: Verifies key section headings and the CRT overlay are present after render.
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Home } from './Home';

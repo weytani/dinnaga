@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the Ticker scrolling marquee and AsciiArt decorative components.
+// ABOUTME: Verifies the ticker duplicates items for a seamless loop and the ASCII heading renders.
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Ticker } from './Ticker';

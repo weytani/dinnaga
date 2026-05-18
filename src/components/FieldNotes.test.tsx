@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the FieldNotes grid section with category filter chips.
+// ABOUTME: Verifies all notes render by default and category filtering reduces the visible set.
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';

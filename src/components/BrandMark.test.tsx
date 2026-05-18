@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the BrandMark and CautionDivider leaf components.
+// ABOUTME: Verifies the brand SVG sizes correctly and the divider renders.
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { BrandMark } from './BrandMark';

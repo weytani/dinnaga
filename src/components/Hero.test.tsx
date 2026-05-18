@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the Hero above-the-fold section and the Terminal interactive component.
+// ABOUTME: Covers headline/CTA rendering, boot sequence reveal, question submission, and reset.
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';

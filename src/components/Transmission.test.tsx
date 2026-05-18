@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the Transmission email subscription form component.
+// ABOUTME: Verifies success state on valid email submission and rejection of invalid input.
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';

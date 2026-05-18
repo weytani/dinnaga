@@ -1,3 +1,5 @@
+// ABOUTME: Tests for all static content data files (fieldNotes, practices, surfaceData, etc.).
+// ABOUTME: Verifies shape, length, and category constraints for each data export.
 import { describe, expect, it } from 'vitest';
 import { FIELD_NOTES } from './fieldNotes';
 import { PRACTICES } from './practices';

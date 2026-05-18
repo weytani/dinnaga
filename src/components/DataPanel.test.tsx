@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the DataPanel dossier component showing surface data and team profile.
+// ABOUTME: Verifies all six data rows render and both panel headings are present.
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { DataPanel } from './DataPanel';

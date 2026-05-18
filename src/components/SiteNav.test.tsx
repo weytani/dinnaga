@@ -1,3 +1,5 @@
+// ABOUTME: Tests for the SiteNav sticky navigation component.
+// ABOUTME: Covers the mount animation green square and nav link click callbacks.
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
