@@ -1,0 +1,301 @@
+/* =====================================================================
+   DINNAGA DESIGN SYSTEM — Components
+   Buttons, chips, inputs, cards, panels, dividers, hud-plates.
+   Depends on colors_and_type.css.
+   ===================================================================== */
+
+/* ── Buttons ───────────────────────────────────────────────────────── */
+
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg-1);
+  --btn-border: var(--seam-strong);
+  --btn-hover-bg: var(--fg-1);
+  --btn-hover-fg: var(--bg-1);
+  --btn-hover-border: var(--fg-1);
+
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 44px;
+  padding: 0 var(--sp-5);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-0);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--t-detail);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+  position: relative;
+  white-space: nowrap;
+}
+
+.btn:hover  { background: var(--btn-hover-bg); color: var(--btn-hover-fg); border-color: var(--btn-hover-border); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+.btn:disabled, .btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-primary {
+  --btn-bg: var(--signal);
+  --btn-fg: var(--bg-1);
+  --btn-border: var(--signal);
+  --btn-hover-bg: var(--fg-1);
+  --btn-hover-fg: var(--bg-1);
+  --btn-hover-border: var(--fg-1);
+}
+.btn-primary:hover { box-shadow: var(--glow-signal); }
+
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg-1);
+  --btn-border: var(--seam-strong);
+}
+
+.btn-signal {
+  --btn-bg: transparent;
+  --btn-fg: var(--signal);
+  --btn-border: var(--signal);
+  --btn-hover-bg: var(--signal);
+  --btn-hover-fg: var(--bg-1);
+  --btn-hover-border: var(--signal);
+}
+
+.btn-danger {
+  --btn-bg: transparent;
+  --btn-fg: var(--error);
+  --btn-border: var(--error);
+  --btn-hover-bg: var(--error);
+  --btn-hover-fg: var(--bg-1);
+  --btn-hover-border: var(--error);
+}
+
+.btn-sm { height: 32px; padding: 0 var(--sp-3); font-size: var(--t-detail-sm); }
+.btn-lg { height: 52px; padding: 0 var(--sp-7); font-size: var(--t-detail); }
+
+/* ── Chip / pill (sparingly rounded) ───────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 24px;
+  padding: 0 var(--sp-2);
+  background: var(--bg-2);
+  color: var(--fg-2);
+  border: 1px solid var(--seam-strong);
+  border-radius: var(--radius-1);
+  font-family: var(--font-mono);
+  font-size: var(--t-detail-sm);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+.chip-signal { background: var(--signal); color: var(--bg-1); border-color: var(--signal); }
+.chip-warn   { background: transparent; color: var(--warn);  border-color: var(--warn); }
+.chip-error  { background: transparent; color: var(--error); border-color: var(--error); }
+.chip-ghost  { background: transparent; color: var(--fg-3); }
+
+/* ── Inputs ────────────────────────────────────────────────────────── */
+
+.input, .textarea, .select {
+  width: 100%;
+  display: block;
+  height: 44px;
+  padding: 0 var(--sp-4);
+  background: var(--bg-2);
+  color: var(--fg-1);
+  border: 1px solid var(--seam-strong);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-detail);
+  letter-spacing: var(--ls-mono);
+  outline: none;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.input::placeholder, .textarea::placeholder { color: var(--fg-4); }
+.input:hover { border-color: var(--fg-4); }
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--signal);
+  box-shadow: var(--glow-signal);
+}
+.textarea { height: auto; min-height: 120px; padding: var(--sp-3) var(--sp-4); resize: vertical; line-height: var(--lh-mono); }
+
+.field { display: grid; gap: var(--sp-2); }
+.field-label {
+  font-family: var(--font-mono);
+  font-size: var(--t-detail-sm);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg-4);
+}
+.field-hint { font-family: var(--font-mono); font-size: var(--t-detail-sm); color: var(--fg-4); }
+.field-error { font-family: var(--font-mono); font-size: var(--t-detail-sm); color: var(--error); }
+
+/* ── Card / Panel ──────────────────────────────────────────────────── */
+
+.card {
+  background: var(--bg-2);
+  border: 1px solid var(--seam-strong);
+  padding: var(--sp-6);
+  position: relative;
+  transition: background var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+.card:hover { background: var(--surface); border-color: var(--seam-strong); }
+
+.card-flat {
+  /* Marathon's seam-grid card — uses 1px gaps between cards rather than
+     padding/shadow. Place inside a grid with gap:1px and background:var(--seam). */
+  background: var(--bg-1);
+  padding: var(--sp-6);
+  transition: background var(--dur-base) var(--ease-out);
+}
+.card-flat:hover { background: var(--surface); }
+
+.panel {
+  background: var(--bg-1);
+  border: 1px solid var(--seam-strong);
+  padding: var(--sp-7);
+}
+.panel-head { display: flex; align-items: baseline; gap: var(--sp-3); margin-bottom: var(--sp-6); }
+.panel-idx { font-family: var(--font-mono); font-size: var(--t-detail-sm); color: var(--signal); letter-spacing: var(--ls-eyebrow); }
+
+/* ── Dividers / Seams ──────────────────────────────────────────────── */
+
+.divider { height: 1px; background: var(--seam-strong); }
+.divider-soft { height: 1px; background: var(--seam-soft); }
+
+/* Caution stripes — diagonal warning hash */
+.caution-stripes {
+  height: 28px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--signal) 0 24px,
+    var(--bg-1) 24px 48px
+  );
+  border-top: 1px solid var(--bg-1);
+  border-bottom: 1px solid var(--bg-1);
+}
+
+/* ── HUD plate (decorative content frame) ──────────────────────────── */
+
+.hud-plate {
+  position: relative;
+  background:
+    radial-gradient(circle at 30% 40%, #102a05, #050505 65%),
+    linear-gradient(180deg, #080808, #121212);
+  border: 1px solid var(--signal);
+  overflow: hidden;
+}
+.hud-plate::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(192, 254, 4, 0.06) 1px, transparent 1px) 0 0 / 100% 40px,
+    linear-gradient(90deg, rgba(192, 254, 4, 0.06) 1px, transparent 1px) 0 0 / 40px 100%;
+  pointer-events: none;
+}
+
+/* Scanline overlay (apply to a child) */
+.scanlines {
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(192,254,4,0.06) 0 2px,
+    transparent 2px 4px
+  );
+}
+
+/* ── Status dot ────────────────────────────────────────────────────── */
+
+.dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--signal);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 0 2px rgba(192,254,4,0.18);
+}
+.dot-warn  { background: var(--warn);  box-shadow: 0 0 0 2px rgba(255,176,32,0.18); }
+.dot-error { background: var(--error); box-shadow: 0 0 0 2px rgba(242,71,35,0.18); }
+.dot-idle  { background: var(--fg-4);  box-shadow: 0 0 0 2px rgba(113,113,113,0.18); }
+
+/* Pulsing variant for live signals */
+.dot-live { animation: dot-pulse 1.6s var(--ease-in-out) infinite; }
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(192,254,4,0.18); }
+  50%      { box-shadow: 0 0 0 6px rgba(192,254,4,0.04); }
+}
+
+/* ── Marquee ticker ────────────────────────────────────────────────── */
+
+.ticker {
+  overflow: hidden;
+  border-top: 1px solid var(--seam-strong);
+  border-bottom: 1px solid var(--seam-strong);
+  background: var(--bg-1);
+}
+.ticker-track {
+  display: flex;
+  gap: var(--sp-8);
+  padding: var(--sp-2) 0;
+  white-space: nowrap;
+  animation: ticker-scroll 38s linear infinite;
+}
+.ticker-text {
+  font-family: var(--font-mono);
+  font-size: var(--t-detail-sm);
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--signal);
+  text-transform: uppercase;
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Container / layout helpers ────────────────────────────────────── */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.stack { display: grid; gap: var(--sp-4); }
+.row { display: flex; align-items: center; gap: var(--sp-3); }
+.spacer { flex: 1; }
+
+/* Seam grid: 1px hairline gaps between children */
+.seam-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--seam-strong);
+}
+.seam-grid > * { background: var(--bg-1); }
+
+/* ── Reveal animation (used by nav/hero on mount) ──────────────────── */
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+  animation: clip-reveal 800ms var(--ease-reveal) forwards;
+}
+@keyframes clip-reveal {
+  to { clip-path: inset(0); }
+}
+
+/* Subtle hover lift — used very sparingly */
+.lift { transition: transform var(--dur-base) var(--ease-out); }
+.lift:hover { transform: translateY(-1px); }
