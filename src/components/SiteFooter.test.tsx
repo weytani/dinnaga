@@ -18,6 +18,10 @@ describe('SiteFooter', () => {
       '/atisha',
     );
     expect(screen.getByRole('link', { name: 'Colophon' })).toHaveAttribute('href', '/colophon');
+    expect(screen.getByRole('link', { name: 'Atisha project' })).toHaveAttribute(
+      'href',
+      'https://github.com/orgs/Dinnaga-Research/projects/1',
+    );
     expect(screen.getByText('© 2026 DINNAGA')).toBeInTheDocument();
   });
 });

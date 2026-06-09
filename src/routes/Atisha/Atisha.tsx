@@ -1,7 +1,7 @@
 // ABOUTME: Atisha Initiative route (/atisha) — the open-source validated-reference front door.
 // ABOUTME: Renders mission, the validation bar, and the catalog (or an honest empty-state).
 import { ATISHA_CATALOG } from '../../data/atishaCatalog';
-import { ATISHA_REPO_URL } from '../../data/links';
+import { ATISHA_PROJECT_URL } from '../../data/links';
 import type { AtishaEntry } from '../../types';
 
 export function Atisha({ entries = ATISHA_CATALOG }: { entries?: AtishaEntry[] } = {}) {
@@ -13,7 +13,7 @@ export function Atisha({ entries = ATISHA_CATALOG }: { entries?: AtishaEntry[] }
       </header>
       <p className="panel-body">
         Atisha is an{' '}
-        <a href={ATISHA_REPO_URL}>open-source reference</a> of the tools, skills, and methods the lab
+        <a href={ATISHA_PROJECT_URL}>open-source reference</a> of the tools, skills, and methods the lab
         has validated as genuinely useful — published openly to make AI adoption faster for everyone.
       </p>
       <p className="panel-body">
@@ -23,8 +23,8 @@ export function Atisha({ entries = ATISHA_CATALOG }: { entries?: AtishaEntry[] }
 
       {entries.length === 0 ? (
         <p className="atisha-empty">
-          ▸ The first validated entries are on the way. The catalog lives in the open at{' '}
-          <a href={ATISHA_REPO_URL}>Dinnaga-Research/atisha</a>.
+          ▸ The first validated entries are on the way. The Atisha Initiative is tracked in the open
+          as <a href={ATISHA_PROJECT_URL}>the Atisha project</a>.
         </p>
       ) : (
         <ul className="atisha-catalog">

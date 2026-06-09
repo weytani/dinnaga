@@ -1,8 +1,8 @@
 // ABOUTME: Site footer — brand block, route link columns, and bottom meta strip.
-// ABOUTME: Links route within the SPA; the Atisha column points at the open catalog repo.
+// ABOUTME: Links route within the SPA; the Atisha column points at the open Atisha Initiative project board.
 import { Link } from 'react-router-dom';
 import { BrandMark } from './BrandMark';
-import { ATISHA_REPO_URL } from '../data/links';
+import { ATISHA_PROJECT_URL } from '../data/links';
 
 export function SiteFooter() {
   return (
@@ -26,7 +26,7 @@ export function SiteFooter() {
         </nav>
         <nav className="foot-col" aria-label="Open source">
           <h4>Open source</h4>
-          <a href={ATISHA_REPO_URL}>Atisha catalog</a>
+          <a href={ATISHA_PROJECT_URL}>Atisha project</a>
         </nav>
       </div>
       <div className="foot-meta">

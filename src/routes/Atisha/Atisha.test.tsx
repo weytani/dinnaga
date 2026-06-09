@@ -30,7 +30,7 @@ describe('Atisha', () => {
     render(<MemoryRouter><Atisha /></MemoryRouter>);
     expect(screen.getByRole('heading', { name: /Atisha Initiative/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /open-source reference/i }))
-      .toHaveAttribute('href', 'https://github.com/Dinnaga-Research/atisha');
+      .toHaveAttribute('href', 'https://github.com/orgs/Dinnaga-Research/projects/1');
   });
 
   it('shows the empty-state when the catalog has no entries', () => {
