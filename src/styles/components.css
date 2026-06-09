@@ -299,3 +299,8 @@
 /* Subtle hover lift — used very sparingly */
 .lift { transition: transform var(--dur-base) var(--ease-out); }
 .lift:hover { transform: translateY(-1px); }
+
+/* ── Page prose wrap ───────────────────────────────────────────────── */
+/* Constrains body copy on the standalone routed pages to a readable
+   measure, matching the .section-head max-width. */
+.panel-body-wrap { max-width: 760px; }
