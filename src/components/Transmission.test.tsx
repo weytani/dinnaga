@@ -1,22 +1,12 @@
-// ABOUTME: Tests for the Transmission email subscription form component.
-// ABOUTME: Verifies success state on valid email submission and rejection of invalid input.
+// ABOUTME: Tests the Transmission dispatch renders its heading and mission copy.
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import { Transmission } from './Transmission';
 
 describe('Transmission', () => {
-  it('shows the success state after submitting a valid email', async () => {
+  it('renders the dispatch heading and mission copy', () => {
     render(<Transmission />);
-    await userEvent.type(screen.getByLabelText('Email'), 'reader@dinnaga.ai');
-    await userEvent.click(screen.getByRole('button', { name: 'Subscribe' }));
-    expect(screen.getByText(/TRANSMISSION ACCEPTED/)).toBeInTheDocument();
-  });
-
-  it('does not advance when the email has no @', async () => {
-    render(<Transmission />);
-    await userEvent.type(screen.getByLabelText('Email'), 'not-an-email');
-    await userEvent.click(screen.getByRole('button', { name: 'Subscribe' }));
-    expect(screen.queryByText(/TRANSMISSION ACCEPTED/)).not.toBeInTheDocument();
+    expect(screen.getByText('The Atisha Initiative is open.')).toBeInTheDocument();
+    expect(screen.getByText(/open-source reference/i)).toBeInTheDocument();
   });
 });
