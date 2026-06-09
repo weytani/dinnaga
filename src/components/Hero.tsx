@@ -72,7 +72,10 @@ export function Terminal({ media, bootLines = BOOT_LINES }: TerminalProps) {
     setHistory((h) => [
       ...h,
       { kind: 'in', text: q },
-      { kind: 'out', text: '▸ TRANSMISSION RECEIVED. AN OPERATOR WILL REPLY WITHIN 48H.' },
+      {
+        kind: 'out',
+        text: '▸ TRANSMISSION RECEIVED. NO OPERATOR ON THE LINE — WHAT WE VALIDATE SHIPS TO ATISHA.',
+      },
     ]);
     setInput('');
     setSent(true);
@@ -146,7 +149,7 @@ export function Terminal({ media, bootLines = BOOT_LINES }: TerminalProps) {
             <div className="t-prompt is-done">
               <span className="t-caret">&gt;</span>
               <span style={{ color: 'var(--signal)' }}>
-                NEW TRANSMISSION CLOSED. AWAITING REPLY.
+                NEW TRANSMISSION CLOSED. NO REPLY — WE PUBLISH, WE DO NOT CORRESPOND.
               </span>
               <button
                 type="button"
