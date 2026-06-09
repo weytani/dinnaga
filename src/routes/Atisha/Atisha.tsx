@@ -6,7 +6,7 @@ import type { AtishaEntry } from '../../types';
 
 export function Atisha({ entries = ATISHA_CATALOG }: { entries?: AtishaEntry[] } = {}) {
   return (
-    <main className="section" id="atisha" data-screen-label="Atisha Initiative">
+    <section className="section" id="atisha" data-screen-label="Atisha Initiative">
       <header className="section-head">
         <span className="section-eye">// VALIDATED, THEN SHARED</span>
         <h1 className="section-title">The Atisha Initiative.</h1>
@@ -44,6 +44,6 @@ export function Atisha({ entries = ATISHA_CATALOG }: { entries?: AtishaEntry[] }
           ))}
         </ul>
       )}
-    </main>
+    </section>
   );
 }

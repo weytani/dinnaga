@@ -1,5 +1,40 @@
 /* UI-kit-specific overrides: only the bits that aren't in components.css */
 
+/* ── Accessibility ──────────────────────────────────────────
+   Skip-to-content link (visible only on keyboard focus), a
+   visible focus ring for keyboard users, and a blanket
+   reduced-motion guard that neutralises any animation/transition
+   for visitors who ask the OS to minimise motion. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--signal);
+  color: var(--bg-1);
+  padding: 8px 14px;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 1000;
+}
+:focus-visible {
+  outline: 2px solid var(--signal, #39ff14);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 .site {
   background: var(--bg-1);
   color: var(--fg-1);

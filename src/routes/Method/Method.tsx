@@ -5,7 +5,7 @@ import { PROJECT_PLANNING_URL } from '../../data/links';
 
 export function Method() {
   return (
-    <main className="section" id="method" data-screen-label="How We Work">
+    <section className="section" id="method" data-screen-label="How We Work">
       <header className="section-head">
         <span className="section-eye">// HOW WE WORK</span>
         <h1 className="section-title">From read to ship.</h1>
@@ -28,6 +28,6 @@ export function Method() {
           <a href={PROJECT_PLANNING_URL}>See the project-planning repository →</a>
         </p>
       )}
-    </main>
+    </section>
   );
 }

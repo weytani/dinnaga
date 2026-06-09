@@ -2,7 +2,7 @@
 // ABOUTME: No personal name; states the lab's anonymity and how the site is made.
 export function Colophon() {
   return (
-    <main className="section" id="colophon" data-screen-label="Colophon">
+    <section className="section" id="colophon" data-screen-label="Colophon">
       <header className="section-head">
         <span className="section-eye">// COLOPHON</span>
         <h1 className="section-title">Colophon.</h1>
@@ -17,6 +17,6 @@ export function Colophon() {
           design system. Source for what we publish lives openly under the Dinnaga org.
         </p>
       </div>
-    </main>
+    </section>
   );
 }

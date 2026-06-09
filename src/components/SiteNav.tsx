@@ -6,12 +6,17 @@ import { BrandMark } from './BrandMark';
 import { NAV_LINKS } from '../data/navLinks';
 
 export function SiteNav() {
-  const [showSquare, setShowSquare] = useState(true);
+  // Honour the visitor's reduced-motion preference: never mount the
+  // travelling green square if the OS asks us to minimise motion.
+  const [showSquare, setShowSquare] = useState(
+    () => !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
+  );
 
   useEffect(() => {
+    if (!showSquare) return;
     const t = setTimeout(() => setShowSquare(false), 1300);
     return () => clearTimeout(t);
-  }, []);
+  }, [showSquare]);
 
   return (
     <Fragment>
