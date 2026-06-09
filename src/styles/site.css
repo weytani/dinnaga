@@ -24,7 +24,7 @@
   z-index: 1000;
 }
 :focus-visible {
-  outline: 2px solid var(--signal, #39ff14);
+  outline: 2px solid var(--signal);
   outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
