@@ -20,7 +20,7 @@ describe('content data files', () => {
 
   it('ships three practices', () => {
     expect(PRACTICES).toHaveLength(3);
-    expect(PRACTICES.map((p) => p.icon)).toEqual(['research', 'education', 'consulting']);
+    expect(PRACTICES.map((p) => p.icon)).toEqual(['ethos', 'method', 'atisha']);
   });
 
   it('ships six surface-data rows', () => {

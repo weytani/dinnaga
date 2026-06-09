@@ -12,7 +12,7 @@ export interface FieldNote {
   excerpt: string;
 }
 
-export type PracticeIconName = 'research' | 'education' | 'consulting';
+export type PracticeIconName = 'ethos' | 'method' | 'atisha';
 
 export interface Practice {
   num: string;

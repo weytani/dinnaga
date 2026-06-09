@@ -1,30 +1,30 @@
-// ABOUTME: "Three quiet practices" content — placeholder copy ported from the UI kit.
-// ABOUTME: Swap real copy here; Practices.tsx renders this verbatim.
+// ABOUTME: The lab's stance + two pillars — rendered by Practices.tsx.
+// ABOUTME: Open-source ethos, the project-planning funnel, and the Atisha Initiative.
 import type { Practice } from '../types';
 
 export const PRACTICES: Practice[] = [
   {
     num: '01',
-    title: 'Research',
-    icon: 'research',
-    summary: 'Plainspoken reports on AI adoption — written for operators, not investors.',
-    body: 'Plainspoken reports on AI adoption — written for operators, not investors. We publish quarterly primers and a monthly field-notes index. Everything is open access, machine-readable, and translated into three languages.',
-    meta: '▸ 14 papers · 3 languages',
+    title: 'Open by ethos',
+    icon: 'ethos',
+    summary: 'We validate things and share what is genuinely useful, openly.',
+    body: 'We validate things and share what is genuinely useful, openly — to make AI adoption faster for everyone. The lab is anonymous; the work is real and checkable.',
+    meta: '▸ open source',
   },
   {
     num: '02',
-    title: 'Education',
-    icon: 'education',
-    summary: 'Workshops and primers for general audiences and operators. Practical, hype-free.',
-    body: 'Workshops and primers for general audiences and operators. Practical, hype-free, with materials you keep. Two cohorts a year for foundations; rolling enrollment for advanced topics. Scholarship places held for public-sector applicants.',
-    meta: '▸ 6 cohorts / year',
+    title: 'Project Planning',
+    icon: 'method',
+    summary: 'How the work happens: Read → Digest → Ideate → Experiment → Ship.',
+    body: 'How the work happens. We read papers and releases, digest what matters, ideate, build experiments, and ship the ones that survive. The funnel that feeds everything else.',
+    meta: '▸ read → ship',
   },
   {
     num: '03',
-    title: 'Consulting',
-    icon: 'consulting',
-    summary: 'Durable, no-bullshit engagements helping organizations adopt AI thoughtfully.',
-    body: 'Durable, no-bullshit engagements helping organizations adopt AI thoughtfully. We work mostly with regulated industries — telecoms, public sector, healthcare. Engagements are typically 12 weeks, capped intake.',
-    meta: '▸ 8 engagements/year',
+    title: 'The Atisha Initiative',
+    icon: 'atisha',
+    summary: 'The open-source reference of what we validated as worth sharing.',
+    body: 'What comes out the other end: a public, open-source reference of the tools, skills, and methods we have validated as genuinely useful — so you do not have to take it on faith.',
+    meta: '▸ validated, then shared',
   },
 ];

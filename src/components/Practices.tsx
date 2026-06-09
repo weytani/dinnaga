@@ -1,4 +1,4 @@
-// ABOUTME: "Three quiet practices" section — Research / Education / Consulting.
+// ABOUTME: The lab's stance + two pillars — ethos / Project Planning / Atisha Initiative.
 // ABOUTME: Each card expands on click or Enter/Space to reveal a longer body.
 import { useState } from 'react';
 import type { PracticeIconName } from '../types';
@@ -10,7 +10,7 @@ interface PracticeIconProps {
 
 function PracticeIcon({ name }: PracticeIconProps) {
   const common = { strokeLinecap: 'square', strokeLinejoin: 'miter' } as const;
-  if (name === 'research') {
+  if (name === 'method') {
     return (
       <svg className="practice-icon" viewBox="0 0 24 24" {...common}>
         <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
@@ -20,7 +20,7 @@ function PracticeIcon({ name }: PracticeIconProps) {
       </svg>
     );
   }
-  if (name === 'education') {
+  if (name === 'atisha') {
     return (
       <svg className="practice-icon" viewBox="0 0 24 24" {...common}>
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -75,10 +75,10 @@ function PracticeCard({ num, title, icon, summary, body, meta, open, onToggle }:
 export function Practices() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   return (
-    <section className="section" id="research" data-screen-label="Practices">
+    <section className="section" id="lab" data-screen-label="Practices">
       <header className="section-head">
-        <span className="section-eye">// 02 · WHAT WE DO</span>
-        <h2 className="section-title">Three quiet practices.</h2>
+        <span className="section-eye">// 01 · THE LAB</span>
+        <h2 className="section-title">How the lab works.</h2>
       </header>
       <div className="practices">
         {PRACTICES.map((it, i) => (
