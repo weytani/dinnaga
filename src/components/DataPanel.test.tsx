@@ -1,18 +1,15 @@
-// ABOUTME: Tests for the DataPanel dossier component showing surface data and team profile.
-// ABOUTME: Verifies all six data rows render and both panel headings are present.
+// ABOUTME: Tests the dossier panel renders true lab facts and the "who we are" prose.
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { DataPanel } from './DataPanel';
 
 describe('DataPanel', () => {
-  it('renders all six surface-data rows', () => {
-    const { container } = render(<DataPanel />);
-    expect(container.querySelectorAll('.data-row')).toHaveLength(6);
-  });
-
-  it('renders both dossier panels', () => {
+  it('renders true lab dossier rows and identity prose', () => {
     render(<DataPanel />);
-    expect(screen.getByText('SURFACE DATA')).toBeInTheDocument();
-    expect(screen.getByText('WHO WE ARE')).toBeInTheDocument();
+    expect(screen.getByText('Ethos')).toBeInTheDocument();
+    // "Open source" appears in the Ethos dossier row and a who-we-are bullet; both are true copy.
+    expect(screen.getAllByText(/open source/i).length).toBeGreaterThan(0);
+    expect(screen.getByText('Identity')).toBeInTheDocument();
+    expect(screen.getByText(/anonymous by design/i)).toBeInTheDocument();
   });
 });

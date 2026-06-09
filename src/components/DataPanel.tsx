@@ -27,7 +27,7 @@ export function DataPanel() {
           </dl>
           <footer className="panel-foot">
             <span className="chip chip-signal">PUBLIC</span>
-            <span>Last sync 2026-04-16 // Dinnaga Research</span>
+            <span>// DINNAGA</span>
           </footer>
         </article>
         <article className="panel">
@@ -36,28 +36,28 @@ export function DataPanel() {
             <h3 className="panel-title">WHO WE ARE</h3>
           </header>
           <p className="panel-body">
-            Dinnaga Research is a small, focused team. We're <em>research-first</em>: we publish
-            before we consult, and we teach before we publish. The work is open by default and our
-            roadmap is decided in public.
+            Dinnaga is an anonymous research lab working at the consumer-AI frontier. We are open by
+            default: we validate things ourselves, then publish what is genuinely useful so adoption
+            gets faster for everyone.
           </p>
           <p className="panel-body">
-            We're named for Dignāga — a 6th-century philosopher of perception and inference whose
-            work argued that knowledge belongs to whoever takes the trouble to examine it. We try to
-            keep that bar.
+            Named for Dignāga — a philosopher of perception and valid cognition (pramāṇa) who held
+            that knowledge belongs to whoever takes the trouble to examine it. That is the bar for
+            anything we put our name on.
           </p>
           <ul className="panel-list">
             <li>
-              <span className="panel-bullet">▸</span> All research published under CC-BY 4.0.
+              <span className="panel-bullet">▸</span> Validated before it ships.
             </li>
             <li>
-              <span className="panel-bullet">▸</span> Workshop materials open-source.
+              <span className="panel-bullet">▸</span> Open source by default.
             </li>
             <li>
-              <span className="panel-bullet">▸</span> Engagements declined if outcome can't be
-              shared.
+              <span className="panel-bullet">▸</span> Third-party tools we rely on are credited,
+              never claimed.
             </li>
             <li>
-              <span className="panel-bullet">▸</span> No marketing budget — only field notes.
+              <span className="panel-bullet">▸</span> No marketing — only what works.
             </li>
           </ul>
         </article>
