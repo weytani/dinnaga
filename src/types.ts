@@ -1,17 +1,6 @@
 // ABOUTME: Shared TypeScript types for Dinnaga site content.
 // ABOUTME: Consumed by data files in src/data/ and the components that render them.
 
-export type Category = 'RESEARCH' | 'EDUCATION' | 'CONSULTING';
-
-export interface FieldNote {
-  id: string;
-  cat: Category;
-  date: string;
-  readTime: string;
-  title: string;
-  excerpt: string;
-}
-
 export type PracticeIconName = 'ethos' | 'method' | 'atisha';
 
 export interface Practice {
