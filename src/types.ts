@@ -38,3 +38,17 @@ export interface NavLink {
   label: string;
   to: string;
 }
+
+export type AtishaCategory = 'skill' | 'tool' | 'method' | 'paper';
+
+export interface AtishaEntry {
+  slug: string;
+  title: string;
+  category: AtishaCategory;
+  oneLiner: string;
+  sourceUrl: string;
+  validatedOn: string;
+  whyUseful: string;
+  howValidated: string;
+  attribution: string;
+}
