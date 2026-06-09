@@ -304,3 +304,50 @@
 /* Constrains body copy on the standalone routed pages to a readable
    measure, matching the .section-head max-width. */
 .panel-body-wrap { max-width: 760px; }
+
+/* ── Method loop (How We Work page) ────────────────────────────────── */
+/* Five-stage seam-grid, mirroring the .practices card grid: 1px hairline
+   gaps over a seam background, mono numerals in signal green. */
+.method-loop {
+  list-style: none;
+  margin: var(--sp-8) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--seam-strong);
+  border: 1px solid var(--seam-strong);
+}
+@media (min-width: 768px) { .method-loop { grid-template-columns: repeat(5, 1fr); } }
+.method-stage {
+  background: var(--bg-1);
+  padding: var(--sp-6);
+  display: grid;
+  gap: var(--sp-3);
+  align-content: start;
+  min-height: 180px;
+  transition: background var(--dur-base) var(--ease-out);
+}
+.method-stage:hover { background: var(--surface); }
+.method-num {
+  font-family: var(--font-mono);
+  font-size: var(--t-detail-sm);
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--signal);
+}
+.method-name {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  line-height: var(--lh-heading3);
+  letter-spacing: var(--ls-tight);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+.method-detail {
+  font-family: var(--font-body);
+  font-size: var(--t-detail);
+  line-height: 1.55;
+  color: var(--fg-3);
+  margin: 0;
+}
