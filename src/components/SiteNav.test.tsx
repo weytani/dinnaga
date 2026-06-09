@@ -1,23 +1,16 @@
-// ABOUTME: Tests for the SiteNav sticky navigation component.
-// ABOUTME: Covers the mount animation green square and nav link click callbacks.
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+// ABOUTME: Tests for the route-aware primary navigation.
+// ABOUTME: Verifies brand home link and the three route links render with correct hrefs.
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { SiteNav } from './SiteNav';
 
 describe('SiteNav', () => {
-  it('shows the travelling green square on mount, then removes it', async () => {
-    const { container } = render(<SiteNav />);
-    expect(container.querySelector('.green-square')).not.toBeNull();
-    await waitFor(() => expect(container.querySelector('.green-square')).toBeNull(), {
-      timeout: 2500,
-    });
-  });
-
-  it('calls onNav with the slugified link id when a nav link is clicked', async () => {
-    const onNav = vi.fn();
-    render(<SiteNav onNav={onNav} />);
-    await userEvent.click(screen.getByText('FIELD NOTES'));
-    expect(onNav).toHaveBeenCalledWith('field-notes');
+  it('renders the brand link and route links', () => {
+    render(<MemoryRouter><SiteNav /></MemoryRouter>);
+    expect(screen.getByRole('link', { name: /DINNAGA/ })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'ATISHA' })).toHaveAttribute('href', '/atisha');
+    expect(screen.getByRole('link', { name: 'HOW WE WORK' })).toHaveAttribute('href', '/method');
+    expect(screen.getByRole('link', { name: 'COLOPHON' })).toHaveAttribute('href', '/colophon');
   });
 });

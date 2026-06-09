@@ -1,55 +1,41 @@
-// ABOUTME: Sticky primary navigation — brand mark, 5 links, live-status corner.
+// ABOUTME: Sticky primary navigation — brand mark + route links + live-status corner.
 // ABOUTME: Signature motion: a green square races L→R behind the clip-reveal on mount.
 import { Fragment, useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { BrandMark } from './BrandMark';
 import { NAV_LINKS } from '../data/navLinks';
 
-interface SiteNavProps {
-  onNav?: (id: string) => void;
-}
-
-const toId = (label: string) => label.toLowerCase().replace(/\s+/g, '-');
-
-export function SiteNav({ onNav }: SiteNavProps) {
-  const [showSquare, setShowSquare] = useState(true);
+export function SiteNav() {
+  // Honour the visitor's reduced-motion preference: never mount the
+  // travelling green square if the OS asks us to minimise motion.
+  const [showSquare, setShowSquare] = useState(
+    () => !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
+  );
 
   useEffect(() => {
+    if (!showSquare) return;
     const t = setTimeout(() => setShowSquare(false), 1300);
     return () => clearTimeout(t);
-  }, []);
+  }, [showSquare]);
 
   return (
     <Fragment>
       {showSquare && <div className="green-square" aria-hidden="true" />}
       <nav className="nav" aria-label="Primary">
-        <a
-          className="nav-brand"
-          href="#top"
-          onClick={(e) => {
-            e.preventDefault();
-            onNav?.('top');
-          }}
-        >
+        <Link className="nav-brand" to="/">
           <BrandMark size={26} />
           <span className="word">DINNAGA</span>
-        </a>
+        </Link>
         <div className="nav-links">
           {NAV_LINKS.map((l) => (
-            <a
-              key={l}
-              href={'#' + toId(l)}
-              onClick={(e) => {
-                e.preventDefault();
-                onNav?.(toId(l));
-              }}
-            >
-              {l.toUpperCase()}
-            </a>
+            <NavLink key={l.to} to={l.to}>
+              {l.label.toUpperCase()}
+            </NavLink>
           ))}
         </div>
         <div className="nav-right">
           <span className="dot dot-live" />
-          <span>LIVE · 2026-04-16</span>
+          <span>LIVE</span>
         </div>
       </nav>
     </Fragment>

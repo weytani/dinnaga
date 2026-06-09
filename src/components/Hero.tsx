@@ -1,6 +1,7 @@
 // ABOUTME: Hero — 7/5 split: super-type headline + lede + CTAs, and a boot terminal.
 // ABOUTME: The terminal types its boot sequence on mount then invites a question.
 import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTyped } from '../hooks/useTyped';
 import { BOOT_LINES } from '../data/bootLines';
 import type { BootLine } from '../types';
@@ -17,19 +18,23 @@ interface HeroProps {
 }
 
 export function Hero({ media }: HeroProps) {
+  const navigate = useNavigate();
   return (
     <section className="hero" id="top">
       <div>
-        <span className="hero-eyebrow">// 01 · DINNAGA RESEARCH</span>
-        <h1 className="hero-title">Research for the rest of us.</h1>
+        <span className="hero-eyebrow">// 01 · DINNAGA</span>
+        <h1 className="hero-title">Validated, then shared.</h1>
         <p className="hero-lede">
-          We believe powerful AI is inevitable — and that the best possible outcome is to empower as
-          many people as we can. We work in research, education, and consulting, and publish what we
-          learn.
+          An anonymous research lab at the consumer-AI frontier. We try things, validate what's
+          genuinely useful, and publish it openly — to make adoption faster for everyone.
         </p>
         <div className="hero-ctas">
-          <button className="btn btn-primary">Read the paper</button>
-          <button className="btn btn-ghost">Start a conversation</button>
+          <button className="btn btn-primary" onClick={() => navigate('/atisha')}>
+            See the Atisha Initiative
+          </button>
+          <button className="btn btn-ghost" onClick={() => navigate('/method')}>
+            How we work
+          </button>
         </div>
       </div>
       <div className="hero-art">
@@ -67,7 +72,10 @@ export function Terminal({ media, bootLines = BOOT_LINES }: TerminalProps) {
     setHistory((h) => [
       ...h,
       { kind: 'in', text: q },
-      { kind: 'out', text: '▸ TRANSMISSION RECEIVED. AN OPERATOR WILL REPLY WITHIN 48H.' },
+      {
+        kind: 'out',
+        text: '▸ TRANSMISSION RECEIVED. NO OPERATOR ON THE LINE — WHAT WE VALIDATE SHIPS TO ATISHA.',
+      },
     ]);
     setInput('');
     setSent(true);
@@ -141,7 +149,7 @@ export function Terminal({ media, bootLines = BOOT_LINES }: TerminalProps) {
             <div className="t-prompt is-done">
               <span className="t-caret">&gt;</span>
               <span style={{ color: 'var(--signal)' }}>
-                NEW TRANSMISSION CLOSED. AWAITING REPLY.
+                NEW TRANSMISSION CLOSED. NO REPLY — WE PUBLISH, WE DO NOT CORRESPOND.
               </span>
               <button
                 type="button"

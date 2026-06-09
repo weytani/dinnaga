@@ -1,24 +1,12 @@
-// ABOUTME: Site footer — brand block, three link columns, and bottom meta strip.
-// ABOUTME: Footer column links are structural and kept local to this component.
+// ABOUTME: Site footer — brand block, route link columns, and bottom meta strip.
+// ABOUTME: Links route within the SPA; the Atisha column points at the open Atisha Initiative project board.
+import { Link } from 'react-router-dom';
 import { BrandMark } from './BrandMark';
-
-interface FooterColumn {
-  title: string;
-  links: string[];
-}
-
-const FOOTER_COLUMNS: FooterColumn[] = [
-  { title: 'Research', links: ['Latest papers', 'Field notes', 'Open data', 'Methods'] },
-  {
-    title: 'Education',
-    links: ['Foundations cohort', 'Advanced topics', 'Curriculum (CC-BY)', 'Scholarships'],
-  },
-  { title: 'Studio', links: ['About', 'Consulting brief', 'Press', 'Contact'] },
-];
+import { ATISHA_PROJECT_URL } from '../data/links';
 
 export function SiteFooter() {
   return (
-    <footer className="foot" id="consulting">
+    <footer className="foot" id="footer">
       <div className="foot-inner">
         <div className="foot-brand">
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -26,25 +14,25 @@ export function SiteFooter() {
             <span className="word">DINNAGA</span>
           </div>
           <p>
-            Research, education, and consulting toward the broadest possible adoption of useful AI.
-            Independent, distributed, mostly outdoors.
+            An anonymous AI research lab. We validate what is genuinely useful and publish it openly,
+            to make adoption faster for everyone.
           </p>
         </div>
-        {FOOTER_COLUMNS.map((c) => (
-          <nav className="foot-col" key={c.title} aria-label={c.title}>
-            <h4>{c.title}</h4>
-            {c.links.map((l) => (
-              <a key={l} href="#">
-                {l}
-              </a>
-            ))}
-          </nav>
-        ))}
+        <nav className="foot-col" aria-label="The lab">
+          <h4>The lab</h4>
+          <Link to="/method">How we work</Link>
+          <Link to="/atisha">Atisha Initiative</Link>
+          <Link to="/colophon">Colophon</Link>
+        </nav>
+        <nav className="foot-col" aria-label="Open source">
+          <h4>Open source</h4>
+          <a href={ATISHA_PROJECT_URL}>Atisha project</a>
+        </nav>
       </div>
       <div className="foot-meta">
-        <span>© 2026 DINNAGA RESEARCH</span>
-        <span>// CC-BY 4.0 EXCEPT WHERE NOTED</span>
-        <span>LAST TRANSMISSION 2026-04-16 · 18:42Z</span>
+        <span>© 2026 DINNAGA</span>
+        <span>// VALIDATE · THEN SHARE</span>
+        <span>// OPEN SOURCE</span>
       </div>
     </footer>
   );

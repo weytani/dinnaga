@@ -5,11 +5,21 @@ import type { BootLine } from '../types';
 
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
 export function useTyped(lines: BootLine[]) {
-  const [rendered, setRendered] = useState<string[]>([]);
-  const [done, setDone] = useState(false);
+  // Under reduced motion, paint the final boot text immediately and skip the
+  // per-character animation. The terminal still shows its complete output.
+  const reduced = prefersReducedMotion();
+  const [rendered, setRendered] = useState<string[]>(() =>
+    reduced ? lines.map((l) => l.text) : [],
+  );
+  const [done, setDone] = useState(() => reduced);
 
   useEffect(() => {
+    if (reduced) return;
     let cancelled = false;
     let lineIdx = 0;
     let charIdx = 0;

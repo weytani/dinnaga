@@ -1,0 +1,23 @@
+import { expect, test } from '@playwright/test';
+
+const MOBILE = { width: 375, height: 812 };
+
+async function hasHorizontalOverflow(page: import('@playwright/test').Page) {
+  return page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+  );
+}
+
+test('home renders without horizontal overflow on mobile', async ({ page }) => {
+  await page.setViewportSize(MOBILE);
+  await page.goto('/');
+  expect(await hasHorizontalOverflow(page)).toBe(false);
+});
+
+for (const path of ['/atisha', '/method', '/colophon']) {
+  test(`${path} renders without horizontal overflow on mobile`, async ({ page }) => {
+    await page.setViewportSize(MOBILE);
+    await page.goto(path);
+    expect(await hasHorizontalOverflow(page)).toBe(false);
+  });
+}

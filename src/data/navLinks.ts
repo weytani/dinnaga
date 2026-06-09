@@ -1,3 +1,9 @@
-// ABOUTME: Primary navigation labels — SiteNav derives anchor ids from these.
+// ABOUTME: Primary navigation model — label + route target for each top-level link.
 // ABOUTME: Order is the on-screen order.
-export const NAV_LINKS: string[] = ['Research', 'Education', 'Consulting', 'Field Notes', 'About'];
+import type { NavLink } from '../types';
+
+export const NAV_LINKS: NavLink[] = [
+  { label: 'Atisha', to: '/atisha' },
+  { label: 'How We Work', to: '/method' },
+  { label: 'Colophon', to: '/colophon' },
+];

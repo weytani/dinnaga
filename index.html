@@ -3,8 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dinnaga Research — research, education, consulting for AI adoption</title>
+    <title>Dinnaga — validate, then share</title>
+    <meta
+      name="description"
+      content="An anonymous AI research lab. We validate what is genuinely useful and publish it openly to accelerate AI adoption."
+    />
+    <meta property="og:title" content="Dinnaga — validate, then share" />
+    <meta
+      property="og:description"
+      content="An anonymous AI research lab. We validate what is genuinely useful and publish it openly."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dinnaga.ai/" />
+    <meta property="og:image" content="https://dinnaga.ai/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://dinnaga.ai/og.png" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" type="image/svg+xml" href="/assets/logo-mark.svg" />
+    <script>
+      // Restores the path encoded by 404.html (SPA fallback for GitHub Pages).
+      (function () {
+        var l = window.location;
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

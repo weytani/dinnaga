@@ -3,14 +3,19 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { Hero, Terminal } from './Hero';
 
 describe('Hero', () => {
   it('renders the headline and both CTAs', () => {
-    render(<Hero />);
-    expect(screen.getByText('Research for the rest of us.')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Read the paper' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Start a conversation' })).toBeInTheDocument();
+    render(
+      <MemoryRouter>
+        <Hero />
+      </MemoryRouter>,
+    );
+    expect(screen.getByText('Validated, then shared.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'See the Atisha Initiative' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'How we work' })).toBeInTheDocument();
   });
 });
 
