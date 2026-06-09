@@ -2,9 +2,9 @@
 // ABOUTME: Renders mission, the validation bar, and the catalog (or an honest empty-state).
 import { ATISHA_CATALOG } from '../../data/atishaCatalog';
 import { ATISHA_REPO_URL } from '../../data/links';
+import type { AtishaEntry } from '../../types';
 
-export function Atisha() {
-  const entries = ATISHA_CATALOG;
+export function Atisha({ entries = ATISHA_CATALOG }: { entries?: AtishaEntry[] } = {}) {
   return (
     <main className="section" id="atisha" data-screen-label="Atisha Initiative">
       <header className="section-head">

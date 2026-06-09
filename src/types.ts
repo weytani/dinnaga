@@ -50,5 +50,6 @@ export interface AtishaEntry {
   validatedOn: string;
   whyUseful: string;
   howValidated: string;
+  // '' = first-party / no credit; non-empty = the third-party owner to credit.
   attribution: string;
 }
