@@ -30,6 +30,6 @@ describe('content data files', () => {
   it('ships ticker items, boot lines, and nav links', () => {
     expect(TICKER_ITEMS.length).toBeGreaterThan(0);
     expect(BOOT_LINES.length).toBeGreaterThan(0);
-    expect(NAV_LINKS).toEqual(['Research', 'Education', 'Consulting', 'Field Notes', 'About']);
+    expect(NAV_LINKS.map((l) => l.to)).toEqual(['/atisha', '/method', '/colophon']);
   });
 });
