@@ -46,7 +46,7 @@ describe('HarnessHUD', () => {
     expect(screen.getByText('⊕1')).toBeInTheDocument();
     expect(screen.getByText('✕0')).toBeInTheDocument();
     expect(screen.getByText('GNM·HLR')).toBeInTheDocument();
-    expect(screen.getByText(/The Reliability Spine/)).toBeInTheDocument();
+    expect(screen.getByText('“The Reliability Spine”')).toBeInTheDocument();
     expect(screen.queryByText(/unstable build/i)).not.toBeInTheDocument();
   });
 

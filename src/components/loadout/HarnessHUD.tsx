@@ -89,7 +89,7 @@ export function HarnessHUD({
       </span>
       <span className="lo-build-line">
         <span>{code}</span>
-        <span className="lo-build-name">"{name}"</span>
+        <span className="lo-build-name">“{name}”</span>
         {report.unstable && <span className="lo-stamp">Unstable build</span>}
         <button type="button" className="lo-hud-btn" onClick={onShare}>
           {copied === 'share' ? 'Copied ↗' : 'Share ↗'}
