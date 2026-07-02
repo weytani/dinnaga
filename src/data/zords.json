@@ -1,0 +1,825 @@
+{
+  "generated": "2026-07-01",
+  "costBasis": "estimated tokens = ceil(chars/4) over the manifest text + flavor + headline",
+  "capacity": {
+    "contextBudgetTokens": 8000,
+    "driftMax": 5
+  },
+  "sharedSinks": [
+    "runstate.audit"
+  ],
+  "slots": [
+    {
+      "id": "L0",
+      "system": "Operating System",
+      "layer": "L0-model-adapter",
+      "single": true
+    },
+    {
+      "id": "L1",
+      "system": "Kiroshi Optics",
+      "layer": "L1-trajectory-telemetry",
+      "single": true
+    },
+    {
+      "id": "L2",
+      "system": "Dynalar Limbs",
+      "layer": "L2-tools-skills",
+      "single": true
+    },
+    {
+      "id": "L2.5",
+      "system": "Dynalar Limbs",
+      "layer": "L2.5-skill-lifecycle-gating",
+      "single": true
+    },
+    {
+      "id": "L2.7",
+      "system": "Dynalar Limbs",
+      "layer": "L2.7-retriever-steered-workspace",
+      "single": true
+    },
+    {
+      "id": "L3",
+      "system": "Frontal Cortex",
+      "layer": "L3-context-memory",
+      "single": true
+    },
+    {
+      "id": "L4",
+      "system": "Immune System",
+      "layer": "L4-governance-gate",
+      "single": true
+    },
+    {
+      "id": "DIAG",
+      "system": "Subdermal / Diagnostics",
+      "layer": "L-eval-fidelity|L-posthoc-trace-diagnosis",
+      "single": false
+    }
+  ],
+  "zords": [
+    {
+      "name": "doomgoblin",
+      "code": "DGB",
+      "slot": "L1",
+      "layer": "L1-L4-failure-alerting",
+      "hookPoints": [
+        "post-turn",
+        "pre-continue"
+      ],
+      "manufacturer": "Kiroshi",
+      "tier": "rare",
+      "method": [
+        "critic-verifier-layer",
+        "idle-proactive-compute"
+      ],
+      "improves": [
+        "agent-reliability"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.trajectory",
+          "runstate.turn_prefix",
+          "runstate.alpha_config"
+        ],
+        "writes": [
+          "runstate.failure_risk",
+          "runstate.alert_signal",
+          "runstate.audit"
+        ]
+      },
+      "contextCostTokens": 1506,
+      "tests": 120,
+      "faithful": "GATES A–D PASS",
+      "headline": "One α-conditioned policy sweeps 11 accuracy–earliness operating points — no retraining",
+      "stats": [
+        {
+          "label": "OPERATING POINTS",
+          "value": "11 from one policy",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "FUSION GAIN",
+          "value": "+7.7% HV vs naive",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "α-MONOTONE",
+          "value": "ρ = 1.000",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "Screams before the crash, not after. Tune α to pick how jumpy.",
+      "paper": "2606.05414",
+      "requiresCalibration": true
+    },
+    {
+      "name": "genome",
+      "code": "GNM",
+      "slot": "L1",
+      "layer": "L1-trajectory-telemetry",
+      "hookPoints": [
+        "post-tool-use"
+      ],
+      "manufacturer": "Kiroshi",
+      "tier": "rare",
+      "method": [
+        "event-driven-harness",
+        "critic-verifier-layer"
+      ],
+      "improves": [
+        "agent-reliability",
+        "token-efficiency"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.tool_events"
+        ],
+        "writes": [
+          "runstate.trajectory",
+          "runstate.interventions",
+          "runstate.audit"
+        ]
+      },
+      "contextCostTokens": 471,
+      "tests": 148,
+      "faithful": "FAITHFUL 28/28",
+      "headline": "Governor fires on P-X-P, E→V deficit, X→X spirals — 0 LLM calls in the hot path",
+      "stats": [
+        {
+          "label": "HOT-PATH LLM CALLS",
+          "value": "0",
+          "provenance": "measured"
+        },
+        {
+          "label": "SELF-TUNING THRESHOLD",
+          "value": "χ² 3.841 @ α=.05",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "FAILURE SIGNATURES",
+          "value": "P-X-P · E→V · X→X",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "Reads the run's DNA and nudges before the agent spirals.",
+      "paper": "2606.15579",
+      "requiresCalibration": false
+    },
+    {
+      "name": "openskill",
+      "code": "OSK",
+      "slot": "L2",
+      "layer": "L2-tools-skills",
+      "hookPoints": [
+        "skills-commands"
+      ],
+      "manufacturer": "Dynalar",
+      "tier": "rare",
+      "method": [
+        "skill-induction",
+        "critic-verifier-layer"
+      ],
+      "improves": [
+        "skill-acquisition",
+        "generalization"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.task",
+          "runstate.resources"
+        ],
+        "writes": [
+          "runstate.skills",
+          "runstate.verification"
+        ]
+      },
+      "contextCostTokens": 361,
+      "tests": 262,
+      "faithful": "FAITHFUL",
+      "headline": "Live isolation run 44/44 PASS — self-authored skills land ground-truth-exact",
+      "stats": [
+        {
+          "label": "LIVE ISOLATION RUN",
+          "value": "44/44 PASS",
+          "provenance": "measured"
+        },
+        {
+          "label": "GROUND-TRUTH ANCHORS",
+          "value": "5/5 exact",
+          "provenance": "measured"
+        },
+        {
+          "label": "SKILLS AUTHORED LIVE",
+          "value": "3 evo-* SKILL.md",
+          "provenance": "measured"
+        }
+      ],
+      "flavor": "Grows new skills mid-run, then makes them prove themselves.",
+      "paper": "2606.06741",
+      "requiresCalibration": false
+    },
+    {
+      "name": "gauntlet",
+      "code": "GNT",
+      "slot": "L2.5",
+      "layer": "L2.5-skill-lifecycle-gating",
+      "hookPoints": [
+        "skill-hardening-lifecycle"
+      ],
+      "manufacturer": "Dynalar",
+      "tier": "rare",
+      "method": [
+        "skill-lifecycle-gating",
+        "human-in-loop-gates"
+      ],
+      "improves": [
+        "agent-reliability",
+        "skill-acquisition"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.skills",
+          "runstate.exec_evidence"
+        ],
+        "writes": [
+          "runstate.skill_lifecycle",
+          "runstate.fallbacks"
+        ]
+      },
+      "contextCostTokens": 563,
+      "tests": 210,
+      "faithful": "FAITHFUL",
+      "headline": "Skill regressions 0.821 → 0.000 once every skill has to earn its promotion",
+      "stats": [
+        {
+          "label": "SKILL REGRESSIONS",
+          "value": "0.821 → 0.000",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "PROMOTION BOUNDARY",
+          "value": "Wilson-UCB n* = 25",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "DEMO DETERMINISM",
+          "value": "16/16 byte-identical",
+          "provenance": "measured"
+        }
+      ],
+      "flavor": "Every skill runs the gauntlet before it touches production.",
+      "paper": "2606.08049",
+      "requiresCalibration": false
+    },
+    {
+      "name": "yeetriever",
+      "code": "YTR",
+      "slot": "L2.7",
+      "layer": "L2.7-retriever-steered-workspace",
+      "hookPoints": [
+        "in-trajectory-action"
+      ],
+      "manufacturer": "Dynalar",
+      "tier": "rare",
+      "method": [
+        "workspace-materialization",
+        "grep-navigable-retrieval"
+      ],
+      "improves": [
+        "retrieval-accuracy",
+        "token-efficiency"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.query",
+          "runstate.turn_action",
+          "runstate.retrieval_budget",
+          "runstate.context_slice"
+        ],
+        "writes": [
+          "runstate.workspace",
+          "runstate.workspace_delta",
+          "runstate.ranked_preview",
+          "runstate.pull_stats",
+          "runstate.reset_signal"
+        ]
+      },
+      "contextCostTokens": 2258,
+      "tests": 98,
+      "faithful": "GAPS-FOUND (documented)",
+      "headline": "Dynamic pull() beats single-shot retrieval 1.000 vs 0.580 — with a smaller workspace",
+      "stats": [
+        {
+          "label": "VS SINGLE-SHOT",
+          "value": "1.000 vs 0.580",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "WORKSPACE SIZE",
+          "value": "61.4 docs < 84.1",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "SCALE COLLAPSE",
+          "value": "flat 1.000 @ n=800 (raw: 0.100)",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "Fetch. Good dog. Pulls exactly the docs you point at — nothing you don't.",
+      "paper": "2606.14885",
+      "requiresCalibration": false
+    },
+    {
+      "name": "funes",
+      "code": "FNS",
+      "slot": "L3",
+      "layer": "L3-context-memory",
+      "hookPoints": [
+        "pre-compact"
+      ],
+      "manufacturer": "Zetatech",
+      "tier": "rare",
+      "method": [
+        "learned-memory-value"
+      ],
+      "improves": [
+        "memory-retention"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.memory_candidates"
+        ],
+        "writes": [
+          "runstate.memory"
+        ]
+      },
+      "contextCostTokens": 427,
+      "tests": 148,
+      "faithful": "FAITHFUL",
+      "headline": "Learned memory value holds 0.800 recall where blind heuristics collapse to 0.125",
+      "stats": [
+        {
+          "label": "CONFOUND RETENTION",
+          "value": "1.00 vs uniform 0.575",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "BLIND RECALL",
+          "value": "0.800 (collapse: 0.125)",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "VALUE MODEL",
+          "value": "7-factor learned V(m)",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "Remembers what was worth remembering. Forgets the rest on a power law.",
+      "paper": "2606.12945",
+      "requiresCalibration": false
+    },
+    {
+      "name": "gravedigger",
+      "code": "GRV",
+      "slot": "L3",
+      "layer": "L3-context-memory",
+      "hookPoints": [
+        "turn-ingest",
+        "pre-prompt-assembly"
+      ],
+      "manufacturer": "Zetatech",
+      "tier": "rare",
+      "method": [
+        "memory-graph",
+        "hybrid-retrieval"
+      ],
+      "improves": [
+        "retrieval-accuracy",
+        "token-efficiency"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.episodes_raw",
+          "runstate.query",
+          "runstate.as_of",
+          "runstate.token_budget"
+        ],
+        "writes": [
+          "runstate.memory_graph",
+          "runstate.context_slice",
+          "runstate.retrieval_provenance",
+          "runstate.abstained"
+        ]
+      },
+      "contextCostTokens": 1123,
+      "tests": 159,
+      "faithful": "FAITHFUL",
+      "headline": "Lean retrieved context beats full history 0.88 vs 0.65 — less is literally more",
+      "stats": [
+        {
+          "label": "LEAN VS FULL HISTORY",
+          "value": "0.88 vs 0.65 (+0.22)",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "RECENCY RESOLUTION",
+          "value": "1.00 vs 0.38",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "WRITE PATH",
+          "value": "< 50 ms · 0 LLM",
+          "provenance": "measured"
+        }
+      ],
+      "flavor": "Digs up exactly the memory you need. Leaves the rest buried — that's the point.",
+      "paper": "2606.09900",
+      "requiresCalibration": false
+    },
+    {
+      "name": "thonktank",
+      "code": "THK",
+      "slot": "L3",
+      "layer": "L3-context-memory",
+      "hookPoints": [
+        "producer-deposit",
+        "pre-action-context-assembly"
+      ],
+      "manufacturer": "Zetatech",
+      "tier": "rare",
+      "method": [
+        "learned-memory-value",
+        "blackboard-shared-state"
+      ],
+      "improves": [
+        "multi-agent-coordination",
+        "retrieval-accuracy"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.task_x",
+          "runstate.prefix",
+          "runstate.blackboard_D",
+          "runstate.depth_K"
+        ],
+        "writes": [
+          "runstate.retrieved_chunk",
+          "runstate.gtheta_score",
+          "runstate.marginal_utility",
+          "runstate.retrieval_provenance"
+        ]
+      },
+      "contextCostTokens": 1383,
+      "tests": 232,
+      "faithful": "FAITHFUL",
+      "headline": "Crew success 0.465 → 0.827 and 6.5 fewer steps on a shared transactive memory",
+      "stats": [
+        {
+          "label": "SUCCESS RATE",
+          "value": "0.465 → 0.827",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "STEPS TO SOLVE",
+          "value": "20.0 → 13.5",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "RERANKER",
+          "value": "44-feature LTR cascade",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "The crew's shared brain. Knows who solved this before you asked.",
+      "paper": "2606.19911",
+      "requiresCalibration": false
+    },
+    {
+      "name": "hler",
+      "code": "HLR",
+      "slot": "L4",
+      "layer": "L4-governance-gate",
+      "hookPoints": [
+        "pre-tool-use"
+      ],
+      "manufacturer": "Arasaka",
+      "tier": "rare",
+      "method": [
+        "human-in-loop-gates",
+        "reason-execute-partition"
+      ],
+      "improves": [
+        "agent-reliability",
+        "hallucination-reduction"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.stage",
+          "runstate.candidates"
+        ],
+        "writes": [
+          "runstate.gate_decisions",
+          "runstate.audit"
+        ]
+      },
+      "contextCostTokens": 448,
+      "tests": 172,
+      "faithful": "FAITHFUL",
+      "headline": "Critical failures 72% → 16% behind human decision gates (synthetic bench, p=6.7e-16)",
+      "stats": [
+        {
+          "label": "CRITICAL FAILURES",
+          "value": "72% → 16% (synthetic bench)",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "FISHER EXACT",
+          "value": "p = 6.7e-16",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "ATTENTION LAW",
+          "value": "Eq.5 allocation reproduced",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "The immune system says no. That's its job.",
+      "paper": "2606.12848",
+      "requiresCalibration": false
+    },
+    {
+      "name": "blamethrower",
+      "code": "BLM",
+      "slot": "DIAG",
+      "layer": "L-eval-fidelity",
+      "hookPoints": [
+        "out-of-band"
+      ],
+      "manufacturer": "Netwatch",
+      "tier": "rare",
+      "method": [
+        "anytime-valid-monitoring"
+      ],
+      "improves": [
+        "eval-fidelity",
+        "calibration"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.judge_scores",
+          "runstate.anchor_rescores"
+        ],
+        "writes": [
+          "runstate.drift_verdict",
+          "runstate.audit"
+        ]
+      },
+      "contextCostTokens": 851,
+      "tests": 198,
+      "faithful": "FAITHFUL",
+      "headline": "False alarms 0.80 → 0.00 with anytime-valid e-processes — and it knows WHO drifted",
+      "stats": [
+        {
+          "label": "FALSE ALARMS",
+          "value": "0.80 → 0.00",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "BLAME SPILL",
+          "value": "0.00 matched · 0.95 starved",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "GUARANTEE",
+          "value": "anytime-valid e-process",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "When the evals drift, it knows whether to blame the judge or the machine.",
+      "paper": "2606.15474",
+      "requiresCalibration": false
+    },
+    {
+      "name": "gumshoe",
+      "code": "GMS",
+      "slot": "DIAG",
+      "layer": "L-posthoc-trace-diagnosis",
+      "hookPoints": [
+        "post-termination"
+      ],
+      "manufacturer": "Kiroshi",
+      "tier": "rare",
+      "method": [
+        "grep-navigable-retrieval",
+        "critic-verifier-layer"
+      ],
+      "improves": [
+        "agent-reliability",
+        "long-context"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.failed_trace",
+          "runstate.task_goal"
+        ],
+        "writes": [
+          "runstate.decisive_fault",
+          "runstate.audit"
+        ]
+      },
+      "contextCostTokens": 2555,
+      "tests": 154,
+      "faithful": "GAPS-FOUND (documented)",
+      "headline": "Attribution precision holds ~1.000 while the windowed baseline collapses to 0.000",
+      "stats": [
+        {
+          "label": "ATTRIBUTION PRECISION",
+          "value": "~1.000 flat (baseline → 0.000)",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "STM-ABLATION LIFT",
+          "value": "1.000 @ tight budget",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "HONEST LOSS KEPT",
+          "value": "0.590 < RAFFLES 0.615",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "The coroner. Arrives after the crash, leaves with the decisive fault.",
+      "paper": "2606.24626",
+      "requiresCalibration": false
+    },
+    {
+      "name": "skidmark-leak",
+      "code": "SKL",
+      "slot": "DIAG",
+      "layer": "L-eval-fidelity",
+      "hookPoints": [
+        "out-of-band"
+      ],
+      "manufacturer": "Netwatch",
+      "tier": "rare",
+      "method": [
+        "controlled-ablation-eval"
+      ],
+      "improves": [
+        "eval-fidelity"
+      ],
+      "isolation": {
+        "reads": [
+          "container.git_store",
+          "runstate.tool_events"
+        ],
+        "writes": [
+          "runstate.leakage_report",
+          "runstate.audit"
+        ]
+      },
+      "contextCostTokens": 1067,
+      "tests": 209,
+      "faithful": "FAITHFUL",
+      "headline": "Caught +6.87 pt of benchmark inflation hiding in the git history",
+      "stats": [
+        {
+          "label": "PASS@1 INFLATION CAUGHT",
+          "value": "+6.87 pt (57.45 → 50.58)",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "DIRECT LEAKAGE",
+          "value": "5.33%",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "LEAK SIGNATURES",
+          "value": "4 gap-vs-leak classes",
+          "provenance": "reproduced"
+        }
+      ],
+      "flavor": "Checks whether the benchmark answers were in the glovebox the whole time.",
+      "paper": "2606.17454",
+      "requiresCalibration": false
+    },
+    {
+      "name": "skidmark-traj",
+      "code": "SKT",
+      "slot": "DIAG",
+      "layer": "L-posthoc-trace-diagnosis",
+      "hookPoints": [
+        "offline-batch"
+      ],
+      "manufacturer": "Netwatch",
+      "tier": "rare",
+      "method": [
+        "trajectory-diagnostics"
+      ],
+      "improves": [
+        "eval-fidelity",
+        "agent-reliability"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.tool_events",
+          "runstate.base_commit",
+          "runstate.final_patch",
+          "runstate.reference_set"
+        ],
+        "writes": [
+          "runstate.trajectory_diagnostics",
+          "runstate.audit"
+        ]
+      },
+      "contextCostTokens": 1693,
+      "tests": 209,
+      "faithful": "FAITHFUL",
+      "headline": "Five canonical failure trajectories reproduced value-exact from the skid marks alone",
+      "stats": [
+        {
+          "label": "CANONICAL D(t) SHAPES",
+          "value": "5/5 value-exact",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "BACKTRACK DETECTION",
+          "value": "ΔD +0.9167 flagged",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "ANTI-DRIFT PROBE",
+          "value": "∆AUC +0.281 → FAIL",
+          "provenance": "measured"
+        }
+      ],
+      "flavor": "Reads the skid marks to tell how you drove — backtracks, stalls, dead ends.",
+      "paper": "2606.17454",
+      "requiresCalibration": false
+    }
+  ],
+  "conflicts": [
+    {
+      "a": "funes",
+      "b": "hler",
+      "kind": "pre-commit-visibility",
+      "why": "global memory visibility guts the gate's pre-commit teeth",
+      "resolution": "isolation mask — funes writes only its runstate.memory slice; the gate's pre-commit reads are quarantined from it"
+    }
+  ],
+  "stacks": [
+    {
+      "members": [
+        "genome",
+        "hler"
+      ],
+      "on": "agent-reliability",
+      "name": "Reliability Spine"
+    },
+    {
+      "members": [
+        "doomgoblin",
+        "gumshoe",
+        "genome"
+      ],
+      "on": "agent-reliability",
+      "name": "Diagnose-Govern Loop"
+    },
+    {
+      "members": [
+        "skidmark-traj",
+        "skidmark-leak",
+        "blamethrower"
+      ],
+      "on": "eval-fidelity",
+      "name": "Measurement Integrity Family"
+    },
+    {
+      "members": [
+        "yeetriever",
+        "gravedigger"
+      ],
+      "on": "retrieval-accuracy",
+      "name": "Deep Archive Rig"
+    },
+    {
+      "members": [
+        "openskill",
+        "gauntlet"
+      ],
+      "on": "skill-acquisition",
+      "name": "Skill Foundry"
+    },
+    {
+      "members": [
+        "genome",
+        "gravedigger",
+        "yeetriever"
+      ],
+      "on": "token-efficiency",
+      "name": "Token Diet"
+    }
+  ]
+}
