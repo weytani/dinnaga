@@ -14,7 +14,7 @@ test('home renders without horizontal overflow on mobile', async ({ page }) => {
   expect(await hasHorizontalOverflow(page)).toBe(false);
 });
 
-for (const path of ['/atisha', '/method', '/colophon']) {
+for (const path of ['/atisha', '/method', '/colophon', '/loadout']) {
   test(`${path} renders without horizontal overflow on mobile`, async ({ page }) => {
     await page.setViewportSize(MOBILE);
     await page.goto(path);

@@ -4,6 +4,7 @@ const ROUTES = [
   { path: '/atisha', heading: /Atisha Initiative/i },
   { path: '/method', heading: /From read to ship/i },
   { path: '/colophon', heading: /Colophon/i },
+  { path: '/loadout', heading: 'Loadout.' },
 ];
 
 for (const r of ROUTES) {
