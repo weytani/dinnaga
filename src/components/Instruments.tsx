@@ -37,7 +37,7 @@ export function Instruments() {
   return (
     <section className="section instruments" id="instruments" data-screen-label="Instruments">
       <header className="section-head">
-        <span className="section-eye">// 04 · INSTRUMENTS</span>
+        <span className="section-eye">// 03 · INSTRUMENTS</span>
         <h2 className="section-title">Proof you can pick up.</h2>
       </header>
       <p className="body">
