@@ -19,7 +19,7 @@ _Last updated 2026-07-02._
 If it's still `bad_authz` after a day, re-do the **Settings → Pages** remove/re-add custom-domain toggle (watch for green "DNS check successful"), then wait.
 
 ## Cyberware Loadout (`/loadout`)
-The ripperdoc bench is **built and tested on branch `cyberware-loadout`, not yet merged to `main`**. It lets you equip megazord zords as cyberware implants, see a live friction/conflict/drift readout, and share a build via URL — a proposal surface only; nothing is wired live.
+The ripperdoc bench is **merged to `main` and LIVE at [dinnaga.ai/loadout](http://dinnaga.ai/loadout)** (deployed 2026-07-02; screenshots in `docs/screenshots/`, embedded in the repo README). It lets you equip megazord zords as cyberware implants, see a live friction/conflict/drift readout, and share a build via URL — a proposal surface only; nothing is wired live.
 - Plan: `docs/superpowers/plans/2026-07-01-cyberware-loadout.md`
 - **Data flow — manual snapshot, not live:** `~/code/megazord` stays the source of truth for zord manifests; the page renders a vendored snapshot at `src/data/zords.json`. Refreshing it is a documented **manual** step, not part of any automated build:
   ```bash
@@ -27,7 +27,7 @@ The ripperdoc bench is **built and tested on branch `cyberware-loadout`, not yet
   ```
   Nothing in dinnaga calls megazord at runtime.
 - **Easter eggs:** a ripperdoc boot sequence (typed terminal lines, skippable), an `UNPOWERED` dormant readout when no cyberware is installed, and an over-capacity/max-drift "cyberpsychosis" panel (`I'm sorry, Dave. I'm afraid I can't wire that.`) when a build exceeds the context budget or drift ceiling. The boot's typing animation and the cyberpsychosis glitch effect both honor `prefers-reduced-motion` (the animation is skipped/disabled; the underlying content still renders).
-- **Test counts:** unit 83/83 passing (vitest) · e2e 21/21 passing (playwright) · megazord `uv run pytest` 9/9 passing.
+- **Test counts:** unit 85/85 passing (vitest) · e2e 21/21 passing (playwright) · megazord `uv run pytest` 9/9 passing.
 
 ## Notes
 - The **Atisha Initiative** is a GitHub **Project** (`https://github.com/orgs/Dinnaga-Research/projects/1`), not a repo — it must stay **Public** or the site's Atisha link 404s.
