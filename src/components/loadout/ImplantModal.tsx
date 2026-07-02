@@ -1,6 +1,6 @@
 // ABOUTME: Full implant stat card (spec §7) — detail modal with measured costs, rated buffs,
 // ABOUTME: set-bonus hints, isolation slices, calibration flag, and install/uninstall actions.
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { Zord, ZordStack } from '../../types';
 
 const TIER_PIPS: Record<string, number> = {
@@ -32,6 +32,8 @@ export function ImplantModal({
   onUnequip,
   onClose,
 }: ImplantModalProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose();
@@ -40,12 +42,22 @@ export function ImplantModal({
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
+  useEffect(() => {
+    const previous = document.activeElement as HTMLElement | null;
+    dialogRef.current?.focus();
+    return () => {
+      if (previous?.isConnected) previous.focus();
+    };
+  }, []);
+
   const pips = TIER_PIPS[zord.tier] ?? 1;
   const sets = stacks.filter((s) => s.members.includes(zord.name));
 
   return (
     <div className="lo-modal-backdrop" onClick={onClose} role="presentation">
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         className={`lo-modal lo-tier-${zord.tier}`}
         role="dialog"
         aria-modal="true"
@@ -70,7 +82,7 @@ export function ImplantModal({
             +{(zord.contextCostTokens / 1000).toFixed(2)}k ctx{' '}
             <span
               className="lo-badge lo-badge--measured"
-              title="real size of the text this implant loads into context"
+              title="estimated tokens (ceil chars/4) of the real payload text this implant loads into context"
             >
               measured
             </span>

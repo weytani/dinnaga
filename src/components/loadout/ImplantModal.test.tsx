@@ -84,4 +84,33 @@ describe('ImplantModal', () => {
       unmount();
     }
   });
+
+  it('moves focus to the dialog on mount', () => {
+    mount();
+    expect(screen.getByRole('dialog', { name: /genome implant details/i })).toHaveFocus();
+  });
+
+  it('restores focus to the previously focused element on unmount', () => {
+    const outsideButton = document.createElement('button');
+    document.body.appendChild(outsideButton);
+    outsideButton.focus();
+    expect(outsideButton).toHaveFocus();
+
+    const { unmount } = render(
+      <ImplantModal
+        zord={genome}
+        equipped={false}
+        replaces={null}
+        stacks={STACKS}
+        slotSystem="Kiroshi Optics"
+        onEquip={() => {}}
+        onUnequip={() => {}}
+        onClose={() => {}}
+      />,
+    );
+    unmount();
+
+    expect(outsideButton).toHaveFocus();
+    document.body.removeChild(outsideButton);
+  });
 });

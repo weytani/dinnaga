@@ -53,7 +53,10 @@ export function HarnessHUD({
         <span>
           {(report.contextLoad / 1000).toFixed(1)}k/
           {(capacity.contextBudgetTokens / 1000).toFixed(0)}k{' '}
-          <span className="lo-badge lo-badge--measured" title="sum of measured implant payloads">
+          <span
+            className="lo-badge lo-badge--measured"
+            title="sum of estimated implant payloads (ceil chars/4 of real payload text)"
+          >
             m
           </span>
         </span>

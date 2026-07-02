@@ -141,13 +141,17 @@ export function Loadout() {
   const buildCode = shortCode(loadout, ZORDS);
 
   const share = useCallback(() => {
-    void navigator.clipboard?.writeText(window.location.href).then(() => flashCopied('share'));
+    void navigator.clipboard
+      ?.writeText(window.location.href)
+      .then(() => flashCopied('share'))
+      .catch(() => {});
   }, [flashCopied]);
 
   const copy = useCallback(() => {
     void navigator.clipboard
       ?.writeText(`${buildCode} — ${buildName}`)
-      .then(() => flashCopied('code'));
+      .then(() => flashCopied('code'))
+      .catch(() => {});
   }, [buildCode, buildName, flashCopied]);
 
   const slot = SLOTS.find((s) => s.id === selectedSlot);
