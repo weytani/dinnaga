@@ -206,7 +206,7 @@ export function Loadout() {
         />
         <div>
           {loadout.length === 0 && (
-            <div className="lo-unpowered">// no cyberware installed. Pick a slot.</div>
+            <div className="lo-unpowered">// UNPOWERED — no cyberware installed. Pick a slot.</div>
           )}
           <div className="lo-tray-head">
             <span className="lo-tray-title">{slot?.system ?? selectedSlot}</span>

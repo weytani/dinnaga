@@ -21,7 +21,7 @@ async function renderBench(entry = '/loadout') {
 describe('Loadout', () => {
   it('empty bench is UNPOWERED with zeroed HUD', async () => {
     await renderBench();
-    expect(screen.getByText(/UNPOWERED/)).toBeInTheDocument();
+    expect(screen.getAllByText(/UNPOWERED/).length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText(/“UNPOWERED”/)).toBeInTheDocument(); // build name
     expect(screen.getByLabelText(/context load 0 of/)).toBeInTheDocument();
   });
