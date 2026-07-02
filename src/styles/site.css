@@ -646,3 +646,12 @@
 .foot-col a { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); text-decoration: none; letter-spacing: 0.06em; }
 .foot-col a:hover { color: var(--signal); }
 .foot-meta { max-width: var(--container); margin: 32px auto 0; padding-top: 24px; border-top: 1px solid var(--seam-soft); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* ── Instruments ───────────────────────────────────────────── */
+.instr-stats { display: flex; gap: var(--sp-8); margin-block: var(--sp-6); flex-wrap: wrap; }
+.instr-stat b { display: block; font-family: var(--font-display-alt); font-size: var(--t-h2); line-height: var(--lh-heading3); color: var(--fg-1); }
+.instr-stat span { font-family: var(--font-mono); font-size: var(--t-detail-sm); letter-spacing: var(--ls-label); color: var(--fg-4); text-transform: uppercase; }
+.instr-shot-link { display: block; margin: var(--sp-6) 0; }
+.instr-shot-link:hover .instr-shot { box-shadow: var(--glow-signal); border-color: var(--signal); }
+.instr-shot { width: 100%; display: block; border: 1px solid var(--seam-strong); }
+.instr-note { font-family: var(--font-mono); font-size: var(--t-detail-sm); letter-spacing: var(--ls-mono); color: var(--fg-4); margin-top: var(--sp-3); }

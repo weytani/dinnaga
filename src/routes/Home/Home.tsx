@@ -3,6 +3,7 @@
 import { Hero } from '../../components/Hero';
 import { Ticker } from '../../components/Ticker';
 import { Practices } from '../../components/Practices';
+import { Instruments } from '../../components/Instruments';
 import { DataPanel } from '../../components/DataPanel';
 import { AsciiArt } from '../../components/AsciiArt';
 import { CautionDivider } from '../../components/CautionDivider';
@@ -15,6 +16,7 @@ export function Home() {
       <Hero />
       <Ticker items={TICKER_ITEMS} />
       <Practices />
+      <Instruments />
       <DataPanel />
       <AsciiArt />
       <CautionDivider />
