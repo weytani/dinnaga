@@ -99,7 +99,7 @@ export function ImplantModal({
         ))}
         {sets.map((s) => (
           <div className="lo-set-hint" key={s.name}>
-            ⊕ SET: {s.members.filter((m) => m !== zord.name).join(' + ')} → "{s.name}"
+            ⊕ SET: {s.members.filter((m) => m !== zord.name).join(' + ')} → “{s.name}”
           </div>
         ))}
 
@@ -116,7 +116,7 @@ export function ImplantModal({
           <b>w:</b> {zord.isolation.writes.join(', ')}
         </p>
         <hr className="lo-divider" />
-        <p className="lo-flavor">"{zord.flavor}"</p>
+        <p className="lo-flavor">“{zord.flavor}”</p>
         <p className="lo-prov">
           {zord.faithful} · {zord.tests} tests ·{' '}
           <a href={`https://arxiv.org/abs/${zord.paper}`} target="_blank" rel="noreferrer">
