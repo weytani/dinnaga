@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client';
 import './styles/colors_and_type.css';
 import './styles/components.css';
 import './styles/site.css';
+import './styles/loadout.css';
 import { App } from './App';
 
 const root = document.getElementById('root');
