@@ -4,7 +4,7 @@ import type { Loadout, LoadoutEntry, Slot, Zord, ZordConflict, ZordStack } from 
 import { conflictKey } from './friction';
 
 const SLOT_ORDER = ['L0', 'L1', 'L2', 'L2.5', 'L2.7', 'L3', 'L4', 'DIAG'];
-const PART_RE = /^(DIAG|L[0-9.]+)(.+)$/;
+const PART_RE = /^(DIAG|L\d+?(?:\.\d+)?)(.+)$/;
 
 const AXIS_NAMES: Record<string, string> = {
   'agent-reliability': 'Reliability Rig',
@@ -77,7 +77,7 @@ export function autoName(loadout: Loadout, zords: Zord[], stacks: ZordStack[]): 
     .sort((a, b) => b.members.length - a.members.length)[0];
   if (full) return `The ${full.name}`;
   const counts = new Map<string, number>();
-  for (const e of loadout) {
+  for (const e of sorted(loadout)) {
     for (const axis of zords.find((z) => z.name === e.zord)?.improves ?? []) {
       counts.set(axis, (counts.get(axis) ?? 0) + 1);
     }

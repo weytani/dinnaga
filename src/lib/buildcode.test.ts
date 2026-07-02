@@ -2,6 +2,7 @@
 // ABOUTME: display short code, and auto-naming (stack match → axis fallback).
 import { describe, expect, it } from 'vitest';
 import { CONFLICTS, SLOTS, STACKS, ZORDS } from '../data/zords';
+import type { Slot, Zord } from '../types';
 import { autoName, decode, decodeResolved, encode, encodeResolved, shortCode } from './buildcode';
 
 const L = (slot: string, zord: string) => ({ slot, zord });
@@ -40,6 +41,18 @@ describe('encode/decode', () => {
     // XXjunk unparseable · L1funes wrong slot · dupe funes · L4nope unknown · gravedigger second-in-single
     expect(warnings).toHaveLength(5);
   });
+
+  it('does not swallow a zord name that starts with a digit into the slot id', () => {
+    const realZord = ZORDS.find((z) => z.name === 'genome');
+    if (!realZord) throw new Error('fixture data missing genome zord');
+    const synthZord: Zord = { ...realZord, name: '4x', code: 'FX4', slot: 'L1' };
+    const synthSlots: Slot[] = [
+      { id: 'L1', system: 'test-system', layer: 'test-layer', single: false },
+    ];
+    const { loadout, warnings } = decode('L14x', [synthZord], synthSlots);
+    expect(warnings).toEqual([]);
+    expect(loadout).toEqual([L('L1', '4x')]);
+  });
 });
 
 describe('shortCode', () => {
@@ -64,6 +77,14 @@ describe('autoName', () => {
 
   it('falls back to the dominant improves axis', () => {
     expect(autoName([L('L3', 'funes')], ZORDS, STACKS)).toBe('Long Memory Rig');
+  });
+
+  it('is order-independent for the axis fallback tie-break (same equipped set, either order)', () => {
+    const hlerEntry = { slot: 'L4', zord: 'hler' };
+    const gravediggerEntry = { slot: 'L3', zord: 'gravedigger' };
+    expect(autoName([hlerEntry, gravediggerEntry], ZORDS, STACKS)).toBe(
+      autoName([gravediggerEntry, hlerEntry], ZORDS, STACKS),
+    );
   });
 });
 
