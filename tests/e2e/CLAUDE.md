@@ -1,0 +1,13 @@
+Playwright end-to-end specs, run against a live Vite dev server
+(`playwright.config.ts`: `baseURL http://localhost:4242`, chromium only,
+`bun run dev` auto-started). Run with `bun run test:e2e` — never part of
+`bun run test` (that's vitest unit/integration only).
+
+- `homepage.spec.ts` / `routing.spec.ts` — core page render + route coverage.
+- `loadout.spec.ts` — the ripperdoc bench end-to-end: equip → conflict →
+  resolve → share-URL restores the build.
+- `responsive.spec.ts` — mobile viewport (375×812) has no horizontal overflow.
+- `a11y.spec.ts` — accessibility landmarks (e.g. skip-to-content link).
+
+Specs drive the real app through the browser, not component internals —
+prefer role/label queries over CSS selectors, matching the existing specs.
