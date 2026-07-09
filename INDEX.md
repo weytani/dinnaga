@@ -37,5 +37,5 @@ by `src/components/loadout/*` inside the `Loadout` route. See
 
 ## Deploy
 Vercel (`.vercel/project.json`, project `dinnaga`) — **dinnaga.ai is live via
-Vercel**. `.github/workflows/deploy.yml` (GitHub Pages) is legacy/superseded,
-pending removal in a later change.
+Vercel**, which deploys on push to `main`; `.github/workflows/ci.yml` runs
+lint/test/build as a gate only (no deploy step).
