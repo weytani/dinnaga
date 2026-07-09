@@ -1,5 +1,5 @@
 // ABOUTME: Tests for the Instruments proof section — live registry stats plus the bench screenshot.
-// ABOUTME: Stat values are derived from the real ZORDS snapshot rather than hardcoded, beyond the 13/12 pins.
+// ABOUTME: Stat values are derived from the real ZORDS snapshot rather than hardcoded, beyond the 22/21 pins.
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
@@ -35,8 +35,8 @@ describe('Instruments', () => {
     const papers = new Set(ZORDS.map((z) => z.paper)).size;
     const tests = expectedTestsTotal();
 
-    expect(implants).toBe(13);
-    expect(papers).toBe(12);
+    expect(implants).toBe(22);
+    expect(papers).toBe(21);
 
     expect(screen.getByText(String(implants))).toBeInTheDocument();
     expect(screen.getByText(String(papers))).toBeInTheDocument();

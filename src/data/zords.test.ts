@@ -7,9 +7,19 @@ const TIERS = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
 const PROVENANCE = ['measured', 'rated', 'derived', 'reproduced'];
 
 describe('zords.json snapshot', () => {
-  it('has 13 zords and 8 slots', () => {
-    expect(ZORDS).toHaveLength(13);
-    expect(SLOTS.map((s) => s.id)).toEqual(['L0', 'L1', 'L2', 'L2.5', 'L2.7', 'L3', 'L4', 'DIAG']);
+  it('has 22 zords and 9 slots', () => {
+    expect(ZORDS).toHaveLength(22);
+    expect(SLOTS.map((s) => s.id)).toEqual([
+      'L0',
+      'L1',
+      'L2',
+      'L2.5',
+      'L2.7',
+      'L2.8',
+      'L3',
+      'L4',
+      'DIAG',
+    ]);
   });
 
   it('every zord is internally valid', () => {
@@ -52,7 +62,7 @@ describe('zords.json snapshot', () => {
       candidatesForSlot('L3')
         .map((z) => z.name)
         .sort(),
-    ).toEqual(['funes', 'gravedigger', 'thonktank']);
+    ).toEqual(['funes', 'gravedigger', 'squishzilla', 'thonktank', 'zapgram']);
     expect(candidatesForSlot('L0')).toHaveLength(0);
   });
 });
