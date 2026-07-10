@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-08",
+  "generated": "2026-07-10",
   "costBasis": "estimated tokens = ceil(chars/4) over the manifest text + flavor + headline",
   "capacity": {
     "contextBudgetTokens": 8000,
@@ -1051,6 +1051,67 @@
       ],
       "flavor": "Runs the test against gold before the LLM judge gets a vote. Execution doesn't do vibes. No cap.",
       "paper": "2606.16062",
+      "requiresCalibration": false
+    },
+    {
+      "name": "chronosaurus",
+      "code": "CHR",
+      "slot": "DIAG",
+      "layer": "L-measurement-instrumentation",
+      "hookPoints": [
+        "event-ingest"
+      ],
+      "manufacturer": "Zetatech",
+      "tier": "rare",
+      "method": [
+        "hardware-timestamped-measurement",
+        "sealed-single-binary"
+      ],
+      "improves": [
+        "eval-fidelity",
+        "reproducibility"
+      ],
+      "isolation": {
+        "reads": [
+          "runstate.event.stimulus_ts_ns",
+          "runstate.event.response_ts_ns",
+          "runstate.event.target_ts_ns",
+          "runstate.event.actual_ts_ns",
+          "runstate.event.clock"
+        ],
+        "writes": [
+          "runstate.timing.trials",
+          "runstate.timing.timinglog"
+        ]
+      },
+      "contextCostTokens": 2619,
+      "tests": 47,
+      "faithful": "FAITHFUL 14/14",
+      "headline": "Reaction time stays exactly 300.0 ms under 0/10/50/200 ms of injected compute, while a naive now() clock errs by exactly the delay — and the absolute scheduler holds 0.000 ms onset error where cumulative sleep drifts 25 ms in 6 frames",
+      "stats": [
+        {
+          "label": "RT INVARIANCE (H1)",
+          "value": "300.0 ms carried · naive +D exactly",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "SCHEDULER DRIFT (H2)",
+          "value": "absolute 0.000 ms · cumulative 25 ms @ frame 5",
+          "provenance": "reproduced"
+        },
+        {
+          "label": "MUTANTS KILLED",
+          "value": "22/22 that compiled",
+          "provenance": "measured"
+        },
+        {
+          "label": "HOOK WIREABILITY",
+          "value": "stdin JSON → exit 0, state fully confined",
+          "provenance": "measured"
+        }
+      ],
+      "flavor": "Every other zord reports a number. Chronosaurus is the reason the number means anything. It never asks what time it is — the answer already rode in on the event.",
+      "paper": "2604.15245",
       "requiresCalibration": false
     },
     {

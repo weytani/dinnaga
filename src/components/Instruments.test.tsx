@@ -35,8 +35,8 @@ describe('Instruments', () => {
     const papers = new Set(ZORDS.map((z) => z.paper)).size;
     const tests = expectedTestsTotal();
 
-    expect(implants).toBe(22);
-    expect(papers).toBe(21);
+    expect(implants).toBe(23);
+    expect(papers).toBe(22);
 
     expect(screen.getByText(String(implants))).toBeInTheDocument();
     expect(screen.getByText(String(papers))).toBeInTheDocument();

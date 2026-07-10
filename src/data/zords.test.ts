@@ -7,8 +7,8 @@ const TIERS = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
 const PROVENANCE = ['measured', 'rated', 'derived', 'reproduced'];
 
 describe('zords.json snapshot', () => {
-  it('has 22 zords and 9 slots', () => {
-    expect(ZORDS).toHaveLength(22);
+  it('has 23 zords and 9 slots', () => {
+    expect(ZORDS).toHaveLength(23);
     expect(SLOTS.map((s) => s.id)).toEqual([
       'L0',
       'L1',
