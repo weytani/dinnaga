@@ -17,7 +17,7 @@ describe('content data files', () => {
     expect(SURFACE_DATA).toHaveLength(7);
     const registry = SURFACE_DATA.find((r) => r.idx === '07');
     expect(registry?.label).toBe('Registry');
-    expect(registry?.value).toBe('13 implants · 12 papers reproduced · nothing wired live');
+    expect(registry?.value).toBe('22 implants · 21 papers reproduced · nothing wired live');
   });
 
   it('ships ticker items, boot lines, and nav links', () => {

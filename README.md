@@ -3,9 +3,9 @@
 
 # DINNAGA // dinnaga.ai
 
-An anonymous AI research lab site. We validate what is genuinely useful, then share it openly — the site is the transmission surface: **[dinnaga.ai](http://dinnaga.ai)**.
+An anonymous AI research lab site. We validate what is genuinely useful, then share it openly — the site is the transmission surface: **[dinnaga.ai](https://dinnaga.ai)**.
 
-React 19 · Vite · TypeScript (strict) · react-router 7 · plain CSS tokens · Bun. Deployed to GitHub Pages on every push to `main` (lint → unit tests → build, then Pages deploy). SPA deep links ride the `public/404.html` redirect trick.
+React 19 · Vite · TypeScript (strict) · react-router 7 · plain CSS tokens · Bun. Hosted on Vercel, which deploys on every push to `main`; `.github/workflows/ci.yml` runs lint → unit tests → build as a PR/push quality gate (Vercel owns the deploy, not GitHub Actions). SPA deep links ride the `public/404.html` redirect trick.
 
 **Routes:** `/` · `/atisha` · `/method` · `/colophon` · `/loadout`
 
@@ -15,7 +15,7 @@ A Cyberpunk-2077-style cyberware bench where our reproduced-research artifacts (
 
 ![The ripperdoc bench with a three-implant build equipped](docs/screenshots/loadout-bench.png)
 
-- **Every stat is real and labeled.** Context cost is a measured payload estimate (`ceil(chars/4)`, disclosed on-page), benefit buffs are `rated`, drift is `derived` from the real isolation write-masks in the megazord registry, and each implant's stat rows are the reproduced paper results (e.g. thonktank's success rate `0.465 → 0.827`, gravedigger's lean-beats-full `+0.22`, skidmark-leak's `+6.87 pt` benchmark-inflation catch).
+- **Every stat is real and labeled.** Context cost is a measured payload estimate (`ceil(chars/4)`, disclosed on-page), benefit buffs are `rated`, drift is `derived` from the real isolation write-masks in the megazord registry, and each implant's stat rows are the reproduced paper results (e.g. thonktank's success rate `0.465 → 0.827`, gravedigger's lean-beats-full `+0.22`, skidmark-leak's `+6.87 pt` benchmark-inflation catch). The registry currently ships **22 implants** across 9 slots.
 - **Friction is honest.** The funes ⟷ hler conflict on the bench is the registry's actual pre-commit-visibility conflict, resolvable by applying the documented isolation mask. Set bonuses ("Reliability Spine", "Skill Foundry", "Token Diet") are the registry's cross-layer stacks.
 - **Builds are URLs.** State lives entirely in the query string — share `?b=L1genome_L3funes_L4hler&r=funes~hler` and the build restores exactly, resolution and all.
 

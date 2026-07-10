@@ -16,6 +16,6 @@ export const SURFACE_DATA: DataRow[] = [
   {
     idx: '07',
     label: 'Registry',
-    value: '13 implants · 12 papers reproduced · nothing wired live',
+    value: '22 implants · 21 papers reproduced · nothing wired live',
   },
 ];
