@@ -1,5 +1,5 @@
 // ABOUTME: Tests for the route-aware primary navigation.
-// ABOUTME: Verifies brand home link and the three route links render with correct hrefs.
+// ABOUTME: Verifies brand home link and route links render with correct hrefs.
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
@@ -12,5 +12,6 @@ describe('SiteNav', () => {
     expect(screen.getByRole('link', { name: 'ATISHA' })).toHaveAttribute('href', '/atisha');
     expect(screen.getByRole('link', { name: 'HOW WE WORK' })).toHaveAttribute('href', '/method');
     expect(screen.getByRole('link', { name: 'COLOPHON' })).toHaveAttribute('href', '/colophon');
+    expect(screen.getByRole('link', { name: 'ARTIFACTS' })).toHaveAttribute('href', '/artifacts');
   });
 });
