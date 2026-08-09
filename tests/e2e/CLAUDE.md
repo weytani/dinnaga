@@ -8,6 +8,8 @@ Playwright end-to-end specs, run against a live Vite dev server
   resolve → share-URL restores the build.
 - `responsive.spec.ts` — mobile viewport (375×812) has no horizontal overflow.
 - `a11y.spec.ts` — accessibility landmarks (e.g. skip-to-content link).
+- `artifacts.spec.ts` — /artifacts shelf → viewer navigation, the doc iframe
+  actually loading, and the raw static doc under `public/artifact-docs/`.
 
 Specs drive the real app through the browser, not component internals —
 prefer role/label queries over CSS selectors, matching the existing specs.

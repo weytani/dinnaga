@@ -43,6 +43,19 @@ export interface AtishaEntry {
   attribution: string;
 }
 
+export interface ArtifactEntry {
+  slug: string;
+  title: string;
+  project: string;
+  oneLiner: string;
+  // ISO date string (YYYY-MM-DD).
+  published: string;
+  // Root-relative URL of the static doc under public/.
+  docPath: string;
+  // '' = no caveat; non-empty = a free-text caveat shown on the viewer page.
+  note: string;
+}
+
 export type Tier = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 export type Provenance = 'measured' | 'rated' | 'derived' | 'reproduced';
 export interface ZordStat {

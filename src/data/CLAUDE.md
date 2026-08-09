@@ -1,8 +1,10 @@
 Static site content: TypeScript modules exporting typed arrays/objects consumed
 directly by components. Most files (`bootLines.ts`, `links.ts`, `method.ts`,
 `navLinks.ts`, `practices.ts`, `surfaceData.ts`, `tickerItems.ts`,
-`atishaCatalog.ts`, `loadoutBootLines.ts`) are plain literal data — their only
-contract is the matching type in `../types.ts`.
+`atishaCatalog.ts`, `loadoutBootLines.ts`, `artifacts.ts`) are plain literal
+data — their only contract is the matching type in `../types.ts`.
+(`artifacts.test.ts` additionally checks each entry's `docPath` resolves to a
+real file under `public/`.)
 
 **`zords.json` is the one exception.** It is a **vendored snapshot** exported
 from the separate megazord registry repo:
