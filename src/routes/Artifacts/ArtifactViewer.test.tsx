@@ -26,7 +26,7 @@ describe('ArtifactViewer', () => {
     expect(screen.getByText(/localhost:9021/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /open standalone/i })).toHaveAttribute(
       'href',
-      '/artifacts/slamwich-tasting-report.html',
+      '/artifact-docs/slamwich-tasting-report.html',
     );
   });
 
@@ -34,7 +34,7 @@ describe('ArtifactViewer', () => {
     renderViewer('slamwich-tasting-report');
     const frame = screen.getByTitle('SLAMWICH Tasting Report');
     expect(frame.tagName).toBe('IFRAME');
-    expect(frame).toHaveAttribute('src', '/artifacts/slamwich-tasting-report.html');
+    expect(frame).toHaveAttribute('src', '/artifact-docs/slamwich-tasting-report.html');
   });
 
   it('renders NotFound content for an unknown slug', () => {

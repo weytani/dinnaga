@@ -13,7 +13,7 @@ describe('ARTIFACTS', () => {
     expect(report?.title).toBe('SLAMWICH Tasting Report');
     expect(report?.project).toBe('SLAMWICH');
     expect(report?.published).toBe('2026-08-08');
-    expect(report?.docPath).toBe('/artifacts/slamwich-tasting-report.html');
+    expect(report?.docPath).toBe('/artifact-docs/slamwich-tasting-report.html');
     expect(report?.note).toMatch(/localhost:9021/);
   });
 
@@ -37,6 +37,14 @@ describe('ARTIFACTS', () => {
     for (const a of ARTIFACTS) {
       expect(a.docPath.startsWith('/')).toBe(true);
       expect(existsSync(join(PUBLIC_DIR, a.docPath))).toBe(true);
+    }
+  });
+
+  it('no docPath lives inside the /artifacts route namespace', () => {
+    // Static-host extensionless resolution (e.g. vite preview) would let a doc at
+    // /artifacts/<slug>.html shadow the /artifacts/<slug> viewer route.
+    for (const a of ARTIFACTS) {
+      expect(a.docPath.startsWith('/artifacts/')).toBe(false);
     }
   });
 });

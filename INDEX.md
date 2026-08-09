@@ -11,7 +11,8 @@ enforced by `src/test/dirDocs.test.ts`.
 - `/method` — `Method/` — practices/method content (data: `src/data/practices.ts`, `method.ts`).
 - `/loadout` — `Loadout/` — the ripperdoc cyberware bench (see Data flow below).
 - `/artifacts`, `/artifacts/:slug` — `Artifacts/` — artifact document shelf + iframe
-  viewer (data: `src/data/artifacts.ts`; docs served statically from `public/artifacts/`).
+  viewer (data: `src/data/artifacts.ts`; docs served statically from `public/artifact-docs/`,
+  outside the route namespace so extensionless static hosts can't shadow the viewer).
 - `/colophon` — `Colophon/` — colophon page.
 - 404 — `NotFound/` — SPA fallback (`public/404.html` redirect trick).
 

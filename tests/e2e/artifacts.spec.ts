@@ -17,7 +17,7 @@ test('deep link to the viewer resolves on hard load', async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByRole('link', { name: /open standalone/i })).toHaveAttribute(
     'href',
-    '/artifacts/slamwich-tasting-report.html',
+    '/artifact-docs/slamwich-tasting-report.html',
   );
 });
 
@@ -32,7 +32,7 @@ test('the viewer iframe loads the actual report document', async ({ page }) => {
 });
 
 test('the raw doc is served as a static file', async ({ page }) => {
-  const res = await page.request.get('/artifacts/slamwich-tasting-report.html');
+  const res = await page.request.get('/artifact-docs/slamwich-tasting-report.html');
   expect(res.ok()).toBe(true);
   const text = await res.text();
   expect(text).toContain('<!doctype html>');
