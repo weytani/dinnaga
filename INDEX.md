@@ -40,5 +40,7 @@ by `src/components/loadout/*` inside the `Loadout` route. See
 
 ## Deploy
 Vercel (`.vercel/project.json`, project `dinnaga`) — **dinnaga.ai is live via
-Vercel**, which deploys on push to `main`; `.github/workflows/ci.yml` runs
-lint/test/build as a gate only (no deploy step).
+Vercel**. Deploys are **manual**: `vercel deploy --prod` from the repo root
+(no Git integration — pushing `main` does NOT deploy); `.github/workflows/ci.yml`
+runs lint/test/build as a gate only (no deploy step). Vercel bot protection
+challenges non-browser clients (curl/automation get 403 + security checkpoint).
