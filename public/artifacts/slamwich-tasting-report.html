@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="SLAMWICH Tasting Report — synthesis of the 84-dish portfolio test kitchen: corpus traits, technique leaderboard, and specimen walkthroughs." />
+<style>*, *::before, *::after { box-sizing: border-box; } body { margin: 0; }</style>
+<title>SLAMWICH Tasting Report</title>
+<style>
+  :root {
+    --ground: #ece7dc;
+    --paper: #f6f3ea;
+    --ink: #191919;
+    --muted: #6b665c;
+    --line: rgba(25, 25, 25, 0.16);
+    --line-soft: rgba(25, 25, 25, 0.08);
+    --accent: #d63008;
+    --accent-ink: #b52905;
+    --gold: #b57f00;
+    --gold-soft: rgba(255, 193, 18, 0.28);
+    --meter: #e8451c;
+    --meter-track: rgba(25, 25, 25, 0.09);
+    --ghost: rgba(25, 25, 25, 0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0e0e0e;
+      --paper: #161616;
+      --ink: #d6cfc1;
+      --muted: #8f887a;
+      --line: rgba(214, 207, 193, 0.22);
+      --line-soft: rgba(214, 207, 193, 0.1);
+      --accent: #ff6a45;
+      --accent-ink: #ff7d5c;
+      --gold: #ffc112;
+      --gold-soft: rgba(255, 193, 18, 0.16);
+      --meter: #ff5a36;
+      --meter-track: rgba(214, 207, 193, 0.12);
+      --ghost: rgba(214, 207, 193, 0.055);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0e0e0e;
+    --paper: #161616;
+    --ink: #d6cfc1;
+    --muted: #8f887a;
+    --line: rgba(214, 207, 193, 0.22);
+    --line-soft: rgba(214, 207, 193, 0.1);
+    --accent: #ff6a45;
+    --accent-ink: #ff7d5c;
+    --gold: #ffc112;
+    --gold-soft: rgba(255, 193, 18, 0.16);
+    --meter: #ff5a36;
+    --meter-track: rgba(214, 207, 193, 0.12);
+    --ghost: rgba(214, 207, 193, 0.055);
+  }
+  :root[data-theme="light"] {
+    --ground: #ece7dc;
+    --paper: #f6f3ea;
+    --ink: #191919;
+    --muted: #6b665c;
+    --line: rgba(25, 25, 25, 0.16);
+    --line-soft: rgba(25, 25, 25, 0.08);
+    --accent: #d63008;
+    --accent-ink: #b52905;
+    --gold: #b57f00;
+    --gold-soft: rgba(255, 193, 18, 0.28);
+    --meter: #e8451c;
+    --meter-track: rgba(25, 25, 25, 0.09);
+    --ghost: rgba(25, 25, 25, 0.05);
+  }
+
+  html { background: var(--ground); }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Charter, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  code, .tag, .eyebrow, .stat-label, .meter-count, .chip, .spec-tag {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  a { color: var(--accent-ink); text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover { text-decoration-color: var(--accent); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    padding: 4.5rem 0 2.75rem;
+  }
+  .ghostmark {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+  .ghostmark span {
+    position: absolute;
+    top: -0.28em;
+    left: -0.06em;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: clamp(7rem, 22vw, 15rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--ghost);
+    white-space: nowrap;
+  }
+  .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+  .eyebrow b { color: var(--accent-ink); font-weight: 600; }
+  h1 {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.022em;
+    font-size: clamp(2.1rem, 5.4vw, 3.4rem);
+    line-height: 1.04;
+    margin: 0 0 1.1rem;
+    text-wrap: balance;
+  }
+  .dek {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 38rem;
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .header-note {
+    margin-top: 2rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- stat row ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-block: 1px solid var(--line);
+    margin: 0;
+  }
+  .stat {
+    background: var(--paper);
+    padding: 1.1rem 1.25rem 1rem;
+  }
+  .stat-num {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 3.25rem 0 0.5rem; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.7rem;
+    margin-bottom: 1.6rem;
+  }
+  .sec-head .tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    white-space: nowrap;
+  }
+  h2 {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    font-size: clamp(1.4rem, 3vw, 1.85rem);
+    line-height: 1.15;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h3 {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: 0.002em;
+    margin: 1.9rem 0 0.5rem;
+  }
+  p { margin: 0 0 1.05rem; }
+  section > .body p, .spec p { max-width: 44rem; }
+  strong { font-weight: 700; }
+  ::selection { background: var(--gold-soft); }
+
+  code {
+    font-size: 0.85em;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    padding: 0.08em 0.32em;
+    white-space: nowrap;
+  }
+  pre code { white-space: pre; }
+
+  /* ---------- shared-traits list ---------- */
+  .traits { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.05rem; }
+  .traits li { padding-left: 1.4rem; position: relative; }
+  .traits li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.55rem;
+    height: 2px;
+    background: var(--accent);
+  }
+  .traits b { font-weight: 700; }
+
+  /* ---------- leaderboard (table with meters) ---------- */
+  .board { display: grid; gap: 0.85rem; margin: 1.4rem 0 0.6rem; }
+  .board-row { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem 1rem; align-items: baseline; }
+  .board-name { font-size: 0.98rem; }
+  .board-name .ex { color: var(--muted); font-size: 0.85rem; }
+  .meter-count {
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+  .meter {
+    grid-column: 1 / -1;
+    height: 6px;
+    background: var(--meter-track);
+    border-radius: 0 3px 3px 0;
+    overflow: hidden;
+  }
+  .meter i {
+    display: block;
+    height: 100%;
+    background: var(--meter);
+    border-radius: 0 3px 3px 0;
+  }
+  .board-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.9rem; }
+
+  /* ---------- palette strip ---------- */
+  .swatches { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.2rem 0 0.4rem; }
+  .sw { display: flex; align-items: center; gap: 0.45rem; }
+  .sw i {
+    width: 1.15rem; height: 1.15rem;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    display: inline-block;
+  }
+  .sw span { font-size: 0.72rem; color: var(--muted); font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+
+  /* ---------- specimens ---------- */
+  .spec {
+    border-top: 1px solid var(--line-soft);
+    padding: 1.35rem 0 0.4rem;
+  }
+  .spec:first-of-type { border-top: none; padding-top: 0.4rem; }
+  .spec-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    color: var(--accent-ink);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    border-radius: 3px;
+    padding: 0.12rem 0.45rem;
+    margin-bottom: 0.55rem;
+  }
+  .spec h3 { margin: 0.1rem 0 0.45rem; font-size: 1.08rem; }
+  .spec .where { font-size: 0.8rem; color: var(--muted); }
+  .spec .where a { color: inherit; }
+
+  /* ---------- roadmap ---------- */
+  .tier {
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    padding: 1.4rem 1.5rem 1.1rem;
+    margin: 1.3rem 0;
+  }
+  .tier-label {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin: 0 0 0.3rem;
+  }
+  .tier h3 { margin: 0 0 0.9rem; font-size: 1.15rem; }
+  .tier ul { margin: 0; padding-left: 1.15rem; display: grid; gap: 0.75rem; }
+  .tier li::marker { color: var(--accent); }
+  .drill {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.86rem;
+    color: var(--muted);
+  }
+  .drill b {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-weight: 500;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--gold);
+  }
+
+  /* ---------- feature chips ---------- */
+  .chip-group { margin: 1.4rem 0; }
+  .chip-group h3 { margin: 0 0 0.6rem; font-size: 0.92rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .chip {
+    font-size: 0.76rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.22rem 0.7rem;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  .chip span { color: var(--muted); }
+
+  /* ---------- tables ---------- */
+  .scroll-x { overflow-x: auto; }
+
+  footer {
+    margin-top: 3.5rem;
+    border-top: 1px solid var(--line);
+    padding: 1.6rem 0 3rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  footer code { white-space: nowrap; }
+  footer p { margin: 0 0 0.5rem; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .spec-tag { transition: border-color 0.18s ease; }
+    .spec:hover .spec-tag { border-color: var(--accent); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ghostmark" aria-hidden="true"><span>SLAMWICH</span></div>
+  <div class="wrap">
+    <p class="eyebrow"><b>SLAMWICH</b> · tasting report · 2026-08-08</p>
+    <h1>What 84 rebuilds of 28 acclaimed portfolios teach about design</h1>
+    <p class="dek">Every dish in the kitchen renders the same content — design is the only variable. That makes the corpus a controlled experiment in what actually produces visual identity. This is the aggregate: the shared traits, the technique leaderboard, twelve specimens worth studying closely, and where to spend your attention.</p>
+    <p class="header-note">This page practices what the corpus preaches: token-driven light/dark themes, a barbell type scale, one red accent, zero image assets. The header's ghost wordmark is Bleibtgleich's move.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats" role="list" aria-label="Corpus size">
+    <div class="stat" role="listitem"><span class="stat-num">28</span><span class="stat-label">reference sites</span></div>
+    <div class="stat" role="listitem"><span class="stat-num">84</span><span class="stat-label">dishes rebuilt</span></div>
+    <div class="stat" role="listitem"><span class="stat-num">6</span><span class="stat-label">selection rounds</span></div>
+    <div class="stat" role="listitem"><span class="stat-num">84</span><span class="stat-label">docs in docs/dishes</span></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ================================================================ -->
+  <section>
+    <div class="sec-head"><span class="tag">§1</span><h2>What the acclaimed 28 have in common</h2></div>
+    <div class="body">
+      <p>The references span wildly different worlds — a WebGL game, a 1998 frameset, an illuminated codex, a DOS boot screen. But strip the surfaces and the same six properties keep appearing:</p>
+      <ul class="traits">
+        <li><b>One organizing idea, pushed all the way down.</b> Every site is a thesis, not a theme: Shantell Martin is <em>one continuous line</em>, Rudnick is <em>a black void of artifacts</em>, Nicky Case is <em>a page inside a speech bubble</em>, Matuschak is <em>sliding panes of thought</em>. The idea governs layout, type, color, and interaction simultaneously. Nothing in the corpus reads as "a nice template plus personality sprinkles."</li>
+        <li><b>Constraint is the style.</b> Daiki Fujita runs literally two colors (the rebuild enforces it with a regex test over the stylesheet). Pacôme, Holman, and Pipkin each use <em>one typeface family</em>. Zhenya spends one red. The corpus suggests identity comes from what you refuse, not what you add.</li>
+        <li><b>Typography does the heavy lifting.</b> In 84 dishes the single biggest visual differentiator is display type: its face, its scale contrast against tiny tracked labels (the "barbell" — huge serif or grotesque vs 11px caps, nothing in between), and its treatments (stroke, extrusion, clipping). Color is a distant second.</li>
+        <li><b>Zero-asset confidence.</b> The acclaimed look almost never depends on photography. Wood grain, CRT glass, riveted steel, paper, starfields, pixel sprites, clay — all rebuilt from gradients, <code>box-shadow</code>, borders, and SVG. Materials are cheaper than they look.</li>
+        <li><b>Motion character lives in timing functions, not quantity.</b> <code>steps()</code> makes things read as electronics or physical mechanisms; overshoot beziers make them read as playful; <code>expo-out</code> reads as precision. Several top dishes (Rudnick, Bremer, Pipkin) are almost or entirely static — stillness is also a choice.</li>
+        <li><b>The best sites let you touch them.</b> Poke the portrait, drag the letters, type into the masthead, scrub the timeline, resize the frames. Interactivity is the personality layer the screenshots miss — and every one of those toys ships an escape hatch so the content still works.</li>
+      </ul>
+
+      <h3>The corpus palette, as data</h3>
+      <p>Grounds cluster into five families; accents are almost always a single hot hue per site. Red is the kitchen's dominant accent by a wide margin.</p>
+      <div class="swatches" role="img" aria-label="Common grounds: near-black, ecru, cream, white, silver gray. Common accents: red family, gold, mint, cyan, indigo.">
+        <span class="sw"><i style="background:#0e0e0e"></i><span>void #0e0e0e</span></span>
+        <span class="sw"><i style="background:#e4e0d5"></i><span>ecru #e4e0d5</span></span>
+        <span class="sw"><i style="background:#fcf3d9"></i><span>cream #fcf3d9</span></span>
+        <span class="sw"><i style="background:#ffffff"></i><span>white #ffffff</span></span>
+        <span class="sw"><i style="background:#ededed"></i><span>silver #ededed</span></span>
+        <span class="sw"><i style="background:#f93700"></i><span>red #f93700</span></span>
+        <span class="sw"><i style="background:#ffc112"></i><span>gold #ffc112</span></span>
+        <span class="sw"><i style="background:#21ffc0"></i><span>mint #21ffc0</span></span>
+        <span class="sw"><i style="background:#00d3ff"></i><span>cyan #00d3ff</span></span>
+        <span class="sw"><i style="background:#3b0aff"></i><span>indigo #3b0aff</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ -->
+  <section>
+    <div class="sec-head"><span class="tag">§2</span><h2>The technique leaderboard</h2></div>
+    <div class="body">
+      <p>Counted from the 84 dish summaries: how many dishes lead with each technique family. Approximate by nature — a dish using a technique quietly isn't counted, only ones where it carries the design.</p>
+
+      <div class="board">
+        <div class="board-row">
+          <span class="board-name"><strong>Custom properties as a runtime design system</strong> <span class="ex">— token theming, state in <code>data-*</code> attributes, <code>calc()</code> derivation, per-index staggers</span></span>
+          <span class="meter-count">≈40 dishes</span>
+          <span class="meter"><i style="width:100%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>Gradient / pseudo-element / <code>box-shadow</code> artwork</strong> <span class="ex">— materials, sprites, paper, tape, starfields; zero image requests</span></span>
+          <span class="meter-count">≈32 dishes</span>
+          <span class="meter"><i style="width:80%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>Display-type engineering</strong> <span class="ex">— text-stroke outlines, shadow extrusion, <code>background-clip: text</code>, variable-font axes, bitmap letterforms</span></span>
+          <span class="meter-count">≈24 dishes</span>
+          <span class="meter"><i style="width:60%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong><code>steps()</code> timing as character</strong> <span class="ex">— blinks, flickers, hops, boot logs; quantization reads as machinery</span></span>
+          <span class="meter-count">≈13 dishes</span>
+          <span class="meter"><i style="width:33%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>ARIA-state-driven styling</strong> <span class="ex">— selectors on <code>[aria-expanded]</code>/<code>[aria-pressed]</code>, focus rings as design idiom</span></span>
+          <span class="meter-count">≈12 dishes</span>
+          <span class="meter"><i style="width:30%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>Scroll rigs</strong> <span class="ex">— sticky stage over a tall wrapper, one scroll-derived custom property drives everything</span></span>
+          <span class="meter-count">≈12 dishes</span>
+          <span class="meter"><i style="width:30%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>Modern layout guards</strong> <span class="ex">— <code>overflow-x: clip</code>, <code>0fr→1fr</code> height animation, container queries + <code>cqi</code></span></span>
+          <span class="meter-count">≈9 dishes</span>
+          <span class="meter"><i style="width:23%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>Seeded generative art</strong> <span class="ex">— FNV-1a / mulberry32 from content strings: unique per data, identical per render, testable</span></span>
+          <span class="meter-count">≈8 dishes</span>
+          <span class="meter"><i style="width:20%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>SVG <code>pathLength=1</code> draw-on</strong> <span class="ex">— any path normalized to a 0–1 progress dial; one keyframe draws all geometry</span></span>
+          <span class="meter-count">≈8 dishes</span>
+          <span class="meter"><i style="width:20%"></i></span>
+        </div>
+        <div class="board-row">
+          <span class="board-name"><strong>Blend-mode compositing</strong> <span class="ex">— <code>difference</code> cursors, multiply/screen lighting models, CRT stacks</span></span>
+          <span class="meter-count">≈6 dishes</span>
+          <span class="meter"><i style="width:15%"></i></span>
+        </div>
+      </div>
+      <p class="board-note">The top three are not exotic. They are the compounding fundamentals: tokens, painted surfaces, and type treatments account for most of what reads as "designed" across the whole corpus.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================ -->
+  <section>
+    <div class="sec-head"><span class="tag">§3</span><h2>Twelve specimens worth studying closely</h2></div>
+    <div class="body">
+      <p>The most interesting individual findings, each viewable live (<code>bun run dev</code> in <code>~/code/slamwich</code>, then the link) with a full write-up in <code>docs/dishes/&lt;slug&gt;.md</code>.</p>
+
+      <article class="spec">
+        <span class="spec-tag">variable fonts</span>
+        <h3>Kinetic type by interpolating real letterforms</h3>
+        <p>Mat Voyce's squash effect transitions <code>font-variation-settings</code> <em>per character</em>, staggered with <code>nth-child</code> transition delays so a wave rolls through the word. Interpolating actual outlines (width/weight axes) beats <code>scaleX()</code> categorically — strokes keep their proportions.</p>
+        <p class="where">→ <a href="http://localhost:9021/mat-voyce-faithful">mat-voyce-faithful</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">type as data</span>
+        <h3>A bitmap font in forty lines of strings</h3>
+        <p>Holman's wildcard defines 37 glyphs as 5×7 grids of <code>'1'</code>/<code>'0'</code> strings — the letters are visible in the source code. Every cell always holds a character from the page's own copy; the glyph is a <em>lighting state</em> (unlit = transparent fill + 1px text-stroke, lit = white + neon shadow ladder). One matrix holds both a shape and a sentence.</p>
+        <p class="where">→ <a href="http://localhost:9021/tim-holman-wildcard">tim-holman-wildcard</a> · sibling remix models letterforms as arrays of positioned bars</p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">svg economy</span>
+        <h3>Thousands of dots as one path</h3>
+        <p>Fujita's point-fields draw as a single <code>&lt;path&gt;</code> of zero-length subpaths (<code>M x y h.01</code>) with <code>stroke-linecap: round</code> — one DOM node per density layer instead of thousands of circles, and each layer still styles independently. The same dish enforces its two-color palette with a regex test over the stylesheet.</p>
+        <p class="where">→ <a href="http://localhost:9021/daiki-fujita-faithful">daiki-fujita-faithful</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">clip-path</span>
+        <h3>A page rendered twice, cut mid-glyph</h3>
+        <p>Fujita's wildcard renders the entire page in both polarities (black-on-white and white-on-black) and clips the top copy with a scroll-driven <code>clip-path</code> polygon. Blend modes can't cut cleanly through text; two DOM layers and a polygon can. <code>display: flow-root</code> on both layers keeps margin collapse from desyncing the copies.</p>
+        <p class="where">→ <a href="http://localhost:9021/daiki-fujita-wildcard">daiki-fujita-wildcard</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">css math</span>
+        <h3>Isometric projection in two calc() expressions</h3>
+        <p>elle's walkable room passes tile coordinates as <code>--c</code>/<code>--r</code> custom properties; two <code>calc()</code> expressions project them to screen position and <code>z-index: calc(10 + c + r)</code> gives painter's ordering for free. The wildcard sibling lights the whole scene through ~18 tokens per <code>[data-phase]</code> — including <em>shadow direction as a token</em> that tracks the sun across the day.</p>
+        <p class="where">→ <a href="http://localhost:9021/ellesho-remix">ellesho-remix</a> · <a href="http://localhost:9021/ellesho-wildcard">ellesho-wildcard</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">css scheduling</span>
+        <h3>A boot sequence scheduled entirely in CSS</h3>
+        <p>Heffernan's remix sequences a BIOS boot log with a 0.01s <code>step-end</code> animation per line and <code>calc()</code>-derived delays from an index custom property — a pure-CSS scheduler, no JavaScript timers. The faithful sibling makes the simulated monitor its own viewport with <code>container-type: inline-size</code> + <code>cqi</code> units, which is the correct general answer for any nested device screen.</p>
+        <p class="where">→ <a href="http://localhost:9021/henry-heffernan-remix">henry-heffernan-remix</a> · <a href="http://localhost:9021/henry-heffernan-faithful">henry-heffernan-faithful</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">svg filters</span>
+        <h3>Hand-inked wobble on a geometric border</h3>
+        <p>Nicky Case's speech bubble is a plain border on a <code>::before</code> with <code>inset: 0</code>, distorted by <code>feTurbulence</code> + <code>feDisplacementMap</code> at two noise scales — so the SVG filter warps the outline without ever touching the text. Detail that matters: the filter defs stay in-flow at <code>width/height: 0</code>, because <code>display: none</code> would break <code>url(#id)</code> references.</p>
+        <p class="where">→ <a href="http://localhost:9021/nicky-case-faithful">nicky-case-faithful</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">fake 3d</span>
+        <h3>A five-plane room with no preserve-3d</h3>
+        <p>Giulio's remix builds a perspective room from five planes, each rotated then pushed back along its own local axis — no <code>transform-style: preserve-3d</code>, no scene graph. The animated grid streams on an <em>inner child</em> so the 3D-transformed parent never repaints. The wildcard sibling is the corpus's cleanest parallax rig: sticky stage over a tall wrapper, one scroll-derived <code>--p</code>, per-layer depth multipliers into one shared <code>translate3d</code> formula.</p>
+        <p class="where">→ <a href="http://localhost:9021/giulio-collesei-remix">giulio-collesei-remix</a> · <a href="http://localhost:9021/giulio-collesei-wildcard">giulio-collesei-wildcard</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">state cascade</span>
+        <h3>A page that ages through one attribute</h3>
+        <p>Melonking's wildcard rots in five stages driven by a single <code>data-melon-stage</code> on the root — attribute selectors cascade cracks, <code>hue-rotate</code> decay (scoped to decorative subtrees only), and an accelerating marquee. No JavaScript touches styling; JS moves one attribute and CSS does the rest. The same pattern powers Neal's clicker economy and elle's day/night.</p>
+        <p class="where">→ <a href="http://localhost:9021/melonking-wildcard">melonking-wildcard</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">determinism</span>
+        <h3>Generative identity seeded from the content itself</h3>
+        <p>Bremer's three dishes hash persona strings (FNV-1a) into a PRNG (mulberry32) that drives triangulated mesh art — unique per dataset, byte-identical per render, and therefore testable. Voyce's wildcard seeds spring mass/stiffness per draggable letter the same way. Randomness that survives re-renders and screenshots is a superpower for generative branding.</p>
+        <p class="where">→ <a href="http://localhost:9021/nadieh-bremer-faithful">nadieh-bremer-faithful</a> · <a href="http://localhost:9021/mat-voyce-wildcard">mat-voyce-wildcard</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">typesetting</span>
+        <h3>A flex item as a controllable line break</h3>
+        <p>Bleibtgleich's remix treats responsive typesetting as the entire subject: a zero-height flex item with <code>flex: 0 0 var(--b)</code> toggles between <code>0</code> and <code>100%</code> to decide exactly where a headline breaks — recomposition without touching markup. Four composition sets tear one identical markup four ways.</p>
+        <p class="where">→ <a href="http://localhost:9021/maksym-bleibtgleich-remix">maksym-bleibtgleich-remix</a></p>
+      </article>
+
+      <article class="spec">
+        <span class="spec-tag">color science</span>
+        <h3>A palette that rotates without breaking contrast</h3>
+        <p>Comeau's wildcard authors accents in <code>oklch()</code> with hue as a custom property: <code>calc(BASE + var(--hue-shift))</code> rotates the whole palette 360° while lightness — and therefore every contrast ratio — holds fixed. The faithful sibling registers color tokens with <code>@property</code> so even gradients tween on theme change.</p>
+        <p class="where">→ <a href="http://localhost:9021/josh-comeau-wildcard">josh-comeau-wildcard</a> · <a href="http://localhost:9021/josh-comeau-faithful">josh-comeau-faithful</a></p>
+      </article>
+
+      <p style="margin-top:1.6rem">Honorable mentions: Rudnick's faithful ships <strong>zero animation on purpose</strong> and reads as authority; Pipkin's remix implements window-manager drag correctly (pointer listeners on <code>window</code>, never the 7px handle); Shantell's wildcard turns the visitor's own drawn stroke into an SVG <code>&lt;pattern&gt;</code> wallpaper; Pacôme's wildcard restyles a native <code>&lt;input type=range&gt;</code> into a DAW playhead and gets keyboard + ARIA for free.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================ -->
+  <section>
+    <div class="sec-head"><span class="tag">§4</span><h2>Where to spend your attention</h2></div>
+    <div class="body">
+      <p>Ranked by leverage: how often the skill appeared across 84 dishes, weighted by how much of the visual result it explains. Each item names the dishes to study and a concrete drill.</p>
+
+      <div class="tier">
+        <p class="tier-label">Tier 1 · foundations — most of the visible result</p>
+        <h3>Tokens, type, and restraint</h3>
+        <ul>
+          <li><strong>Custom properties as the design system's runtime.</strong> Colors, spacing, shadow direction, timing functions, even <code>border-style</code> live in tokens; state lives in <code>data-*</code> attributes; themes are token redefinitions under one selector. This is the single most common pattern in the corpus (~40 dishes) and the cheapest route to looking deliberate.
+            <span class="drill"><b>drill</b> Rebuild any page you own with a <code>[data-mode]</code> flip à la zhenya-rynzhuk-faithful, then push it to lynn-fisher-wildcard's full identity swap — fonts, alignment, and border-style as tokens, not just colors.</span></li>
+          <li><strong>Typography first: one display face, one body face, a barbell scale.</strong> Huge display against 11px tracked caps with nothing in the middle is what makes pages read editorial instead of corporate. Then the treatment kit: <code>-webkit-text-stroke</code> outlines, stacked shadow extrusion, <code>background-clip: text</code>, <code>box-decoration-break: clone</code> for wrapping marks.
+            <span class="drill"><b>drill</b> A one-page specimen of your own name in five corpus treatments: Voyce's variable-font squash, Holman's neon ladder, Mantia's candy extrusion, Rudnick's chrome clip-text, Hische's em-unit letterpress.</span></li>
+          <li><strong>Palette constraint: ground + ink + one accent.</strong> Nearly every acclaimed reference spends exactly one hot hue. Derive middle tones with <code>color-mix()</code> instead of adding hues.
+            <span class="drill"><b>drill</b> Fujita-remix's discipline: reduce a page to two color custom properties, generate every intermediate with <code>color-mix()</code>, and write the test that fails when a third hue sneaks in.</span></li>
+        </ul>
+      </div>
+
+      <div class="tier">
+        <p class="tier-label">Tier 2 · craft multipliers — the texture of quality</p>
+        <h3>Layout safety, painted surfaces, motion with intent</h3>
+        <ul>
+          <li><strong>The modern layout kit, including the guards.</strong> <code>repeat(auto-fit, minmax(min(100%, 20rem), 1fr))</code> grids that can't overflow; <code>grid-area: 1/1</code> stacking instead of absolute positioning; gap-over-background as rules; <code>grid-template-rows: 0fr→1fr</code> for animating to auto height; <code>overflow-x: clip</code> (not <code>hidden</code> — it preserves <code>position: sticky</code>); container queries with <code>cqi</code> for anything that is its own little viewport.
+            <span class="drill"><b>drill</b> Build heffernan-faithful's nested screen: a component that scales purely from its container via <code>cqi</code>, then break it on purpose with <code>vw</code> to feel the difference.</span></li>
+          <li><strong>CSS-built artwork.</strong> Stacked gradients for materials (leonardi's steel/water/chevron), <code>box-shadow</code> as a sprite rasterizer (melonking, elle), 8-value <code>border-radius</code> for organic shapes, <code>feTurbulence</code> for hand-drawn wobble. Zero requests, fully themeable, diffable as text.
+            <span class="drill"><b>drill</b> Take a page with images and replace every one with painted CSS/SVG. Steal zhenya-faithful's trick: abstract gradient compositions beat gray placeholder boxes.</span></li>
+          <li><strong>Motion where the character is the timing function.</strong> <code>steps()</code> for machinery, overshoot beziers for play, <code>expo-out</code> for precision; scroll rigs as sticky + one custom property; React key-remount to replay one-shot animations; know that a running animation owns <code>transform</code> and will silently kill a transition on the same property (glander-remix splits them across parent and child). Declare animations <em>inside</em> <code>@media (prefers-reduced-motion: no-preference)</code> so stillness is the default, not an override.
+            <span class="drill"><b>drill</b> Build giulio-wildcard's rig: sticky stage, tall wrapper, one <code>--p</code> written from a rAF scroll handler, three layers moving at different depth multipliers.</span></li>
+        </ul>
+      </div>
+
+      <div class="tier">
+        <p class="tier-label">Tier 3 · differentiators — what makes work memorable</p>
+        <h3>SVG fluency, seeded generativity, accessibility as material</h3>
+        <ul>
+          <li><strong>The SVG power set.</strong> <code>pathLength="1"</code> (any path becomes a 0–1 progress dial); <code>transform-box: fill-box</code> (rotate groups about their own center — mandatory before animating inside an SVG); <code>vector-effect: non-scaling-stroke</code>; <code>preserveAspectRatio</code>'s <code>slice</code>/<code>none</code> as crop-vs-stretch art direction; runtime <code>&lt;pattern&gt;</code> swaps.
+            <span class="drill"><b>drill</b> Draw your logo as a path and scroll-draw it with <code>pathLength=1</code> + <code>stroke-dashoffset</code>, shantell-remix style — then regenerate the path and watch the progress dial survive.</span></li>
+          <li><strong>Seeded generative identity.</strong> String hash → tiny PRNG → art. Deterministic, testable, personal.
+            <span class="drill"><b>drill</b> Bremer-faithful's pipeline on your own name: FNV-1a → mulberry32 → a triangulated hero mark, with a test asserting byte-identical SVG output.</span></li>
+          <li><strong>Accessibility as a design material, not a checklist.</strong> Style from ARIA state (<code>[aria-expanded]</code>, <code>[aria-pressed]</code>) so visual and accessible state are the same fact; make the focus ring an idiom of the design (heffernan-wildcard's DOS highlight bar <em>is</em> the focus ring); live regions narrating visual toys (holman-wildcard announces what the masthead spells).
+            <span class="drill"><b>drill</b> Rudnick-wildcard's rule: build a disclosure interface where the <em>only</em> style hook is the ARIA attribute. No state classes allowed.</span></li>
+          <li><strong>And the meta-skill: pick one organizing idea per project and commit.</strong> The corpus's clearest lesson isn't a property — it's that every acclaimed site can be described in one sentence, and every design decision serves that sentence.
+            <span class="drill"><b>drill</b> Before your next build, write the sentence first. Kill any element that doesn't serve it.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ -->
+  <section>
+    <div class="sec-head"><span class="tag">§5</span><h2>Modern CSS, seen actually working</h2></div>
+    <div class="body">
+      <p>Features proven in the kitchen, each with a dish that demonstrates it — a checklist for "do I know this yet?"</p>
+
+      <div class="chip-group">
+        <h3>Layout</h3>
+        <div class="chips">
+          <span class="chip">container queries + cqi <span>· henry-heffernan-faithful</span></span>
+          <span class="chip">:has() <span>· pacome-pertant-faithful</span></span>
+          <span class="chip">display: contents <span>· everest-pipkin-faithful</span></span>
+          <span class="chip">flow-root <span>· daiki-fujita-wildcard</span></span>
+          <span class="chip">0fr→1fr tracks <span>· nicholas-rougeux-remix</span></span>
+          <span class="chip">overflow-x: clip <span>· minh-pham-faithful</span></span>
+          <span class="chip">overflow-clip-margin <span>· maksym-bleibtgleich-wildcard</span></span>
+          <span class="chip">aspect-ratio <span>· tim-holman-wildcard</span></span>
+          <span class="chip">minmax(min(100%, X), 1fr) <span>· robby-leonardi-wildcard</span></span>
+          <span class="chip">100svh <span>· zhenya-rynzhuk-faithful</span></span>
+        </div>
+      </div>
+
+      <div class="chip-group">
+        <h3>Color</h3>
+        <div class="chips">
+          <span class="chip">color-mix() <span>· daiki-fujita-remix</span></span>
+          <span class="chip">oklch() <span>· josh-comeau-wildcard</span></span>
+          <span class="chip">@property <span>· josh-comeau-faithful</span></span>
+          <span class="chip">conic-gradient <span>· louie-mantia-faithful</span></span>
+        </div>
+      </div>
+
+      <div class="chip-group">
+        <h3>Type</h3>
+        <div class="chips">
+          <span class="chip">font-variation-settings <span>· mat-voyce-faithful</span></span>
+          <span class="chip">box-decoration-break <span>· mat-voyce-remix</span></span>
+          <span class="chip">-webkit-text-stroke <span>· nadieh-bremer-faithful</span></span>
+          <span class="chip">background-clip: text <span>· david-rudnick-faithful</span></span>
+          <span class="chip">writing-mode <span>· andy-matuschak-faithful</span></span>
+          <span class="chip">::first-letter <span>· mat-voyce-remix</span></span>
+          <span class="chip">content: attr() <span>· maksym-bleibtgleich-wildcard</span></span>
+          <span class="chip">alt-text-free ornaments (slash syntax) <span>· jessica-hische-wildcard</span></span>
+        </div>
+      </div>
+
+      <div class="chip-group">
+        <h3>Motion</h3>
+        <div class="chips">
+          <span class="chip">steps() <span>· bruno-simon-wildcard</span></span>
+          <span class="chip">per-keyframe easing <span>· antoine-wodniack-wildcard</span></span>
+          <span class="chip">negative animation-delay <span>· robby-leonardi-faithful</span></span>
+          <span class="chip">animation-fill-mode: backwards <span>· melonking-wildcard</span></span>
+          <span class="chip">standalone rotate property <span>· antoine-wodniack-remix</span></span>
+          <span class="chip">reduced-motion opt-in <span>· melonking-remix</span></span>
+        </div>
+      </div>
+
+      <div class="chip-group">
+        <h3>SVG</h3>
+        <div class="chips">
+          <span class="chip">pathLength=1 <span>· shantell-martin-remix</span></span>
+          <span class="chip">transform-box: fill-box <span>· robby-leonardi-faithful</span></span>
+          <span class="chip">vector-effect: non-scaling-stroke <span>· nicholas-rougeux-remix</span></span>
+          <span class="chip">preserveAspectRatio slice/none <span>· shantell-martin-faithful</span></span>
+          <span class="chip">runtime &lt;pattern&gt; swap <span>· shantell-martin-wildcard</span></span>
+          <span class="chip">feTurbulence + feDisplacementMap <span>· nicky-case-faithful</span></span>
+          <span class="chip">zero-length dot subpaths <span>· daiki-fujita-faithful</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Sources.</strong> Per-dish write-ups: <code>~/code/slamwich/docs/dishes/&lt;slug&gt;.md</code> (84 files, indexed in <code>docs/README.md</code>). Live kitchen: <code>bun run dev</code> in <code>~/code/slamwich</code> → <code>http://localhost:9021</code>. Dish links on this page assume the dev server is running locally.</p>
+    <p>SLAMWICH · 28 references chosen by evidence-ranked scouting across 6 rounds · every dish renders identical persona content, so everything on this page is attributable to design alone.</p>
+  </footer>
+
+</main>
+</body>
+</html>
