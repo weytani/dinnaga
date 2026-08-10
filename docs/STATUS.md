@@ -1,23 +1,25 @@
 # Dinnaga.ai — Status & Outstanding
 
-_Last updated 2026-07-08._
+_Last updated 2026-08-09._
 
 ## Live now
-- Multi-page two-pillar lab site is **live at https://dinnaga.ai**, hosted on **Vercel** (`weytanis-projects/dinnaga`) since 2026-07-08. HTTPS is live via Let's Encrypt through Vercel. GitHub Pages hosting is retired; `.github/workflows/ci.yml` runs lint/unit-test/build as a deterministic PR gate — it does not deploy (Vercel deploys on push to `main`).
+- Multi-page two-pillar lab site is **live at https://dinnaga.ai**, hosted on **Vercel** (`weytanis-projects/dinnaga`) since 2026-07-08. HTTPS is live via Let's Encrypt through Vercel. GitHub Pages hosting is retired. **Deploying is a manual step**: `vercel deploy --prod` from the repo root. There is no Vercel Git integration — merging a PR ships nothing (verified 2026-08-09: PR #4 merged, newest deployment was 29 days old until a manual deploy). `.github/workflows/ci.yml` runs lint/unit-test/build as a deterministic PR gate — it does not deploy.
+- **Verifying a deploy:** public HTTPS probes do not work. Vercel bot protection returns 403 + `x-vercel-mitigated: challenge` to `curl` (any UA) and to CDP-automated Chrome ("Code 21"). Use `vercel ls` / `vercel inspect <deployment-url>` and confirm `dinnaga.ai` appears in the aliases; a real human browser passes the challenge.
+- **Artifacts shelf live 2026-08-09** (PR #4): `/artifacts` lists standalone research documents; `/artifacts/:slug` frames them; docs are static files under `public/artifact-docs/` — deliberately outside the `/artifacts` route namespace so extensionless static hosts can't shadow the viewer route (invariant enforced by `src/data/artifacts.test.ts`). First entry: the SLAMWICH Tasting Report.
 - Spec: `docs/superpowers/specs/2026-06-08-dinnaga-living-research-log-design.md`
 - Plan: `docs/superpowers/plans/2026-06-08-dinnaga-two-pillar-site.md`
-- Routes: `/` · `/atisha` · `/method` · `/colophon` · `/loadout` · 404.
+- Routes: `/` · `/atisha` · `/method` · `/colophon` · `/loadout` · `/artifacts` · `/artifacts/:slug` · 404.
 
 ## Cyberware Loadout (`/loadout`)
 The ripperdoc bench is **merged to `main` and LIVE at [dinnaga.ai/loadout](https://dinnaga.ai/loadout)** (screenshots in `docs/screenshots/`, embedded in the repo README). It lets you equip megazord zords as cyberware implants, see a live friction/conflict/drift readout, and share a build via URL — a proposal surface only; nothing is wired live.
 - Plan: `docs/superpowers/plans/2026-07-01-cyberware-loadout.md`
-- **Data flow — manual snapshot, not live:** `~/code/megazord` stays the source of truth for zord manifests; the page renders a vendored snapshot at `src/data/zords.json` (snapshot regenerated 2026-07-08, registry now **22 zords** across 9 slots). Refreshing it is a documented **manual** step, not part of any automated build:
+- **Data flow — manual snapshot, not live:** `~/code/megazord` stays the source of truth for zord manifests; the page renders a vendored snapshot at `src/data/zords.json` (snapshot regenerated 2026-07-10, registry now **23 zords** across 9 slots). Refreshing it is a documented **manual** step, not part of any automated build:
   ```bash
   cd ~/code/megazord && bin/megazord export-json --out ~/code/dinnaga/src/data/zords.json
   ```
   Nothing in dinnaga calls megazord at runtime.
 - **Easter eggs:** a ripperdoc boot sequence (typed terminal lines, skippable), an `UNPOWERED` dormant readout when no cyberware is installed, and an over-capacity/max-drift "cyberpsychosis" panel (`I'm sorry, Dave. I'm afraid I can't wire that.`) when a build exceeds the context budget or drift ceiling. The boot's typing animation and the cyberpsychosis glitch effect both honor `prefers-reduced-motion` (the animation is skipped/disabled; the underlying content still renders).
-- **Test counts:** unit 102/102 passing (vitest) · e2e 21/21 passing (playwright) · megazord `uv run pytest` green.
+- **Test counts:** not tracked here (they rot within a feature). Run `bun run test` (vitest unit/integration) and `bun run test:e2e` (playwright) for the current numbers; `.github/workflows/ci.yml` gates lint → test → build on every PR. megazord's own suite: `uv run pytest` in `~/code/megazord`.
 
 ## Notes
 - The **Atisha Initiative** is a GitHub **Project** (`https://github.com/orgs/Dinnaga-Research/projects/1`), not a repo — it must stay **Public** or the site's Atisha link 404s.
