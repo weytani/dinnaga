@@ -13,5 +13,6 @@ describe('SiteNav', () => {
     expect(screen.getByRole('link', { name: 'HOW WE WORK' })).toHaveAttribute('href', '/method');
     expect(screen.getByRole('link', { name: 'COLOPHON' })).toHaveAttribute('href', '/colophon');
     expect(screen.getByRole('link', { name: 'ARTIFACTS' })).toHaveAttribute('href', '/artifacts');
+    expect(screen.getByRole('link', { name: 'WEEKLY' })).toHaveAttribute('href', '/weekly');
   });
 });
