@@ -30,4 +30,5 @@ calls it live. `weeklyRuns.ts` loads it with the same unchecked cast and
 sorts newest-first; `weeklyRuns.schema.test.ts` is the guard: non-empty
 fields, ISO dates, unique dates, sortedness, docPath resolving to a real
 file under `public/` and outside the `/weekly/` + `/artifacts/` route
-namespaces.
+namespaces. `weeklyRuns.sort.test.ts` proves the newest-first comparator
+against a mocked multi-entry fixture (the one-run shipped snapshot cannot).
