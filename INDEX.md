@@ -13,6 +13,9 @@ enforced by `src/test/dirDocs.test.ts`.
 - `/artifacts`, `/artifacts/:slug` — `Artifacts/` — artifact document shelf + iframe
   viewer (data: `src/data/artifacts.ts`; docs served statically from `public/artifact-docs/`,
   outside the route namespace so extensionless static hosts can't shadow the viewer).
+- `/weekly`, `/weekly/:date` — `Weekly/` — Saturday week-in-review run log + report
+  viewer (data: `src/data/weeklyRuns.ts`; reports served from
+  `public/artifact-docs/weekly/`, outside the route namespace — see Weekly data flow).
 - `/colophon` — `Colophon/` — colophon page.
 - 404 — `NotFound/` — SPA fallback (`public/404.html` redirect trick).
 
@@ -25,6 +28,13 @@ a snapshot via `bin/megazord export-json --out src/data/zords.json` — a
 `src/lib/buildcode.ts` derive the bench's friction/build-code logic, rendered
 by `src/components/loadout/*` inside the `Loadout` route. See
 `src/data/CLAUDE.md`, `src/lib/CLAUDE.md`, `src/components/loadout/CLAUDE.md`.
+
+## Data flow: week-in-review → weeklyRuns.json → /weekly
+`src/data/weeklyRuns.json` is a **vendored snapshot** appended by the Saturday
+week-in-review publish step in `~/.claude/week-in-review/` — sanitize-gated,
+fail-closed; nothing on the site calls it live. `src/data/weeklyRuns.ts` loads
+it (unchecked cast, guarded by `src/data/weeklyRuns.schema.test.ts`); reports
+land under `public/artifact-docs/weekly/`.
 
 ## Docs (`docs/`)
 - `docs/STATUS.md` — current live/outstanding state (see `docs/CLAUDE.md`).

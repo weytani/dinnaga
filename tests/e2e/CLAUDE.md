@@ -10,6 +10,8 @@ Playwright end-to-end specs, run against a live Vite dev server
 - `a11y.spec.ts` — accessibility landmarks (e.g. skip-to-content link).
 - `artifacts.spec.ts` — /artifacts shelf → viewer navigation, the doc iframe
   actually loading, and the raw static doc under `public/artifact-docs/`.
+- `weekly.spec.ts` — /weekly run log → viewer navigation, the report iframe
+  actually loading, and the raw static report under `public/artifact-docs/weekly/`.
 
 Specs drive the real app through the browser, not component internals —
 prefer role/label queries over CSS selectors, matching the existing specs.

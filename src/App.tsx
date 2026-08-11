@@ -9,6 +9,8 @@ import { Colophon } from './routes/Colophon/Colophon';
 import { Loadout } from './routes/Loadout/Loadout';
 import { Artifacts } from './routes/Artifacts/Artifacts';
 import { ArtifactViewer } from './routes/Artifacts/ArtifactViewer';
+import { WeeklyLog } from './routes/Weekly/WeeklyLog';
+import { WeeklyViewer } from './routes/Weekly/WeeklyViewer';
 import { NotFound } from './routes/NotFound/NotFound';
 
 const router = createBrowserRouter([
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
       { path: 'loadout', element: <Loadout /> },
       { path: 'artifacts', element: <Artifacts /> },
       { path: 'artifacts/:slug', element: <ArtifactViewer /> },
+      { path: 'weekly', element: <WeeklyLog /> },
+      { path: 'weekly/:date', element: <WeeklyViewer /> },
       { path: '*', element: <NotFound /> },
     ],
   },

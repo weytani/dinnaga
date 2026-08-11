@@ -21,6 +21,8 @@ for (const path of [
   '/loadout',
   '/artifacts',
   '/artifacts/slamwich-tasting-report',
+  '/weekly',
+  '/weekly/2026-08-08',
 ]) {
   test(`${path} renders without horizontal overflow on mobile`, async ({ page }) => {
     await page.setViewportSize(MOBILE);

@@ -1,0 +1,11 @@
+{
+  "runs": [
+    {
+      "date": "2026-08-08",
+      "windowStart": "2026-08-03",
+      "windowLabel": "this week (since 2026-08-03)",
+      "summary": "The week was dominated by large parallel-agent builds (SLAMWICH’s scout/cook/judge design-portfolio pipeline and d3-lwc’s wave-4 chart conversions) alongside a deep pass on WRINKLEMAXX’s knowledge architecture (context-window discipline, qmd vs LightRAG, a PARA-method critique) and a Claude Code skill-ecosystem migration to mattpocock/skills.",
+      "docPath": "/artifact-docs/weekly/2026-08-08.html"
+    }
+  ]
+}
