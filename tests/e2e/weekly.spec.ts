@@ -1,3 +1,5 @@
+// ABOUTME: E2E for the /weekly run log and /weekly/:date viewer — list-to-viewer navigation,
+// ABOUTME: deep-link load, the report iframe actually rendering, and the raw static doc fetch.
 import { expect, test } from '@playwright/test';
 
 test('/weekly lists the run and clicking navigates to the viewer', async ({ page }) => {
