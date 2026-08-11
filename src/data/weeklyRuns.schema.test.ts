@@ -8,6 +8,10 @@ import { WEEKLY_RUNS } from './weeklyRuns';
 const PUBLIC_DIR = join(__dirname, '..', '..', 'public');
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
+function nonEmptyString(value: unknown): boolean {
+  return typeof value === 'string' && value.length > 0;
+}
+
 describe('weeklyRuns.json schema', () => {
   it('ships at least one run', () => {
     expect(WEEKLY_RUNS.length).toBeGreaterThan(0);
@@ -15,11 +19,11 @@ describe('weeklyRuns.json schema', () => {
 
   it('every run has non-empty core fields', () => {
     for (const r of WEEKLY_RUNS) {
-      expect(r.date, `${r.date}.date`).not.toBe('');
-      expect(r.windowStart, `${r.date}.windowStart`).not.toBe('');
-      expect(r.windowLabel, `${r.date}.windowLabel`).not.toBe('');
-      expect(r.summary, `${r.date}.summary`).not.toBe('');
-      expect(r.docPath, `${r.date}.docPath`).not.toBe('');
+      expect(nonEmptyString(r.date), `${r.date}.date`).toBe(true);
+      expect(nonEmptyString(r.windowStart), `${r.date}.windowStart`).toBe(true);
+      expect(nonEmptyString(r.windowLabel), `${r.date}.windowLabel`).toBe(true);
+      expect(nonEmptyString(r.summary), `${r.date}.summary`).toBe(true);
+      expect(nonEmptyString(r.docPath), `${r.date}.docPath`).toBe(true);
     }
   });
 
