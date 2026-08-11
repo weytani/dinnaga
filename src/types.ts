@@ -56,6 +56,19 @@ export interface ArtifactEntry {
   note: string;
 }
 
+export interface WeeklyRun {
+  // ISO date string (YYYY-MM-DD) of the Saturday run — the unique key.
+  date: string;
+  // ISO date string (YYYY-MM-DD) the reviewed window starts at.
+  windowStart: string;
+  // Human label for the reviewed window, e.g. "this week (since 2026-08-03)".
+  windowLabel: string;
+  // 1-2 sentence summary of the week.
+  summary: string;
+  // Root-relative URL of the static report under public/.
+  docPath: string;
+}
+
 export type Tier = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 export type Provenance = 'measured' | 'rated' | 'derived' | 'reproduced';
 export interface ZordStat {
