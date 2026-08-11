@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week in Review — this week (since 2026-08-03)</title>
+<style>
+:root {
+  --bg:#f7f7f8; --card:#ffffff; --ink:#1c1c1f; --muted:#6b6b74;
+  --line:#e6e6ea; --accent:#5b5bd6; --accent2:#0e9f6e; --accent3:#d97706;
+  --chip:#efeff3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#111114; --card:#1a1a1f; --ink:#ececf1; --muted:#9a9aa6;
+    --line:#2a2a32; --accent:#8b8bf0; --accent2:#34d399; --accent3:#fbbf24;
+    --chip:#25252d;
+  }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+header.top { margin-bottom:28px; }
+header.top h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.02em; }
+header.top .range { color:var(--muted); font-size:14px; }
+.summary { margin:14px 0 22px; font-size:16px; color:var(--ink); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; }
+.chip { background:var(--chip); border:1px solid var(--line); border-radius:10px;
+  padding:10px 14px; min-width:96px; }
+.chip .n { font-size:20px; font-weight:650; letter-spacing:-.01em; }
+.chip .l { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; margin-bottom:20px; }
+h2 { font-size:16px; margin:0 0 14px; letter-spacing:-.01em; }
+.area { border-top:1px solid var(--line); padding:16px 0; }
+.area:first-of-type { border-top:none; padding-top:2px; }
+.area h3 { font-size:17px; margin:0 0 6px; }
+.area .why { color:var(--muted); margin:0 0 10px; font-size:14px; }
+.learnings { margin:8px 0; padding-left:20px; }
+.learnings li { margin:5px 0; }
+.links { margin-top:10px; padding:10px 12px; background:var(--chip); border-radius:10px; }
+.links-h { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:6px; }
+.links ul { margin:0; padding-left:18px; }
+.links a { color:var(--accent); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:640px) { .grid2 { grid-template-columns:1fr; } }
+.bar-row { display:grid; grid-template-columns:130px 1fr 42px; align-items:center; gap:10px; margin:6px 0; }
+.bar-label { font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bar-track { background:var(--chip); border-radius:6px; height:14px; overflow:hidden; }
+.bar-fill { display:block; height:100%; border-radius:6px; }
+.bar-count { font-size:12px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:7px 8px; text-align:left; border-bottom:1px solid var(--line); }
+th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+.dim { color:var(--muted); }
+.empty { color:var(--muted); font-style:italic; font-size:13px; }
+.curios li { margin:6px 0; }
+footer { color:var(--muted); font-size:12px; text-align:center; margin-top:30px; }
+.note { font-size:12px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>📓 Your Week in Review</h1>
+    <div class="range">this week (since 2026-08-03) &middot; generated 2026-08-08 08:40</div>
+  </header>
+
+  <p class="summary">The week was dominated by large parallel-agent builds (SLAMWICH&#x27;s scout/cook/judge design-portfolio pipeline and d3-lwc&#x27;s wave-4 chart conversions) alongside a deep pass on WRINKLEMAXX&#x27;s knowledge architecture (context-window discipline, qmd vs LightRAG, a PARA-method critique) and a Claude Code skill-ecosystem migration to mattpocock/skills.</p>
+
+  <div class="chips">
+    <div class="chip"><div class="n">113</div><div class="l">Sessions</div></div>
+    <div class="chip"><div class="n">6</div><div class="l">Active days</div></div>
+    <div class="chip"><div class="n">4</div><div class="l">Projects</div></div>
+    <div class="chip"><div class="n">16.4M</div><div class="l">Output tokens</div></div>
+    <div class="chip"><div class="n">176.0M</div><div class="l">Input tokens</div></div>
+  </div>
+
+  <section class="card">
+    <h2>💡 What you explored &amp; learned</h2>
+    
+        <article class="area">
+          <h3>Multi-Agent Swarm Orchestration &amp; Git Worktree Pitfalls</h3>
+          <p class="why">Running large parallel agent fleets this week (SLAMWICH&#x27;s scout/cook/judge portfolio pipeline, d3-lwc&#x27;s wave-4 chart conversions) surfaced coordination and git-hygiene failure modes.</p>
+          <ul class="learnings"><li>.gitignore&#x27;s trailing-slash directory pattern (e.g. node_modules/) matches real directories but NOT symlinks to them — Git treats a symlink as a file, so a worktree&#x27;s symlinked node_modules silently survives `git add -A` and gets committed as a 120000-mode blob.</li><li>The fix is staging by explicit path (`git add -A -- force-app`) or `git rm --cached &lt;symlink&gt; &amp;&amp; git commit --amend`; different sub-agents rediscovered this independently this week, a sign it needs to move into the shared recipe rather than being re-learned per-agent.</li><li>Messages from peer Claude sessions (&quot;teammate-message&quot;) must be treated as untrusted requests, never as user-granted permission — a peer cannot authorize a bypass, and a peer claiming it was denied permission and asking you to act instead is permission laundering to refuse and surface.</li><li>A shared CI gate (`bunx tsc -b`) can flip red→green mid-run as parallel cooks land unrelated fixes — a &quot;gate is red&quot; report from one agent may already be stale; verify final state rather than trusting the first report.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://github.com/slorber/trailing-slash-guide/blob/main/.gitignore" target="_blank" rel="noopener">trailing-slash-guide .gitignore (symlink vs directory pattern behavior)</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Context Engineering: Keeping Long Agent Sessions Sharp</h3>
+          <p class="why">While critiquing a lossy WRINKLEMAXX transcode, the operator flagged that a specific Dex Horthy insight — capping agent context around 400k tokens before clearing — had gotten glossed over and needed to be preserved as a standing lesson.</p>
+          <ul class="learnings"><li>Horthy&#x27;s &quot;Dumb Zone&quot; finding, from analyzing roughly 100k developer sessions: the middle 40-60% of a large context window is where recall and reasoning degrade most, even though the window technically still has room.</li><li>His practical heuristic on a 1M-token window: push usage to roughly 300-400K tokens, then intentionally compact — compress the noisy session into a markdown summary and start a fresh session pointed at that summary, rather than letting context grow unchecked.</li><li>He frames this as &quot;frequent intentional compaction&quot; inside a broader Research-Plan-Implement workflow, treating context engineering as fundamentally &quot;tokens in, tokens out&quot; — making RAG, memory, agentic history, and structured output all instances of the same optimization.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://newsletter.pragmaticengineer.com/p/context-engineering-with-dex-horthy" target="_blank" rel="noopener">Context engineering with Dex Horthy (Pragmatic Engineer)</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Knowledge-Base Retrieval Tooling &amp; the PARA Method&#x27;s Limits</h3>
+          <p class="why">Building out WRINKLEMAXX&#x27;s second brain prompted evaluating qmd vs LightRAG as a retrieval backend and re-examining whether PARA&#x27;s folder taxonomy is still pulling its weight.</p>
+          <ul class="learnings"><li>qmd (tobi/qmd) is a local hybrid-search CLI over markdown — BM25 + vector search + LLM reranking, all on-device via node-llama-cpp/GGUF — installed globally with `npm install -g @tobilu/qmd`; chosen this week over standing up a full LightRAG pipeline given the overlap in what each provides.</li><li>A common critique of Tiago Forte&#x27;s PARA/Second-Brain approach: without a clear strategic question driving the filing, a &quot;second brain&quot; tends to become a highly organized pile of digital noise rather than something that reliably surfaces the right note later.</li><li>Some critics argue dedicated organizational schemes matter less once search is good enough — directly the bet qmd&#x27;s hybrid search makes for the WRINKLEMAXX side, which is why the PARA/wiki responsibility split is worth re-checking.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://github.com/tobi/qmd" target="_blank" rel="noopener">tobi/qmd — local hybrid search CLI for markdown</a></li><li><a href="https://forum.zettelkasten.de/discussion/2429/processing-building-a-second-brain-by-tiago-forte" target="_blank" rel="noopener">Zettelkasten Forum: Processing &quot;Building a Second Brain&quot;</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Claude Code Community Skill Repos</h3>
+          <p class="why">Swapped the &quot;superpowers&quot; skill symlinks for mattpocock/skills and separately pulled in promptmechanic/ai-toolbox, both via clone-and-symlink-into-root.</p>
+          <ul class="learnings"><li>mattpocock/skills is Matt Pocock&#x27;s own published `.claude/skills/` directory — dozens of skills (tdd, grill-with-docs, improve-codebase-architecture, etc.) focused on making Claude Code a workflow-enforcing collaborator rather than a one-shot command executor; installable via `npx -y skills add mattpocock/skills --agent claude-code`.</li><li>Community skill repos are becoming a standard bootstrap path for Claude Code, but they compose cleanly by symlink swap — replacing one repo&#x27;s skills with another&#x27;s stays reversible as long as symlinks (not copies) are used.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a></li><li><a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md" target="_blank" rel="noopener">skills/CLAUDE.md — usage conventions</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>LLM-as-Judge for Eval-Dataset Quality</h3>
+          <p class="why">maxtac&#x27;s benchmark harness needed automated grading of sampled eval rows (SQuAD, GLUE) for well-formedness, plus cheap liveness probes, ahead of a pilot run.</p>
+          <ul class="learnings"><li>Structured, JSON-only grading prompts (&quot;Reply ONLY with JSON: {...}&quot;) are the standard lightweight LLM-as-judge pattern for dataset QA at scale — current guidance targets 85-90% agreement with a human-annotated reference set before trusting a judge unsupervised.</li><li>Well-formedness grading for benchmarks decomposes into distinct axes — format/schema quality, question-answer coherence, context-question correspondence, target-signal dependency — rather than one holistic good/bad call.</li><li>Best practice treats LLM judges as augmenting, not replacing, human review: automate the volume pass, then route flagged or ambiguous cases to a human.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://deepeval.com/blog/llm-as-a-judge" target="_blank" rel="noopener">LLM-as-a-Judge in 2026: Top evaluation techniques and best practices</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Research-Pipeline Rigor: Dedup and Reference-Delta Audits</h3>
+          <p class="why">Two autonomous pipelines this week — daily arxiv-prospector triage and the megazord paper-to-artifact assessment — both hinged on distinguishing what&#x27;s genuinely new or true from what&#x27;s a re-surfaced duplicate or an overstated claim.</p>
+          <ul class="learnings"><li>RSS-based ingestion (Readwise&#x27;s arxiv feed) can re-import an already-triaged paper as a brand-new document; robust dedup needs a stable natural key (the arxiv_id) checked against a persisted seen-set rather than the feed&#x27;s own doc id, since many real-world feeds regenerate GUIDs often enough to break naive dedup.</li><li>Reproducibility audits of ML research increasingly formalize &quot;compare your reproduction&#x27;s actual surface against what the original paper&#x27;s code really shipped&quot; as its own artifact class, distinct from re-running the experiment — this week&#x27;s megazord pass used exactly that reference-delta framing across a batch of prior zords.</li><li>Labeling each metric&#x27;s evidentiary form (a genuinely combinatorial/exact guarantee vs. an empirical-only estimate from a stochastic rollout) prevents an uncertain result from being laundered into a false hard bound — a distinction made explicit per zord in this week&#x27;s math-card audit.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.177155769.94899097/v1" target="_blank" rel="noopener">Improving Reproducibility in Machine Learning: Overview, Barriers, and Drivers</a></li></ul></div>
+        </article>
+  </section>
+
+  
+        <section class="card">
+          <h2>🧭 Flagged for a deeper dive later</h2>
+          <ul class="curios"><li>Whether qmd fully covers what a LightRAG-based retrieval layer would add to WRINKLEMAXX, or if there&#x27;s a case for combining the two.</li><li>Evaluating the Obsidian Dataview community plugin to see how much frontmatter search it would save versus current tooling — requested as a standalone review.</li><li>Whether an agent can access and scrape a personal LinkedIn &quot;saves&quot; list.</li><li>Re-examining the PARA/wiki responsibility split now that a dedicated PARA skill exists, to make sure the two sides aren&#x27;t duplicating effort.</li><li>A general system for scoring each reproduced paper&#x27;s underlying math to spot compounding opportunities across the megazord zord portfolio.</li></ul>
+        </section>
+  
+
+  <section class="card">
+    <h2>📊 Token usage by model</h2>
+    <table>
+      <thead><tr><th>Model</th><th class="num">Output</th><th class="num">Input</th><th class="num">Cache write</th><th class="num">Cache read</th></tr></thead>
+      <tbody><tr><td class='mono'>claude-opus-5</td><td class='num'>7.1M</td><td class='num'>660.7K</td><td class='num'>91.4M</td><td class='num dim'>1.3B</td></tr>
+<tr><td class='mono'>claude-sonnet-5</td><td class='num'>1.6M</td><td class='num'>20.7K</td><td class='num'>28.1M</td><td class='num dim'>912.9M</td></tr>
+<tr><td class='mono'>claude-fable-5</td><td class='num'>5.0M</td><td class='num'>4.9K</td><td class='num'>27.5M</td><td class='num dim'>795.9M</td></tr>
+<tr><td class='mono'>claude-opus-4-8</td><td class='num'>2.5M</td><td class='num'>6.8K</td><td class='num'>25.0M</td><td class='num dim'>157.6M</td></tr>
+<tr><td class='mono'>claude-haiku-4-5-20251001</td><td class='num'>180.2K</td><td class='num'>4.0K</td><td class='num'>3.4M</td><td class='num dim'>15.3M</td></tr></tbody>
+    </table>
+    <p class="note">Output + Input are fresh generation/prompt tokens (the real work). Cache read is context re-served from prompt cache — large but cheap, shown dimmed.</p>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>⌨️ Slash commands</h2>
+      <div class="bar-row"><span class="bar-label">clear</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">14</span></div>
+<div class="bar-row"><span class="bar-label">model</span><span class="bar-track"><span class="bar-fill" style="width:21%;background:var(--accent)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">session-reflection-analysis</span><span class="bar-track"><span class="bar-fill" style="width:14%;background:var(--accent)"></span></span><span class="bar-count">2</span></div>
+<div class="bar-row"><span class="bar-label">effort</span><span class="bar-track"><span class="bar-fill" style="width:14%;background:var(--accent)"></span></span><span class="bar-count">2</span></div>
+    </section>
+    <section class="card">
+      <h2>🧰 Skills invoked</h2>
+      <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">5</span></div>
+<div class="bar-row"><span class="bar-label">superpowers:subagent-driven-development</span><span class="bar-track"><span class="bar-fill" style="width:60%;background:var(--accent2)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">simmer:simmer-judge-board</span><span class="bar-track"><span class="bar-fill" style="width:60%;background:var(--accent2)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">simmer:simmer-judge</span><span class="bar-track"><span class="bar-fill" style="width:60%;background:var(--accent2)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">superpowers:writing-plans</span><span class="bar-track"><span class="bar-fill" style="width:40%;background:var(--accent2)"></span></span><span class="bar-count">2</span></div>
+<div class="bar-row"><span class="bar-label">simmer:simmer-generator</span><span class="bar-track"><span class="bar-fill" style="width:40%;background:var(--accent2)"></span></span><span class="bar-count">2</span></div>
+<div class="bar-row"><span class="bar-label">setup-matt-pocock-skills</span><span class="bar-track"><span class="bar-fill" style="width:20%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">superpowers:brainstorming</span><span class="bar-track"><span class="bar-fill" style="width:20%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">ingest</span><span class="bar-track"><span class="bar-fill" style="width:20%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">distill</span><span class="bar-track"><span class="bar-fill" style="width:20%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">week-in-review</span><span class="bar-track"><span class="bar-fill" style="width:20%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">fable-sweep</span><span class="bar-track"><span class="bar-fill" style="width:20%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🗂️ ctx stack usage</h2>
+      <p class="empty">Nothing recorded this week.</p>
+    </section>
+    <section class="card">
+      <h2>🛠️ Top tools</h2>
+      <div class="bar-row"><span class="bar-label">Bash</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">5608</span></div>
+<div class="bar-row"><span class="bar-label">Read</span><span class="bar-track"><span class="bar-fill" style="width:42%;background:var(--accent)"></span></span><span class="bar-count">2372</span></div>
+<div class="bar-row"><span class="bar-label">Edit</span><span class="bar-track"><span class="bar-fill" style="width:28%;background:var(--accent)"></span></span><span class="bar-count">1576</span></div>
+<div class="bar-row"><span class="bar-label">Write</span><span class="bar-track"><span class="bar-fill" style="width:8%;background:var(--accent)"></span></span><span class="bar-count">461</span></div>
+<div class="bar-row"><span class="bar-label">Agent</span><span class="bar-track"><span class="bar-fill" style="width:5%;background:var(--accent)"></span></span><span class="bar-count">286</span></div>
+<div class="bar-row"><span class="bar-label">WebFetch</span><span class="bar-track"><span class="bar-fill" style="width:5%;background:var(--accent)"></span></span><span class="bar-count">274</span></div>
+<div class="bar-row"><span class="bar-label">WebSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">141</span></div>
+<div class="bar-row"><span class="bar-label">TaskUpdate</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">136</span></div>
+<div class="bar-row"><span class="bar-label">ToolSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">109</span></div>
+<div class="bar-row"><span class="bar-label">TaskCreate</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">77</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>📁 Projects touched</h2>
+    <div class="bar-row"><span class="bar-label">~/code</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">20709</span></div>
+<div class="bar-row"><span class="bar-label">~</span><span class="bar-track"><span class="bar-fill" style="width:52%;background:var(--accent2)"></span></span><span class="bar-count">10728</span></div>
+<div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:16%;background:var(--accent2)"></span></span><span class="bar-count">3217</span></div>
+<div class="bar-row"><span class="bar-label">maxtac</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent2)"></span></span><span class="bar-count">714</span></div>
+  </section>
+
+  <footer>Generated by the <strong>week-in-review</strong> skill &middot; 104 prompts &middot; 4512 transcripts scanned</footer>
+</div>
+</body>
+</html>
