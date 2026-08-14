@@ -28,7 +28,6 @@ describe('content data files', () => {
       '/method',
       '/colophon',
       '/loadout',
-      '/artifacts',
       '/weekly',
     ]);
   });

@@ -1,3 +1,5 @@
+// ABOUTME: E2E for the artifacts shelf — index → viewer navigation and the static docs.
+// ABOUTME: The shelf is unlisted; entry is the home-terminal passphrase or a direct URL.
 import { expect, test } from '@playwright/test';
 
 test('/artifacts lists the report and clicking navigates to the viewer', async ({ page }) => {
@@ -44,4 +46,31 @@ test('renders exactly one main landmark on both artifact routes', async ({ page 
   await expect(page.locator('main')).toHaveCount(1);
   await page.goto('/artifacts/slamwich-tasting-report');
   await expect(page.locator('main')).toHaveCount(1);
+});
+
+test('the home terminal passphrase unlocks the hidden shelf (reduced motion)', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const input = page.getByLabel('Ask Dinnaga a question');
+  await input.fill('show me what you got');
+  await input.press('Enter');
+  await expect(page.getByText('▸ ACCESS GRANTED — ROUTING TO /ARTIFACTS')).toBeVisible();
+  await expect(page).toHaveURL(/\/artifacts$/, { timeout: 10_000 });
+  await expect(page.getByRole('heading', { name: 'Documents off the bench.' })).toBeVisible();
+});
+
+test('the passphrase reveal plays through under full motion', async ({ page }) => {
+  await page.goto('/');
+  const input = page.getByLabel('Ask Dinnaga a question');
+  await input.fill("show me what you've got");
+  await input.press('Enter');
+  await expect(page.getByText('PASSPHRASE ACCEPTED.')).toBeVisible({ timeout: 15_000 });
+  await expect(page).toHaveURL(/\/artifacts$/, { timeout: 15_000 });
+});
+
+test('the primary nav does not list the artifact shelf', async ({ page }) => {
+  await page.goto('/');
+  const nav = page.locator('.nav-links');
+  await expect(nav.getByRole('link', { name: 'WEEKLY' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'ARTIFACTS' })).toHaveCount(0);
 });

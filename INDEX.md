@@ -13,6 +13,8 @@ enforced by `src/test/dirDocs.test.ts`.
 - `/artifacts`, `/artifacts/:slug` — `Artifacts/` — artifact document shelf + iframe
   viewer (data: `src/data/artifacts.ts`; docs served statically from `public/artifact-docs/`,
   outside the route namespace so extensionless static hosts can't shadow the viewer).
+  **Unlisted**: no nav link — unlocked by typing "show me what you got" into the home
+  terminal (`src/lib/unlock.ts` matcher, `src/data/unlockLines.ts` reveal), or direct URL.
 - `/weekly`, `/weekly/:date` — `Weekly/` — Saturday week-in-review run log + report
   viewer (data: `src/data/weeklyRuns.ts`; reports served from
   `public/artifact-docs/weekly/`, outside the route namespace — see Weekly data flow).

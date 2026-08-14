@@ -12,7 +12,11 @@ describe('SiteNav', () => {
     expect(screen.getByRole('link', { name: 'ATISHA' })).toHaveAttribute('href', '/atisha');
     expect(screen.getByRole('link', { name: 'HOW WE WORK' })).toHaveAttribute('href', '/method');
     expect(screen.getByRole('link', { name: 'COLOPHON' })).toHaveAttribute('href', '/colophon');
-    expect(screen.getByRole('link', { name: 'ARTIFACTS' })).toHaveAttribute('href', '/artifacts');
     expect(screen.getByRole('link', { name: 'WEEKLY' })).toHaveAttribute('href', '/weekly');
+  });
+
+  it('does not list the hidden artifact shelf', () => {
+    render(<MemoryRouter><SiteNav /></MemoryRouter>);
+    expect(screen.queryByRole('link', { name: 'ARTIFACTS' })).not.toBeInTheDocument();
   });
 });
