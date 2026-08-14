@@ -12,7 +12,8 @@ export function Artifacts() {
       </header>
       <p className="panel-body">
         Standalone reports and syntheses produced by lab projects — complete documents, readable in
-        place or opened raw.
+        place or opened raw. Unlisted channel — the nav forgot this shelf; the home terminal
+        remembers the words.
       </p>
       <ul className="artifact-index">
         {ARTIFACTS.map((a) => (
