@@ -1,8 +1,11 @@
 // ABOUTME: Terminal — the interactive boot terminal shown in the home hero's art column.
-// ABOUTME: Types its boot sequence on mount then invites a question.
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+// ABOUTME: Types its boot sequence, invites a question, and unlocks /artifacts on the passphrase.
+import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTyped } from '../hooks/useTyped';
 import { BOOT_LINES } from '../data/bootLines';
+import { UNLOCK_LINES } from '../data/unlockLines';
+import { isUnlockPhrase } from '../lib/unlock';
 import type { BootLine } from '../types';
 
 export interface TerminalMedia {
@@ -15,6 +18,7 @@ export interface TerminalMedia {
 interface TerminalProps {
   media?: TerminalMedia;
   bootLines?: BootLine[];
+  unlockLines?: BootLine[];
 }
 
 interface HistoryEntry {
@@ -22,21 +26,69 @@ interface HistoryEntry {
   text: string;
 }
 
-export function Terminal({ media, bootLines = BOOT_LINES }: TerminalProps) {
+const UNLOCK_NAV_DELAY_MS = 900;
+
+interface UnlockRevealProps {
+  lines: BootLine[];
+  onDone: () => void;
+}
+
+// Mounted once when the passphrase matches; `lines` must stay referentially
+// stable for the lifetime of the mount (useTyped treats it as a mount-time input).
+function UnlockReveal({ lines, onDone }: UnlockRevealProps) {
+  const { rendered, done } = useTyped(lines);
+
+  useEffect(() => {
+    if (!done) return;
+    const t = setTimeout(onDone, UNLOCK_NAV_DELAY_MS);
+    return () => clearTimeout(t);
+  }, [done, onDone]);
+
+  return (
+    <>
+      {rendered.map((t, i) => (
+        <div className="t-line" key={i}>
+          {t || ' '}
+        </div>
+      ))}
+    </>
+  );
+}
+
+export function Terminal({
+  media,
+  bootLines = BOOT_LINES,
+  unlockLines = UNLOCK_LINES,
+}: TerminalProps) {
+  const navigate = useNavigate();
   const { rendered, done } = useTyped(bootLines);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [sent, setSent] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigatedRef = useRef(false);
 
   useEffect(() => {
     if (done && inputRef.current && !sent) inputRef.current.focus();
   }, [done, sent]);
 
+  const goShelf = useCallback(() => {
+    if (navigatedRef.current) return;
+    navigatedRef.current = true;
+    navigate('/artifacts');
+  }, [navigate]);
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const q = input.trim();
     if (!q) return;
+    if (isUnlockPhrase(q)) {
+      setHistory((h) => [...h, { kind: 'in', text: q }]);
+      setInput('');
+      setUnlocked(true);
+      return;
+    }
     setHistory((h) => [
       ...h,
       { kind: 'in', text: q },
@@ -94,7 +146,9 @@ export function Terminal({ media, bootLines = BOOT_LINES }: TerminalProps) {
             </div>
           ))}
 
-          {done && !sent && (
+          {unlocked && <UnlockReveal lines={unlockLines} onDone={goShelf} />}
+
+          {done && !sent && !unlocked && (
             <form className="t-prompt" onSubmit={onSubmit}>
               <span className="t-caret">&gt;</span>
               <input
