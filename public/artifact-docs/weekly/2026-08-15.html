@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week in Review — this week (since 2026-08-10)</title>
+<style>
+:root {
+  --bg:#f7f7f8; --card:#ffffff; --ink:#1c1c1f; --muted:#6b6b74;
+  --line:#e6e6ea; --accent:#5b5bd6; --accent2:#0e9f6e; --accent3:#d97706;
+  --chip:#efeff3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#111114; --card:#1a1a1f; --ink:#ececf1; --muted:#9a9aa6;
+    --line:#2a2a32; --accent:#8b8bf0; --accent2:#34d399; --accent3:#fbbf24;
+    --chip:#25252d;
+  }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+header.top { margin-bottom:28px; }
+header.top h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.02em; }
+header.top .range { color:var(--muted); font-size:14px; }
+.summary { margin:14px 0 22px; font-size:16px; color:var(--ink); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; }
+.chip { background:var(--chip); border:1px solid var(--line); border-radius:10px;
+  padding:10px 14px; min-width:96px; }
+.chip .n { font-size:20px; font-weight:650; letter-spacing:-.01em; }
+.chip .l { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; margin-bottom:20px; }
+h2 { font-size:16px; margin:0 0 14px; letter-spacing:-.01em; }
+.area { border-top:1px solid var(--line); padding:16px 0; }
+.area:first-of-type { border-top:none; padding-top:2px; }
+.area h3 { font-size:17px; margin:0 0 6px; }
+.area .why { color:var(--muted); margin:0 0 10px; font-size:14px; }
+.learnings { margin:8px 0; padding-left:20px; }
+.learnings li { margin:5px 0; }
+.links { margin-top:10px; padding:10px 12px; background:var(--chip); border-radius:10px; }
+.links-h { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:6px; }
+.links ul { margin:0; padding-left:18px; }
+.links a { color:var(--accent); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:640px) { .grid2 { grid-template-columns:1fr; } }
+.bar-row { display:grid; grid-template-columns:130px 1fr 42px; align-items:center; gap:10px; margin:6px 0; }
+.bar-label { font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bar-track { background:var(--chip); border-radius:6px; height:14px; overflow:hidden; }
+.bar-fill { display:block; height:100%; border-radius:6px; }
+.bar-count { font-size:12px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:7px 8px; text-align:left; border-bottom:1px solid var(--line); }
+th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+.dim { color:var(--muted); }
+.empty { color:var(--muted); font-style:italic; font-size:13px; }
+.curios li { margin:6px 0; }
+footer { color:var(--muted); font-size:12px; text-align:center; margin-top:30px; }
+.note { font-size:12px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>📓 Your Week in Review</h1>
+    <div class="range">this week (since 2026-08-10) &middot; generated 2026-08-15 08:39</div>
+  </header>
+
+  <p class="summary">The operator&#x27;s week centered on hardening headless-agent automation (nightly/weekly reports, replacing a risky auto-commit job), plumbing personal knowledge-base and remote-access infrastructure, vetting eval-harness datasets, and orchestrating fleets of parallel research agents to mine web design references into a reusable skill.</p>
+
+  <div class="chips">
+    <div class="chip"><div class="n">35</div><div class="l">Sessions</div></div>
+    <div class="chip"><div class="n">6</div><div class="l">Active days</div></div>
+    <div class="chip"><div class="n">5</div><div class="l">Projects</div></div>
+    <div class="chip"><div class="n">7.4M</div><div class="l">Output tokens</div></div>
+    <div class="chip"><div class="n">78.6M</div><div class="l">Input tokens</div></div>
+  </div>
+
+  <section class="card">
+    <h2>💡 What you explored &amp; learned</h2>
+    
+        <article class="area">
+          <h3>Building LLM Eval Harnesses: Dataset Vetting &amp; Judge Prompts</h3>
+          <p class="why">The operator had Claude grade sampled benchmark rows (SQuAD, GLUE) for well-formedness and score response directness — core building blocks of an LLM-as-judge eval harness.</p>
+          <ul class="learnings"><li>LLM-as-judge is now standard practice, but the 2026 production pattern is hybrid: metrics where measurable, LLM judges for reasoning-heavy calls, and human review for the disputed tail (roughly 1-5% of samples).</li><li>Judge quality is task-specific, not universal — the right move is running a few candidate judge models against a small human-labeled set and checking agreement before trusting one at scale.</li><li>Effective golden/eval datasets tend to be small (200-500 examples) and built from real observed failures rather than synthetic data.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://deepeval.com/blog/llm-as-a-judge" target="_blank" rel="noopener">LLM-as-a-Judge in 2026: Top evaluation techniques and best practices</a></li><li><a href="https://arxiv.org/html/2606.01629v1" target="_blank" rel="noopener">Benchmarking LLM-as-a-Judge for Long-Form Output Evaluation</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Claude Code Skill Ecosystem &amp; Workflow Design</h3>
+          <p class="why">The operator asked for an analysis reconciling three overlapping Claude Code skill stacks into one coherent programming workflow, including where GitHub Actions could plug in.</p>
+          <ul class="learnings"><li>Skills are filesystem-based (~/.claude/skills/ or project .claude/skills/) and load into context only when invoked, not ahead of time — so overlapping skill stacks can coexist without bloating every session.</li><li>A skill defines *what* to do; a subagent (its own context window, tools, and permissions) defines *who* does it — the distinction matters when merging multiple skill stacks so they compose instead of collide.</li><li>Claude Code&#x27;s official GitHub Action can be triggered via an @claude PR/issue comment or on any repo event, making it a natural place to wire in a settled multi-skill workflow for review or automation.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Extend Claude with skills — Claude Code Docs</a></li><li><a href="https://code.claude.com/docs/en/github-actions" target="_blank" rel="noopener">Claude Code GitHub Actions — Claude Code Docs</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Multi-Session / Multi-Agent Claude Orchestration</h3>
+          <p class="why">The operator ran a fleet of parallel research teammate sessions mining reference sites, surfacing idle/failure notifications and a case worth flagging: a peer session&#x27;s message is not the same as user authorization.</p>
+          <ul class="learnings"><li>Claude Code&#x27;s Agent Teams feature (distinct from plain subagents) lets multiple full Claude Code instances share a task list, claim work, and message each other directly.</li><li>Subagents, by contrast, only report results back to the parent session and never talk to each other peer-to-peer — the right choice depends on whether the work needs cross-agent negotiation or just fan-out/fan-in.</li><li>Agent Teams is still experimental and opt-in (CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1); a teammate session cannot grant escalated permissions or launder a denied action through another session.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://code.claude.com/docs/en/agent-teams" target="_blank" rel="noopener">Orchestrate teams of Claude Code sessions — Claude Code Docs</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Personal Knowledge Base Tooling (Obsidian-backed vault)</h3>
+          <p class="why">The operator pushed a git-backed Obsidian vault to GitHub, then chased down why changes weren&#x27;t showing up on a phone, and asked for a CLI plus lint/distill passes.</p>
+          <ul class="learnings"><li>The community Obsidian Git plugin runs on isomorphic-git under the hood on mobile, and its own maintainers say it&#x27;s unstable there — no SSH auth support and memory-driven repo-size limits — which explains desktop-commits-but-phone-shows-nothing symptoms.</li><li>A dedicated mobile-sync plugin is a better fit than Obsidian Git&#x27;s mobile leg for reliably reaching a vault from a phone.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://community.obsidian.md/plugins/obsidian-git" target="_blank" rel="noopener">Git — Obsidian Plugin (community docs)</a></li><li><a href="https://forum.obsidian.md/t/obsidian-github-sync-plugin-with-mobile-support/95338" target="_blank" rel="noopener">Obsidian &lt;---&gt; GitHub Sync Plugin with Mobile support — Obsidian Forum</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Headless Reporting Agents (nightly/weekly automation)</h3>
+          <p class="why">The operator retired a risky nightly auto-commit job in favor of a read-only nightly state-of-the-world report, added a weekly session-reflection pass, and wired a weekly run-log page — all driven by headless Claude Code runs.</p>
+          <ul class="learnings"><li>Headless mode (`claude -p`) runs Claude Code non-interactively from shell scripts, cron, or CI — reading a prompt directly and writing structured output via `--output-format json`.</li><li>`--allowedTools` and `--permission-mode` let an unattended run proceed without blocking on an approval prompt, which is what makes a genuinely hands-off nightly/weekly job possible.</li><li>The documented pattern is chaining headless runs as nodes in a pipeline — one run&#x27;s JSON output feeding the next — which matches the nightly-facts → nightly-report → weekly-digest chain the operator built this week.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://docs.anthropic.com/en/docs/claude-code/sdk/sdk-headless" target="_blank" rel="noopener">SDK headless mode — Claude Docs</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Tailscale Remote Access &amp; Persistent Device Auth</h3>
+          <p class="why">The operator hit repeated re-auth prompts reaching a tailnet device from different browsers and wanted access to persist going forward.</p>
+          <ul class="learnings"><li>Long-term device authorization actually rides on the node key created at login, not the original auth method — node keys auto-expire every 180 days by default regardless of how the device first joined.</li><li>Pre-approved or tagged auth keys let a device skip interactive re-authorization entirely — the mechanism to reach for when a device should &#x27;just stay in&#x27; instead of re-prompting per browser or session.</li><li>Auth-key secrets are sensitive and worth deliberately rotating/expiring, which is a good reason to set a reminder rather than leaving a pasted key live indefinitely.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://tailscale.com/docs/features/access-control/auth-keys" target="_blank" rel="noopener">Auth keys — Tailscale Docs</a></li><li><a href="https://tailscale.com/docs/features/access-control/device-management/device-approval" target="_blank" rel="noopener">Device approval — Tailscale Docs</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Web Design Research → Reusable Skill Distillation</h3>
+          <p class="why">The operator wants to mine the original reference sites behind an earlier portfolio exercise for CSS and visual-design techniques, then fold the findings into a growing, reusable design skill.</p>
+          <ul class="learnings"><li>Design tokens — layered as primitive, semantic, and component values — are the standard vocabulary for capturing a site&#x27;s visual system in a reusable, diffable form rather than as free-text notes.</li><li>Structuring captured findings the way a formal design system does (tokens, components, screenshots) means new examples slot into existing categories instead of piling up as one-off write-ups, which matters for a skill meant to accumulate over time.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://www.contentful.com/blog/design-token-system/" target="_blank" rel="noopener">Design tokens explained (and how to build a design token system) — Contentful</a></li><li><a href="https://designsystem.ny.gov/foundations/tokens/" target="_blank" rel="noopener">Design Tokens — NYS Design System</a></li></ul></div>
+        </article>
+  </section>
+
+  
+        <section class="card">
+          <h2>🧭 Flagged for a deeper dive later</h2>
+          <ul class="curios"><li>Revisit and rotate the Tailscale API token that was pasted into a session — the operator explicitly asked to be reminded in November.</li><li>Formalize a combined programming workflow across the three overlapping skill stacks, with GitHub Actions layered in — requested as analysis, still an open follow-up.</li><li>Keep extending the emerging web-design skill with new mined examples and analysis over time, as explicitly requested.</li><li>Look into what &#x27;dotfile-brainstorm&#x27; actually is/does — the operator asked the question mid-session without a follow-up.</li><li>Confirm the weekly audit report is actually landing in the reader after the schedule was shifted to early Sunday morning — the operator flagged it as missing once already.</li></ul>
+        </section>
+  
+
+  <section class="card">
+    <h2>📊 Token usage by model</h2>
+    <table>
+      <thead><tr><th>Model</th><th class="num">Output</th><th class="num">Input</th><th class="num">Cache write</th><th class="num">Cache read</th></tr></thead>
+      <tbody><tr><td class='mono'>claude-opus-4-8</td><td class='num'>4.3M</td><td class='num'>201.6K</td><td class='num'>54.6M</td><td class='num dim'>321.2M</td></tr>
+<tr><td class='mono'>claude-opus-5</td><td class='num'>1.8M</td><td class='num'>64.2K</td><td class='num'>14.4M</td><td class='num dim'>270.4M</td></tr>
+<tr><td class='mono'>claude-fable-5</td><td class='num'>1.3M</td><td class='num'>17.2K</td><td class='num'>7.7M</td><td class='num dim'>129.0M</td></tr>
+<tr><td class='mono'>claude-sonnet-5</td><td class='num'>135.5K</td><td class='num'>286</td><td class='num'>1.5M</td><td class='num dim'>4.4M</td></tr>
+<tr><td class='mono'>claude-haiku-4-5-20251001</td><td class='num'>13.1K</td><td class='num'>200</td><td class='num'>160.0K</td><td class='num dim'>507.0K</td></tr></tbody>
+    </table>
+    <p class="note">Output + Input are fresh generation/prompt tokens (the real work). Cache read is context re-served from prompt cache — large but cheap, shown dimmed.</p>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>⌨️ Slash commands</h2>
+      <div class="bar-row"><span class="bar-label">clear</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">12</span></div>
+<div class="bar-row"><span class="bar-label">session-reflection-analysis</span><span class="bar-track"><span class="bar-fill" style="width:25%;background:var(--accent)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">model</span><span class="bar-track"><span class="bar-fill" style="width:25%;background:var(--accent)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">effort</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent)"></span></span><span class="bar-count">2</span></div>
+<div class="bar-row"><span class="bar-label">usage-credits</span><span class="bar-track"><span class="bar-fill" style="width:8%;background:var(--accent)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🧰 Skills invoked</h2>
+      <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">6</span></div>
+<div class="bar-row"><span class="bar-label">lint</span><span class="bar-track"><span class="bar-fill" style="width:33%;background:var(--accent2)"></span></span><span class="bar-count">2</span></div>
+<div class="bar-row"><span class="bar-label">ingest</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">schedule</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">skill-forge</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🗂️ ctx stack usage</h2>
+      <p class="empty">Nothing recorded this week.</p>
+    </section>
+    <section class="card">
+      <h2>🛠️ Top tools</h2>
+      <div class="bar-row"><span class="bar-label">Bash</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">1209</span></div>
+<div class="bar-row"><span class="bar-label">Read</span><span class="bar-track"><span class="bar-fill" style="width:74%;background:var(--accent)"></span></span><span class="bar-count">891</span></div>
+<div class="bar-row"><span class="bar-label">Write</span><span class="bar-track"><span class="bar-fill" style="width:18%;background:var(--accent)"></span></span><span class="bar-count">217</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_add_tags_to_document</span><span class="bar-track"><span class="bar-fill" style="width:13%;background:var(--accent)"></span></span><span class="bar-count">154</span></div>
+<div class="bar-row"><span class="bar-label">Agent</span><span class="bar-track"><span class="bar-fill" style="width:11%;background:var(--accent)"></span></span><span class="bar-count">139</span></div>
+<div class="bar-row"><span class="bar-label">Edit</span><span class="bar-track"><span class="bar-fill" style="width:11%;background:var(--accent)"></span></span><span class="bar-count">135</span></div>
+<div class="bar-row"><span class="bar-label">ToolSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">40</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_list_documents</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">35</span></div>
+<div class="bar-row"><span class="bar-label">TaskUpdate</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">32</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_move_documents</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">30</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>📁 Projects touched</h2>
+    <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">5739</span></div>
+<div class="bar-row"><span class="bar-label">~</span><span class="bar-track"><span class="bar-fill" style="width:52%;background:var(--accent2)"></span></span><span class="bar-count">3010</span></div>
+<div class="bar-row"><span class="bar-label">~/code</span><span class="bar-track"><span class="bar-fill" style="width:39%;background:var(--accent2)"></span></span><span class="bar-count">2211</span></div>
+<div class="bar-row"><span class="bar-label">maxtac</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent2)"></span></span><span class="bar-count">93</span></div>
+<div class="bar-row"><span class="bar-label">orglore</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent2)"></span></span><span class="bar-count">23</span></div>
+  </section>
+
+  <footer>Generated by the <strong>week-in-review</strong> skill &middot; 74 prompts &middot; 3151 transcripts scanned</footer>
+</div>
+</body>
+</html>
