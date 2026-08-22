@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week in Review — this week (since 2026-08-17)</title>
+<style>
+:root {
+  --bg:#f7f7f8; --card:#ffffff; --ink:#1c1c1f; --muted:#6b6b74;
+  --line:#e6e6ea; --accent:#5b5bd6; --accent2:#0e9f6e; --accent3:#d97706;
+  --chip:#efeff3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#111114; --card:#1a1a1f; --ink:#ececf1; --muted:#9a9aa6;
+    --line:#2a2a32; --accent:#8b8bf0; --accent2:#34d399; --accent3:#fbbf24;
+    --chip:#25252d;
+  }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+header.top { margin-bottom:28px; }
+header.top h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.02em; }
+header.top .range { color:var(--muted); font-size:14px; }
+.summary { margin:14px 0 22px; font-size:16px; color:var(--ink); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; }
+.chip { background:var(--chip); border:1px solid var(--line); border-radius:10px;
+  padding:10px 14px; min-width:96px; }
+.chip .n { font-size:20px; font-weight:650; letter-spacing:-.01em; }
+.chip .l { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; margin-bottom:20px; }
+h2 { font-size:16px; margin:0 0 14px; letter-spacing:-.01em; }
+.area { border-top:1px solid var(--line); padding:16px 0; }
+.area:first-of-type { border-top:none; padding-top:2px; }
+.area h3 { font-size:17px; margin:0 0 6px; }
+.area .why { color:var(--muted); margin:0 0 10px; font-size:14px; }
+.learnings { margin:8px 0; padding-left:20px; }
+.learnings li { margin:5px 0; }
+.links { margin-top:10px; padding:10px 12px; background:var(--chip); border-radius:10px; }
+.links-h { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:6px; }
+.links ul { margin:0; padding-left:18px; }
+.links a { color:var(--accent); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:640px) { .grid2 { grid-template-columns:1fr; } }
+.bar-row { display:grid; grid-template-columns:130px 1fr 42px; align-items:center; gap:10px; margin:6px 0; }
+.bar-label { font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bar-track { background:var(--chip); border-radius:6px; height:14px; overflow:hidden; }
+.bar-fill { display:block; height:100%; border-radius:6px; }
+.bar-count { font-size:12px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:7px 8px; text-align:left; border-bottom:1px solid var(--line); }
+th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+.dim { color:var(--muted); }
+.empty { color:var(--muted); font-style:italic; font-size:13px; }
+.curios li { margin:6px 0; }
+footer { color:var(--muted); font-size:12px; text-align:center; margin-top:30px; }
+.note { font-size:12px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>📓 Your Week in Review</h1>
+    <div class="range">this week (since 2026-08-17) &middot; generated 2026-08-22 08:39</div>
+  </header>
+
+  <p class="summary">The week was dominated by heavy AI-research triage work that surfaced recurring themes in multi-agent deliberation, LLM-judge design, and Global Workspace Theory, plus two infrastructure detours into macOS daemon recovery after a crash and setting up Tailscale SSH.</p>
+
+  <div class="chips">
+    <div class="chip"><div class="n">14</div><div class="l">Sessions</div></div>
+    <div class="chip"><div class="n">6</div><div class="l">Active days</div></div>
+    <div class="chip"><div class="n">3</div><div class="l">Projects</div></div>
+    <div class="chip"><div class="n">2.0M</div><div class="l">Output tokens</div></div>
+    <div class="chip"><div class="n">16.6M</div><div class="l">Input tokens</div></div>
+  </div>
+
+  <section class="card">
+    <h2>💡 What you explored &amp; learned</h2>
+    
+        <article class="area">
+          <h3>Multi-Agent Deliberation &amp; Debate Failure Modes</h3>
+          <p class="why">Research-triage sessions repeatedly surfaced papers analyzing why multi-agent LLM review/debate systems break down, including one paper on a structured &#x27;critic&#x27; role for agentic code review.</p>
+          <ul class="learnings"><li>&quot;False consensus&quot; is a named failure mode: agents converge on agreement without sufficient supporting evidence.</li><li>A single strategically adversarial or sycophantic agent can swing group accuracy substantially (reported 10-40% degradation, 30%+ more consensus on wrong answers).</li><li>Structured disagreement — a dedicated reviewer/critic role that must justify pushback — outperforms unstructured, unguided consensus-seeking.</li><li>Interaction structure (who talks to whom, and how disagreement is resolved) matters more for review quality than simply adding more agents.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/abs/2608.18167" target="_blank" rel="noopener">Adversarial Review: Structured Disagreement for Grounded Agentic Code Review (arXiv 2608.18167)</a></li><li><a href="https://arxiv.org/pdf/2509.05396" target="_blank" rel="noopener">Talk Isn&#x27;t Always Cheap: Understanding Failure Modes in Multi-Agent Debate</a></li><li><a href="https://www.nature.com/articles/s41598-026-42705-7" target="_blank" rel="noopener">When collaboration fails: persuasion-driven adversarial influence in multi-agent LLM debate — Scientific Reports</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>LLM-as-Judge &amp; Evaluator Design</h3>
+          <p class="why">Several triaged papers this week concerned how to design verifiers/judges that score agent or model outputs, including one finding that verifier-selection can beat near-perfect self-selection.</p>
+          <ul class="learnings"><li>The strongest model isn&#x27;t always the best judge — cost, latency, and self-preference bias (favoring outputs resembling its own family) all factor in.</li><li>Known systematic biases to guard against: position bias (favors placement), verbosity bias (favors longer answers), and self-preference bias.</li><li>Verifier/judge design hinges on four questions: how to construct the judge, how to prompt/aggregate it, how to evaluate the judge itself, and how to control its biases in deployment.</li><li>Validate a judge against a labeled holdout set and track agreement over time rather than trusting it out of the box.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://deepeval.com/blog/llm-as-a-judge" target="_blank" rel="noopener">LLM-as-a-Judge in 2026: Top evaluation techniques and best practices — DeepEval</a></li><li><a href="https://arize.com/blog/how-to-build-llm-as-a-judge-evaluators-that-hold-up-in-production/" target="_blank" rel="noopener">How to build LLM-as-a-Judge evaluators that hold up in production — Arize AI</a></li><li><a href="https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge" target="_blank" rel="noopener">LLM-as-a-Judge — Langfuse docs</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Global Workspace Theory as a Lens for Agent Architectures</h3>
+          <p class="why">The research-triage committee runs a dedicated &#x27;GWT voice&#x27; that repeatedly applied Global Workspace Theory to judge whether new agent papers had a genuine broadcast/coordination mechanism.</p>
+          <ul class="learnings"><li>GWT models cognition as many specialist modules competing for access to a capacity-limited &#x27;global workspace&#x27;; the winner gets broadcast to everything else.</li><li>The bottleneck is the point — a single shared channel is what lets otherwise-siloed modules coordinate at all.</li><li>Recent LLM cognitive-architecture papers (e.g. &#x27;Theater of Mind&#x27;) build literal GWT-style broadcast hubs on top of LLM agents, distinct from ad hoc multi-agent message-passing.</li><li>GWT gives a useful diagnostic: does a proposed multi-agent system actually have a workspace/broadcast construct, or just parallel isolated agents (its &#x27;antithesis&#x27;)?</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/html/2604.08206v1" target="_blank" rel="noopener">&quot;Theater of Mind&quot; for LLMs: A Cognitive Architecture Based on Global Workspace Theory</a></li><li><a href="https://www.emergentmind.com/topics/global-workspace-theory-gwt" target="_blank" rel="noopener">Global Workspace Theory — EmergentMind</a></li><li><a href="https://arxiv.org/pdf/2605.04097" target="_blank" rel="noopener">CTM-AI: A Blueprint for General AI Inspired by a Model of Consciousness</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Agent Skill/Tool Routing &amp; Selection</h3>
+          <p class="why">Multiple triaged papers targeted the bottleneck of choosing which skill or tool an agent should invoke, rather than the agent&#x27;s raw capability.</p>
+          <ul class="learnings"><li>Routing quality, not agent capability, is often the real bottleneck — a better router can beat a better agent.</li><li>Skill-selection failures can starve good skills of usage even when they&#x27;re available and correct (a &#x27;credit starvation&#x27; pattern).</li><li>Self-evolving skill libraries can backfire past a critical pool size: a defective skill entering the decision context becomes reference material for later skills, forming contamination chains.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/html/2603.22455v1" target="_blank" rel="noopener">SkillRouter — skill retrieval at scale for LLM agent ecosystems (arXiv 2603.22455)</a></li><li><a href="https://arxiv.org/abs/2608.05810" target="_blank" rel="noopener">When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents (arXiv 2608.05810)</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>macOS launchd/Daemon Recovery After a Crash</h3>
+          <p class="why">A system crash prompted a root-cause check and recovery pass over launchd-managed daemons on the operator&#x27;s machine.</p>
+          <ul class="learnings"><li>launchd throttles restarts with a crash-loop guard (roughly a 10-second minimum period) to stop runaway respawning.</li><li>KeepAlive with SuccessfulExit set to false restarts a job specifically after it exits abnormally — that&#x27;s the crash-recovery lever, not just Keepalive alone.</li><li>Editing a job&#x27;s .plist doesn&#x27;t take effect until you unload and reload it — toggling start/stop or enable/disable isn&#x27;t enough.</li><li>Querying the state of a system-level Launch Daemon (vs. a per-user LaunchAgent) requires root.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://www.launchd.info/" target="_blank" rel="noopener">A launchd Tutorial</a></li><li><a href="https://rakhesh.com/mac/macos-launchctl-commands/" target="_blank" rel="noopener">macOS launchctl commands — rakhesh.com</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Tailscale SSH</h3>
+          <p class="why">The operator needed to reach a remote machine on the tailnet over SSH.</p>
+          <ul class="learnings"><li>Tailscale SSH takes over port 22 for connections originating from the tailnet, authenticating and encrypting over WireGuard using Tailscale node identity — no separate SSH key management.</li><li>Enable it with `tailscale up --ssh` on first connect, or `sudo tailscale set --ssh` on an already-connected machine.</li><li>Access is governed entirely by the tailnet&#x27;s ACL policy — without explicit rules, nobody can SSH in.</li><li>It doesn&#x27;t touch sshd_config or authorized_keys, so existing non-Tailscale SSH access keeps working in parallel.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://tailscale.com/docs/features/tailscale-ssh" target="_blank" rel="noopener">Tailscale SSH — Tailscale Docs</a></li><li><a href="https://tailscale.com/docs/how-to/set-up-servers" target="_blank" rel="noopener">Setting up a server on your Tailscale network — Tailscale Docs</a></li></ul></div>
+        </article>
+  </section>
+
+  
+        <section class="card">
+          <h2>🧭 Flagged for a deeper dive later</h2>
+          <ul class="curios"><li>&quot;Formal methods with Hillel Wayne&quot; (The Pragmatic Engineer, 2026-07-29) — TLA+, why distributed systems are hard to reason about, and whether AI makes formal verification mainstream; flagged to grab via yapvault.</li><li>Several triaged papers this week asserted a recursive self-improvement (RSI) thesis without actually demonstrating it (no model trained, loop never closed) — worth digging into what a real RSI demonstration would require.</li></ul>
+        </section>
+  
+
+  <section class="card">
+    <h2>📊 Token usage by model</h2>
+    <table>
+      <thead><tr><th>Model</th><th class="num">Output</th><th class="num">Input</th><th class="num">Cache write</th><th class="num">Cache read</th></tr></thead>
+      <tbody><tr><td class='mono'>claude-opus-4-8</td><td class='num'>1.3M</td><td class='num'>27.7K</td><td class='num'>13.0M</td><td class='num dim'>94.2M</td></tr>
+<tr><td class='mono'>claude-opus-5</td><td class='num'>630.5K</td><td class='num'>1.0K</td><td class='num'>2.7M</td><td class='num dim'>41.2M</td></tr>
+<tr><td class='mono'>claude-sonnet-5</td><td class='num'>74.4K</td><td class='num'>140</td><td class='num'>771.0K</td><td class='num dim'>2.1M</td></tr></tbody>
+    </table>
+    <p class="note">Output + Input are fresh generation/prompt tokens (the real work). Cache read is context re-served from prompt cache — large but cheap, shown dimmed.</p>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>⌨️ Slash commands</h2>
+      <div class="bar-row"><span class="bar-label">clear</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">4</span></div>
+    </section>
+    <section class="card">
+      <h2>🧰 Skills invoked</h2>
+      <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">superpowers:systematic-debugging</span><span class="bar-track"><span class="bar-fill" style="width:33%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">session-reflection-analysis</span><span class="bar-track"><span class="bar-fill" style="width:33%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🗂️ ctx stack usage</h2>
+      <p class="empty">Nothing recorded this week.</p>
+    </section>
+    <section class="card">
+      <h2>🛠️ Top tools</h2>
+      <div class="bar-row"><span class="bar-label">Bash</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">367</span></div>
+<div class="bar-row"><span class="bar-label">Read</span><span class="bar-track"><span class="bar-fill" style="width:51%;background:var(--accent)"></span></span><span class="bar-count">188</span></div>
+<div class="bar-row"><span class="bar-label">Write</span><span class="bar-track"><span class="bar-fill" style="width:15%;background:var(--accent)"></span></span><span class="bar-count">54</span></div>
+<div class="bar-row"><span class="bar-label">Agent</span><span class="bar-track"><span class="bar-fill" style="width:12%;background:var(--accent)"></span></span><span class="bar-count">43</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_move_documents</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">14</span></div>
+<div class="bar-row"><span class="bar-label">ToolSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">13</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_add_tags_to_document</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">13</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_list_documents</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">12</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_bulk_edit_document_metadata</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">7</span></div>
+<div class="bar-row"><span class="bar-label">Edit</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">6</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>📁 Projects touched</h2>
+    <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">1991</span></div>
+<div class="bar-row"><span class="bar-label">~</span><span class="bar-track"><span class="bar-fill" style="width:51%;background:var(--accent2)"></span></span><span class="bar-count">1022</span></div>
+<div class="bar-row"><span class="bar-label">wrinklemaxx</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent2)"></span></span><span class="bar-count">22</span></div>
+  </section>
+
+  <footer>Generated by the <strong>week-in-review</strong> skill &middot; 49 prompts &middot; 1235 transcripts scanned</footer>
+</div>
+</body>
+</html>

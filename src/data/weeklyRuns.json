@@ -13,6 +13,13 @@
       "windowLabel": "this week (since 2026-08-10)",
       "summary": "The operator's week centered on hardening headless-agent automation (nightly/weekly reports, replacing a risky auto-commit job), plumbing personal knowledge-base and remote-access infrastructure, vetting eval-harness datasets, and orchestrating fleets of parallel research agents to mine web design references into a reusable skill.",
       "docPath": "/artifact-docs/weekly/2026-08-15.html"
+    },
+    {
+      "date": "2026-08-22",
+      "windowStart": "2026-08-17",
+      "windowLabel": "this week (since 2026-08-17)",
+      "summary": "The week was dominated by heavy AI-research triage work that surfaced recurring themes in multi-agent deliberation, LLM-judge design, and Global Workspace Theory, plus two infrastructure detours into macOS daemon recovery after a crash and setting up Tailscale SSH.",
+      "docPath": "/artifact-docs/weekly/2026-08-22.html"
     }
   ]
 }
