@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week in Review — this week (since 2026-08-24)</title>
+<style>
+:root {
+  --bg:#f7f7f8; --card:#ffffff; --ink:#1c1c1f; --muted:#6b6b74;
+  --line:#e6e6ea; --accent:#5b5bd6; --accent2:#0e9f6e; --accent3:#d97706;
+  --chip:#efeff3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#111114; --card:#1a1a1f; --ink:#ececf1; --muted:#9a9aa6;
+    --line:#2a2a32; --accent:#8b8bf0; --accent2:#34d399; --accent3:#fbbf24;
+    --chip:#25252d;
+  }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+header.top { margin-bottom:28px; }
+header.top h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.02em; }
+header.top .range { color:var(--muted); font-size:14px; }
+.summary { margin:14px 0 22px; font-size:16px; color:var(--ink); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; }
+.chip { background:var(--chip); border:1px solid var(--line); border-radius:10px;
+  padding:10px 14px; min-width:96px; }
+.chip .n { font-size:20px; font-weight:650; letter-spacing:-.01em; }
+.chip .l { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; margin-bottom:20px; }
+h2 { font-size:16px; margin:0 0 14px; letter-spacing:-.01em; }
+.area { border-top:1px solid var(--line); padding:16px 0; }
+.area:first-of-type { border-top:none; padding-top:2px; }
+.area h3 { font-size:17px; margin:0 0 6px; }
+.area .why { color:var(--muted); margin:0 0 10px; font-size:14px; }
+.learnings { margin:8px 0; padding-left:20px; }
+.learnings li { margin:5px 0; }
+.links { margin-top:10px; padding:10px 12px; background:var(--chip); border-radius:10px; }
+.links-h { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:6px; }
+.links ul { margin:0; padding-left:18px; }
+.links a { color:var(--accent); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:640px) { .grid2 { grid-template-columns:1fr; } }
+.bar-row { display:grid; grid-template-columns:130px 1fr 42px; align-items:center; gap:10px; margin:6px 0; }
+.bar-label { font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bar-track { background:var(--chip); border-radius:6px; height:14px; overflow:hidden; }
+.bar-fill { display:block; height:100%; border-radius:6px; }
+.bar-count { font-size:12px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:7px 8px; text-align:left; border-bottom:1px solid var(--line); }
+th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+.dim { color:var(--muted); }
+.empty { color:var(--muted); font-style:italic; font-size:13px; }
+.curios li { margin:6px 0; }
+footer { color:var(--muted); font-size:12px; text-align:center; margin-top:30px; }
+.note { font-size:12px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>📓 Your Week in Review</h1>
+    <div class="range">this week (since 2026-08-24) &middot; generated 2026-08-29 08:36</div>
+  </header>
+
+  <p class="summary">The operator&#x27;s week split between running a multi-lens judge committee over a large batch of arxiv papers (surfacing recurring interest in Global Workspace Theory, KV-cache/speculative-decoding tricks, and agent-orchestration reframings), and a planning push to design a multi-machine AI research lab with cross-harness delegation, alongside smaller threads on Obsidian ingestion pipelines and self-improving headless automation.</p>
+
+  <div class="chips">
+    <div class="chip"><div class="n">16</div><div class="l">Sessions</div></div>
+    <div class="chip"><div class="n">6</div><div class="l">Active days</div></div>
+    <div class="chip"><div class="n">2</div><div class="l">Projects</div></div>
+    <div class="chip"><div class="n">6.1M</div><div class="l">Output tokens</div></div>
+    <div class="chip"><div class="n">53.2M</div><div class="l">Input tokens</div></div>
+  </div>
+
+  <section class="card">
+    <h2>💡 What you explored &amp; learned</h2>
+    
+        <article class="area">
+          <h3>Global Workspace Theory as a Lens for Multi-Agent AI Architectures</h3>
+          <p class="why">A dedicated &#x27;GWT/Baars&#x27; judging lens ran across two days of arxiv-prospector triage, repeatedly asking whether papers implemented anything resembling Bernard Baars&#x27; cognitive-science model of consciousness (a shared broadcast workspace agents compete to write to and read from).</p>
+          <ul class="learnings"><li>Global Workspace Theory models cognition as a Stage (limited-capacity working memory), a Spotlight (attention/selection), and an Audience (parallel specialized processors) that broadcast to and compete for the shared stage.</li><li>Researchers are mapping this directly onto multi-agent LLM systems: a shared latent KV-cache or public transcript acts as the &#x27;workspace&#x27; that competing agents write to and read from, with an orchestrator playing the role of the attention spotlight.</li><li>This week&#x27;s papers judged strongest on this lens used a bounded shared latent memory (agents communicating via cache state rather than text) or a public-transcript workspace with access-routing control — closer to a literal GWT substrate than most &#x27;multi-agent&#x27; papers that just chain text handoffs.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://en.wikipedia.org/wiki/Global_workspace_theory" target="_blank" rel="noopener">Global workspace theory — Wikipedia</a></li><li><a href="https://arxiv.org/pdf/2604.08206" target="_blank" rel="noopener">&quot;Theater of Mind&quot; for LLMs: A Cognitive Architecture Based on Global Workspace Theory</a></li><li><a href="https://arxiv.org/pdf/2606.05711" target="_blank" rel="noopener">Beyond tokens: a unified framework for latent communication in LLM-based multi-agent systems</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>KV-Cache Tricks: Shared Memory Bus and Speculative Decoding</h3>
+          <p class="why">Several triaged papers this week reused the KV-cache in non-standard ways — as an inter-agent communication channel and as the substrate for tree-structured speculative decoding — and were scored across &#x27;optimization&#x27; and &#x27;capability&#x27; judging lenses for their efficiency claims.</p>
+          <ul class="learnings"><li>KV-cache can be repurposed as a receiver-aware latent communication medium between agents, replacing text message-passing with direct cache-state handoff — cheaper but harder to audit than text.</li><li>Tree-based speculative decoding verifies a whole token tree in parallel rather than a single draft sequence, better exploiting GPU parallelism, but adds KV-cache memory pressure that competes with batch size.</li><li>Headline speedup numbers in this space are frequently measured against weak baselines (e.g. single-core CPU or un-batched serving) — the paper committee repeatedly capped claims like &#x27;625x&#x27; down to an honest 1.2-3x end-to-end gain.</li><li>RAG systems face a similar honest-accounting problem: an index that&#x27;s 20x cheaper to maintain is only a real win if it doesn&#x27;t just tie (not beat) the accuracy of brute-force retrieval.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/pdf/2605.20104" target="_blank" rel="noopener">Draft Less, Retrieve More: Hybrid Tree Construction for Speculative Decoding</a></li><li><a href="https://github.com/jjiantong/Awesome-KV-Cache-Optimization" target="_blank" rel="noopener">Awesome-KV-Cache-Optimization survey (ACL 2026)</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Designing a Multi-Machine AI Research Lab</h3>
+          <p class="why">The operator used /wayfinder to think through how to configure a personal fleet — a Mac mini, two Raspberry Pi 5s, a MacBook Pro, and an incoming high-memory Mac Studio — connected over Tailscale, deciding which machine orchestrates versus experiments versus hosts local models.</p>
+          <ul class="learnings"><li>Tailscale builds a private peer-to-peer mesh (&#x27;tailnet&#x27;) over WireGuard, giving every device on the mesh a stable identity and direct connectivity regardless of physical network — the natural transport layer for a home fleet of heterogeneous machines.</li><li>A clean pattern for a small fleet: one machine holds planning/orchestration authority permanently, while others rotate between &#x27;experimental playground&#x27; and &#x27;local-model testbed&#x27; roles rather than trying to make every box do everything.</li><li>Splitting a single knowledge base (RAG) versus giving each machine/agent its own vault is a real design fork — worth deciding deliberately rather than defaulting to one shared store.</li><li>Naming and scoping matter for keeping a multi-agent research direction from sprawling — the operator explicitly cut a tangential idea (&#x27;AI tamagotchi&#x27;) to keep the fleet focused on harness evaluation and consulting-grade research.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://tailscale.com/docs/concepts/what-is-tailscale" target="_blank" rel="noopener">What is Tailscale? — Tailscale Docs</a></li><li><a href="https://tailscale.com/learn/understanding-mesh-vpns" target="_blank" rel="noopener">Understanding mesh network topology (mesh VPNs)</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Cross-Harness Agent Delegation: What&#x27;s Actually Verifiable</h3>
+          <p class="why">A teammate research thread surveyed how different AI coding harnesses hand off tasks to other machines/agents, concluding that none natively ship a delegation primitive with a verified return path — directly relevant to the operator&#x27;s fleet-orchestration plans.</p>
+          <ul class="learnings"><li>Most &#x27;delegation&#x27; in current agent harnesses is chat-shaped messaging (session-to-session relays) with no built-in verification contract for whether the delegated work actually completed correctly.</li><li>Google&#x27;s Agent2Agent (A2A) protocol — now under the Linux Foundation — is the one standards-track attempt at this: agents publish a machine-readable &#x27;Agent Card&#x27; at a well-known URL and coordinate over JSON-RPC with a defined task lifecycle.</li><li>A practical workaround for verified delegation today is composing headless one-shot invocations (e.g. Claude Code&#x27;s `-p` with `--output-format json` for a structured result and session ID) with an explicit task file as the envelope and a concrete evidence artifact (a pushed branch, a structured result) as the done-when signal.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://docs.claude.com/en/docs/claude-code/headless" target="_blank" rel="noopener">Run Claude Code programmatically (headless mode) — Claude Docs</a></li><li><a href="https://a2a-protocol.org/latest/" target="_blank" rel="noopener">A2A Protocol — official specification site</a></li><li><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">Announcing the Agent2Agent Protocol (A2A) — Google Developers Blog</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Podcast-to-Knowledge-Base Ingestion with Consistent Frontmatter</h3>
+          <p class="why">The operator built out a WRINKLEMAXX ingestion pipeline for high-density podcast content (Tim Ferriss relationship episodes, The Pragmatic Engineer via its Substack transcripts) and had to correct a run that skipped the agreed frontmatter template.</p>
+          <ul class="learnings"><li>Preferring existing transcripts (e.g. a podcast&#x27;s Substack post) over transcribing audio directly is both cheaper and more accurate when a written source already exists.</li><li>A recurring content type (e.g. &#x27;podcast episode notes&#x27;) benefits from a fixed, small set of typed YAML properties applied consistently via a template, rather than ad hoc tags accumulating per-note.</li><li>Two syntax rules cause most YAML frontmatter bugs: never mix tabs into indentation, and always quote any value containing a colon.</li><li>Enforcing template consistency needs an explicit check step — this week&#x27;s ingestion run initially skipped the just-developed template, requiring a manual correction.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://danholloran.me/posts/obsidian-properties-and-frontmatter-a-practical-guide" target="_blank" rel="noopener">Obsidian Properties and Frontmatter: Stop Treating Metadata as an Afterthought</a></li><li><a href="https://obsidianmate.com/article/obsidian-properties-complete-guide" target="_blank" rel="noopener">Obsidian Properties: The Complete Guide</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Self-Improving Headless Automation Loops</h3>
+          <p class="why">The operator runs several recurring headless agents (nightly state-of-the-world reports, weekly session-reflection analysis) that are explicitly instructed to ground every claim in a file they actually read and to mine past sessions for inefficiency patterns to feed back into memory.</p>
+          <ul class="learnings"><li>For headless runs with no human to ask, an explicit &#x27;ground every claim in a file you actually read, or say you didn&#x27;t verify it&#x27; instruction is the main defense against invented facts — separating deterministic fact-collection (a facts.json) from LLM narrative generation.</li><li>A useful audit taxonomy for session inefficiency: wasted tokens (re-reading files), abandoned approaches, repeated mistakes, missing automation, missing documentation, redundant tool calls, and context lost after compaction.</li><li>Findings from that audit are only useful if turned into paste-ready artifacts (a memory entry, a playbook rule, a script) rather than left as prose observations.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://docs.claude.com/en/docs/claude-code/headless" target="_blank" rel="noopener">Run Claude Code programmatically (headless mode) — Claude Docs</a></li></ul></div>
+        </article>
+  </section>
+
+  
+        <section class="card">
+          <h2>🧭 Flagged for a deeper dive later</h2>
+          <ul class="curios"><li>Whether the incoming Mac Studio (M5 Max, 128GB) should serve as the fleet&#x27;s orchestrator or as a dedicated local-model testbed once it arrives in October.</li><li>Contributing directly to the sf-pi open source project as a way to experiment with a Raspberry Pi-hosted agent harness.</li><li>Building a shared RAG versus per-machine/per-vault RAGs across the fleet, and how Hermes&#x27;s existing vault setup should factor into that decision.</li><li>Understanding and eventually generalizing Hermes&#x27;s self-healing capabilities across the whole agent fleet.</li><li>Ingesting the last six months of The Pragmatic Engineer via its Substack transcripts into the WRINKLEMAXX knowledge base.</li></ul>
+        </section>
+  
+
+  <section class="card">
+    <h2>📊 Token usage by model</h2>
+    <table>
+      <thead><tr><th>Model</th><th class="num">Output</th><th class="num">Input</th><th class="num">Cache write</th><th class="num">Cache read</th></tr></thead>
+      <tbody><tr><td class='mono'>claude-opus-4-8</td><td class='num'>3.5M</td><td class='num'>5.1K</td><td class='num'>40.2M</td><td class='num dim'>230.7M</td></tr>
+<tr><td class='mono'>claude-opus-5</td><td class='num'>1.8M</td><td class='num'>2.1K</td><td class='num'>7.1M</td><td class='num dim'>130.7M</td></tr>
+<tr><td class='mono'>claude-fable-5</td><td class='num'>550.5K</td><td class='num'>710</td><td class='num'>3.4M</td><td class='num dim'>38.2M</td></tr>
+<tr><td class='mono'>claude-sonnet-5</td><td class='num'>248.3K</td><td class='num'>480</td><td class='num'>2.4M</td><td class='num dim'>6.9M</td></tr></tbody>
+    </table>
+    <p class="note">Output + Input are fresh generation/prompt tokens (the real work). Cache read is context re-served from prompt cache — large but cheap, shown dimmed.</p>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>⌨️ Slash commands</h2>
+      <div class="bar-row"><span class="bar-label">clear</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">4</span></div>
+<div class="bar-row"><span class="bar-label">model</span><span class="bar-track"><span class="bar-fill" style="width:50%;background:var(--accent)"></span></span><span class="bar-count">2</span></div>
+<div class="bar-row"><span class="bar-label">effort</span><span class="bar-track"><span class="bar-fill" style="width:50%;background:var(--accent)"></span></span><span class="bar-count">2</span></div>
+    </section>
+    <section class="card">
+      <h2>🧰 Skills invoked</h2>
+      <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">6</span></div>
+<div class="bar-row"><span class="bar-label">session-reflection-analysis</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">ingest</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">wayfinder</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">grilling</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">domain-modeling</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🗂️ ctx stack usage</h2>
+      <p class="empty">Nothing recorded this week.</p>
+    </section>
+    <section class="card">
+      <h2>🛠️ Top tools</h2>
+      <div class="bar-row"><span class="bar-label">Bash</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">871</span></div>
+<div class="bar-row"><span class="bar-label">Read</span><span class="bar-track"><span class="bar-fill" style="width:57%;background:var(--accent)"></span></span><span class="bar-count">498</span></div>
+<div class="bar-row"><span class="bar-label">Agent</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent)"></span></span><span class="bar-count">148</span></div>
+<div class="bar-row"><span class="bar-label">Write</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent)"></span></span><span class="bar-count">148</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_list_documents</span><span class="bar-track"><span class="bar-fill" style="width:8%;background:var(--accent)"></span></span><span class="bar-count">74</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_add_tags_to_document</span><span class="bar-track"><span class="bar-fill" style="width:8%;background:var(--accent)"></span></span><span class="bar-count">73</span></div>
+<div class="bar-row"><span class="bar-label">WebFetch</span><span class="bar-track"><span class="bar-fill" style="width:5%;background:var(--accent)"></span></span><span class="bar-count">46</span></div>
+<div class="bar-row"><span class="bar-label">ToolSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">31</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_move_documents</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">28</span></div>
+<div class="bar-row"><span class="bar-label">WebSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">28</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>📁 Projects touched</h2>
+    <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">5376</span></div>
+<div class="bar-row"><span class="bar-label">~</span><span class="bar-track"><span class="bar-fill" style="width:54%;background:var(--accent2)"></span></span><span class="bar-count">2900</span></div>
+  </section>
+
+  <footer>Generated by the <strong>week-in-review</strong> skill &middot; 82 prompts &middot; 1134 transcripts scanned</footer>
+</div>
+</body>
+</html>

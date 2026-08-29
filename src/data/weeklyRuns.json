@@ -20,6 +20,13 @@
       "windowLabel": "this week (since 2026-08-17)",
       "summary": "The week was dominated by heavy AI-research triage work that surfaced recurring themes in multi-agent deliberation, LLM-judge design, and Global Workspace Theory, plus two infrastructure detours into macOS daemon recovery after a crash and setting up Tailscale SSH.",
       "docPath": "/artifact-docs/weekly/2026-08-22.html"
+    },
+    {
+      "date": "2026-08-29",
+      "windowStart": "2026-08-24",
+      "windowLabel": "this week (since 2026-08-24)",
+      "summary": "The operator's week split between running a multi-lens judge committee over a large batch of arxiv papers (surfacing recurring interest in Global Workspace Theory, KV-cache/speculative-decoding tricks, and agent-orchestration reframings), and a planning push to design a multi-machine AI research lab with cross-harness delegation, alongside smaller threads on Obsidian ingestion pipelines and self-improving headless automation.",
+      "docPath": "/artifact-docs/weekly/2026-08-29.html"
     }
   ]
 }
