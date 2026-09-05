@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week in Review — this week (since 2026-08-31)</title>
+<style>
+:root {
+  --bg:#f7f7f8; --card:#ffffff; --ink:#1c1c1f; --muted:#6b6b74;
+  --line:#e6e6ea; --accent:#5b5bd6; --accent2:#0e9f6e; --accent3:#d97706;
+  --chip:#efeff3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#111114; --card:#1a1a1f; --ink:#ececf1; --muted:#9a9aa6;
+    --line:#2a2a32; --accent:#8b8bf0; --accent2:#34d399; --accent3:#fbbf24;
+    --chip:#25252d;
+  }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+header.top { margin-bottom:28px; }
+header.top h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.02em; }
+header.top .range { color:var(--muted); font-size:14px; }
+.summary { margin:14px 0 22px; font-size:16px; color:var(--ink); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; }
+.chip { background:var(--chip); border:1px solid var(--line); border-radius:10px;
+  padding:10px 14px; min-width:96px; }
+.chip .n { font-size:20px; font-weight:650; letter-spacing:-.01em; }
+.chip .l { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; margin-bottom:20px; }
+h2 { font-size:16px; margin:0 0 14px; letter-spacing:-.01em; }
+.area { border-top:1px solid var(--line); padding:16px 0; }
+.area:first-of-type { border-top:none; padding-top:2px; }
+.area h3 { font-size:17px; margin:0 0 6px; }
+.area .why { color:var(--muted); margin:0 0 10px; font-size:14px; }
+.learnings { margin:8px 0; padding-left:20px; }
+.learnings li { margin:5px 0; }
+.links { margin-top:10px; padding:10px 12px; background:var(--chip); border-radius:10px; }
+.links-h { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:6px; }
+.links ul { margin:0; padding-left:18px; }
+.links a { color:var(--accent); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:640px) { .grid2 { grid-template-columns:1fr; } }
+.bar-row { display:grid; grid-template-columns:130px 1fr 42px; align-items:center; gap:10px; margin:6px 0; }
+.bar-label { font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bar-track { background:var(--chip); border-radius:6px; height:14px; overflow:hidden; }
+.bar-fill { display:block; height:100%; border-radius:6px; }
+.bar-count { font-size:12px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:7px 8px; text-align:left; border-bottom:1px solid var(--line); }
+th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+.dim { color:var(--muted); }
+.empty { color:var(--muted); font-style:italic; font-size:13px; }
+.curios li { margin:6px 0; }
+footer { color:var(--muted); font-size:12px; text-align:center; margin-top:30px; }
+.note { font-size:12px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>📓 Your Week in Review</h1>
+    <div class="range">this week (since 2026-08-31) &middot; generated 2026-09-05 08:38</div>
+  </header>
+
+  <p class="summary">The week was anchored by one deep arxiv-prospector triage session that ran a committee of parallel review lenses over ~20 AI-agent research papers, surfacing recurring themes in multi-agent harness design, cognitive-architecture framing, and LLM inference efficiency; the rest of the week was recurring automated nightly-report and session-reflection runs plus one interrupted agent-fleet review thread.</p>
+
+  <div class="chips">
+    <div class="chip"><div class="n">14</div><div class="l">Sessions</div></div>
+    <div class="chip"><div class="n">6</div><div class="l">Active days</div></div>
+    <div class="chip"><div class="n">2</div><div class="l">Projects</div></div>
+    <div class="chip"><div class="n">5.6M</div><div class="l">Output tokens</div></div>
+    <div class="chip"><div class="n">60.6M</div><div class="l">Input tokens</div></div>
+  </div>
+
+  <section class="card">
+    <h2>💡 What you explored &amp; learned</h2>
+    
+        <article class="area">
+          <h3>Verification-gated multi-agent orchestration architecture</h3>
+          <p class="why">This week&#x27;s arxiv-prospector triage scored several papers on harness/orchestration design, with parallel &#x27;voice&#x27; agents specifically assessing their orchestration-pattern signal.</p>
+          <ul class="learnings"><li>A recurring pattern across the surfaced papers: keep the agent that proposes an action separate from the agent that certifies it (proposer != certifier), gated by a centralized admission check before work is accepted.</li><li>A shared &#x27;claim-graph&#x27;/blackboard state plus a task-graph split lets agents hand work across models while making it possible to measure whether the handoff added real value, versus just added cost.</li><li>Strict parent-child message contracts with a single-owner rule for cross-cutting concerns (and upward escalation of unresolved defects) beat forwarding full conversation history, which one paper found buys cost, not accuracy.</li><li>Production-oriented write-ups converge on the same shape: plan -&gt; execute -&gt; verify -&gt; replan loops with explicit boolean exit gates rather than freeform agent-to-agent chatter.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/html/2603.11445v2" target="_blank" rel="noopener">Verified Multi-Agent Orchestration: A Plan-Execute-Verify-Replan Framework</a></li><li><a href="https://arxiv.org/pdf/2606.21856" target="_blank" rel="noopener">Harness-MU: A Safe, Governed, and Effective Harness for Multi-User LLM Agents</a></li><li><a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns" target="_blank" rel="noopener">AI Agent Orchestration Patterns - Azure Architecture Center</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Global Workspace Theory as a lens for agent architecture</h3>
+          <p class="why">One triaged paper&#x27;s memory-routing design was flagged by a dedicated review pass as a strong structural match for Bernard Baars&#x27; Global Workspace Theory (GWT).</p>
+          <ul class="learnings"><li>GWT models cognition as specialized processors competing for access to a capacity-limited shared workspace; whichever signal wins gets &#x27;broadcast&#x27; globally to every other processor.</li><li>Translated into agent-system design: use a bounded shared-state layer with an explicit write/admission gate (what&#x27;s allowed in) and a separate retrieval/broadcast gate (what gets read back out), instead of letting every agent see every message.</li><li>This is now an active research thread, not just a metaphor — a 2026 &#x27;Theater of Mind&#x27; cognitive-architecture paper and reported Anthropic interpretability work both look for GWT-like structure actually emerging inside LLM-based systems.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/pdf/2604.08206" target="_blank" rel="noopener">&quot;Theater of Mind&quot; for LLMs: A Cognitive Architecture Based on Global Workspace Theory</a></li><li><a href="https://en.wikipedia.org/wiki/Global_workspace_theory" target="_blank" rel="noopener">Global workspace theory</a></li><li><a href="https://micheallanham.substack.com/p/global-workspace-theory-and-the-missing" target="_blank" rel="noopener">Global Workspace Theory and the Missing Architecture of AI Cognition</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Efficient inference for vision-language models</h3>
+          <p class="why">A triaged paper claimed a first lossless one-pass speculative decoder for VLMs (2.93x speedup), prompting a look at where that technique sits in the current field.</p>
+          <ul class="learnings"><li>Speculative decoding drafts several candidate tokens with a cheap model, then verifies them against the full model in one pass, cutting autoregressive steps while &#x27;lossless&#x27; variants preserve the exact output distribution.</li><li>Vision-language models complicate this: the prefill stage is dominated by visual tokens whose count scales with image resolution or video length, inflating compute and KV-cache size well beyond a text-only LLM.</li><li>Because of that, vision-aware drafting (rather than treating image tokens like any other token) is the current edge — recent systems report 2.5-2.9x end-to-end speedups from making the draft model itself vision-aware.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/abs/2509.11815" target="_blank" rel="noopener">SpecVLM: Fast Speculative Decoding in Vision-Language Models</a></li><li><a href="https://arxiv.org/html/2509.15235v1" target="_blank" rel="noopener">ViSpec: Accelerating Vision-Language Models with Vision-Aware Speculative Decoding</a></li><li><a href="https://github.com/zyfzs0/Multimodal-Models-Speculative-Decoding-Survey" target="_blank" rel="noopener">Multimodal Models Speculative Decoding Survey</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Cross-model KV-cache transfer</h3>
+          <p class="why">A triaged paper proposed transferring KV cache between related models to skip prefill, worth situating against the broader inference-efficiency literature.</p>
+          <ul class="learnings"><li>Systems that swap between different-sized models in a family (cost/quality cascading, mid-conversation model switching) normally repay the full prefill cost on every swap; KV-cache transfer is aimed at avoiding that.</li><li>One recent approach found KV representations are related by a closed-form linear mapping across matched model pairs (same head count and per-head dimension), with rotary position embeddings stripped out first so the mapping stays position-free.</li><li>Reported results: the linear mapper keeps 73-98% of standalone-prefill accuracy on most tested pairs and runs 2.7-25x faster than re-prefill, but degrades sharply on some pairs, so it isn&#x27;t yet a universal drop-in.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/abs/2608.03893" target="_blank" rel="noopener">Cross-Model KV Cache Transfer in LLM Families: A Closed-Form Linear Mapping for Prefill Reuse</a></li><li><a href="https://arxiv.org/abs/2608.30963" target="_blank" rel="noopener">A Universal Context-Reuse Layer for Cross-Model KV Sharing</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Systematic evaluation of research-paper claims</h3>
+          <p class="why">This week&#x27;s paper triage deliberately ran separate parallel passes scoring veracity, novelty, buildability, capability, and optimization signal for each paper before deciding what to promote.</p>
+          <ul class="learnings"><li>Treat novelty and soundness/veracity as separate axes: novelty asks whether a claim is new relative to prior work, soundness asks whether the method and evidence actually support the claim as stated.</li><li>Good practice traces every claim in a paper&#x27;s introduction back to specific evidence in its methods and results, rather than trusting the framing -- this is how a paper that honestly labels itself &#x27;preliminary&#x27; can still be caught overclaiming elsewhere in the text.</li><li>LLM-based paper review is itself an active research area (rubric-based reproducibility scoring, claim-decomposition novelty checks), but researchers still flag &#x27;LLM judging LLM&#x27; circularity as an open reliability caveat.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/html/2607.26066" target="_blank" rel="noopener">Do Methods Support the Claims? Intra-Paper Verification for Peer Review</a></li><li><a href="https://arxiv.org/pdf/2603.20884" target="_blank" rel="noopener">MemoNoveltyAgent: A Historical Research Memory-Aware Agent Workflow for Paper Novelty Assessment</a></li><li><a href="https://arxiv.org/pdf/2605.26730" target="_blank" rel="noopener">PRISM: A Multi-Dimensional Benchmark for Evaluating LLM Peer Reviewers</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Auditing Claude Code session efficiency</h3>
+          <p class="why">The weekly session-reflection run explicitly hunted for wasted tokens, repeated mistakes, and missing automation across the operator&#x27;s own Claude Code sessions.</p>
+          <ul class="learnings"><li>Token waste concentrates in a few recurring spots: vague prompts that trigger open-ended repo exploration, and noisy tool output (long grep/test/log dumps) that stays in context for the rest of the session.</li><li>Practical countermeasures: clear context between unrelated tasks, reference files directly instead of asking the agent to search for them, and route noisy commands through a subagent or quiet flags so their output doesn&#x27;t pollute the main thread.</li><li>Prompt specificity is a bigger lever than model choice for most coding tasks -- a well-scoped first message cuts cost more reliably than switching models.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Best practices for Claude Code</a></li><li><a href="https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions" target="_blank" rel="noopener">Maximizing the value of your Claude Code sessions</a></li><li><a href="https://www.kdnuggets.com/7-practical-ways-to-reduce-claude-code-token-usage" target="_blank" rel="noopener">7 Practical Ways to Reduce Claude Code Token Usage</a></li></ul></div>
+        </article>
+  </section>
+
+  
+        <section class="card">
+          <h2>🧭 Flagged for a deeper dive later</h2>
+          <ul class="curios"><li>Revisit the /wayfinder map from the agent-fleet review session -- the request to load it was interrupted mid-week (&#x27;it was literally the last session about reviewing our agent fleet&#x27;).</li><li>This week&#x27;s papers leaned repeatedly on borrowing a formalism from an unrelated field (epidemiology&#x27;s reproduction number, chemistry&#x27;s metadynamics search, interpretability probes) and reapplying it to agent/LLM behavior -- worth digging into as a general heuristic for spotting genuinely novel work versus recombination.</li></ul>
+        </section>
+  
+
+  <section class="card">
+    <h2>📊 Token usage by model</h2>
+    <table>
+      <thead><tr><th>Model</th><th class="num">Output</th><th class="num">Input</th><th class="num">Cache write</th><th class="num">Cache read</th></tr></thead>
+      <tbody><tr><td class='mono'>claude-opus-4-8</td><td class='num'>4.8M</td><td class='num'>5.6K</td><td class='num'>55.2M</td><td class='num dim'>252.5M</td></tr>
+<tr><td class='mono'>claude-opus-5</td><td class='num'>472.7K</td><td class='num'>748</td><td class='num'>1.8M</td><td class='num dim'>27.5M</td></tr>
+<tr><td class='mono'>claude-sonnet-5</td><td class='num'>279.1K</td><td class='num'>616</td><td class='num'>3.2M</td><td class='num dim'>8.7M</td></tr>
+<tr><td class='mono'>claude-fable-5</td><td class='num'>70.3K</td><td class='num'>120</td><td class='num'>435.5K</td><td class='num dim'>4.6M</td></tr></tbody>
+    </table>
+    <p class="note">Output + Input are fresh generation/prompt tokens (the real work). Cache read is context re-served from prompt cache — large but cheap, shown dimmed.</p>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>⌨️ Slash commands</h2>
+      <div class="bar-row"><span class="bar-label">clear</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">3</span></div>
+<div class="bar-row"><span class="bar-label">model</span><span class="bar-track"><span class="bar-fill" style="width:33%;background:var(--accent)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">effort</span><span class="bar-track"><span class="bar-fill" style="width:33%;background:var(--accent)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🧰 Skills invoked</h2>
+      <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">6</span></div>
+<div class="bar-row"><span class="bar-label">session-reflection-analysis</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">grilling</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">domain-modeling</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🗂️ ctx stack usage</h2>
+      <p class="empty">Nothing recorded this week.</p>
+    </section>
+    <section class="card">
+      <h2>🛠️ Top tools</h2>
+      <div class="bar-row"><span class="bar-label">Bash</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">582</span></div>
+<div class="bar-row"><span class="bar-label">Read</span><span class="bar-track"><span class="bar-fill" style="width:97%;background:var(--accent)"></span></span><span class="bar-count">566</span></div>
+<div class="bar-row"><span class="bar-label">Write</span><span class="bar-track"><span class="bar-fill" style="width:29%;background:var(--accent)"></span></span><span class="bar-count">171</span></div>
+<div class="bar-row"><span class="bar-label">Agent</span><span class="bar-track"><span class="bar-fill" style="width:28%;background:var(--accent)"></span></span><span class="bar-count">164</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_add_tags_to_document</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent)"></span></span><span class="bar-count">98</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_list_documents</span><span class="bar-track"><span class="bar-fill" style="width:10%;background:var(--accent)"></span></span><span class="bar-count">56</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_move_documents</span><span class="bar-track"><span class="bar-fill" style="width:5%;background:var(--accent)"></span></span><span class="bar-count">31</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_bulk_edit_document_metadata</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">24</span></div>
+<div class="bar-row"><span class="bar-label">ToolSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">19</span></div>
+<div class="bar-row"><span class="bar-label">Edit</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">13</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>📁 Projects touched</h2>
+    <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">6121</span></div>
+<div class="bar-row"><span class="bar-label">~</span><span class="bar-track"><span class="bar-fill" style="width:16%;background:var(--accent2)"></span></span><span class="bar-count">988</span></div>
+  </section>
+
+  <footer>Generated by the <strong>week-in-review</strong> skill &middot; 34 prompts &middot; 976 transcripts scanned</footer>
+</div>
+</body>
+</html>

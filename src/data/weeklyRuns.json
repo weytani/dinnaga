@@ -27,6 +27,13 @@
       "windowLabel": "this week (since 2026-08-24)",
       "summary": "The operator's week split between running a multi-lens judge committee over a large batch of arxiv papers (surfacing recurring interest in Global Workspace Theory, KV-cache/speculative-decoding tricks, and agent-orchestration reframings), and a planning push to design a multi-machine AI research lab with cross-harness delegation, alongside smaller threads on Obsidian ingestion pipelines and self-improving headless automation.",
       "docPath": "/artifact-docs/weekly/2026-08-29.html"
+    },
+    {
+      "date": "2026-09-05",
+      "windowStart": "2026-08-31",
+      "windowLabel": "this week (since 2026-08-31)",
+      "summary": "The week was anchored by one deep arxiv-prospector triage session that ran a committee of parallel review lenses over ~20 AI-agent research papers, surfacing recurring themes in multi-agent harness design, cognitive-architecture framing, and LLM inference efficiency; the rest of the week was recurring automated nightly-report and session-reflection runs plus one interrupted agent-fleet review thread.",
+      "docPath": "/artifact-docs/weekly/2026-09-05.html"
     }
   ]
 }
