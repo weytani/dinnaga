@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Cheat sheet: the hermes LLM best-practices doctrine resolved into Microsoft Copilot Studio's actual control surface — topics before orchestration, named knowledge, Entra Agent IDs, DLP, and the credit meter." />
+<title>Applying LLM Best Practices in Microsoft Copilot Studio</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --ground: #e9e6dc;
+    --paper: #f6f4ec;
+    --ink: #1c1b17;
+    --muted: #6a6558;
+    --line: rgba(28, 27, 23, 0.16);
+    --line-soft: rgba(28, 27, 23, 0.08);
+    --accent: #0d6a66;      /* platform: power-platform teal */
+    --accent-soft: rgba(13, 106, 102, 0.1);
+    --gold: #7a6410;        /* doctrine: constant across siblings */
+    --gold-bar: #b57f00;
+    --ghost: rgba(28, 27, 23, 0.045);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #121210;
+      --paper: #1a1a17;
+      --ink: #d9d3c4;
+      --muted: #98917e;
+      --line: rgba(217, 211, 196, 0.2);
+      --line-soft: rgba(217, 211, 196, 0.09);
+      --accent: #4ecdc0;
+      --accent-soft: rgba(78, 205, 192, 0.12);
+      --gold: #d9ab1a;
+      --gold-bar: #d9ab1a;
+      --ghost: rgba(217, 211, 196, 0.05);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #121210;
+    --paper: #1a1a17;
+    --ink: #d9d3c4;
+    --muted: #98917e;
+    --line: rgba(217, 211, 196, 0.2);
+    --line-soft: rgba(217, 211, 196, 0.09);
+    --accent: #4ecdc0;
+    --accent-soft: rgba(78, 205, 192, 0.12);
+    --gold: #d9ab1a;
+    --gold-bar: #d9ab1a;
+    --ghost: rgba(217, 211, 196, 0.05);
+  }
+  :root[data-theme="light"] {
+    --ground: #e9e6dc;
+    --paper: #f6f4ec;
+    --ink: #1c1b17;
+    --muted: #6a6558;
+    --line: rgba(28, 27, 23, 0.16);
+    --line-soft: rgba(28, 27, 23, 0.08);
+    --accent: #0d6a66;
+    --accent-soft: rgba(13, 106, 102, 0.1);
+    --gold: #7a6410;
+    --gold-bar: #b57f00;
+    --ghost: rgba(28, 27, 23, 0.045);
+  }
+
+  html { background: var(--ground); }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Charter, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  code, .mono, .eye, .chip, .rail a, .card dt, .card-head, .foot, .legend {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  .wrap { max-width: 76rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  a { color: var(--accent); text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover { text-decoration-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    a { transition: text-decoration-color 120ms ease-out; }
+  }
+
+  /* ---------- header ---------- */
+  header { border-bottom: 1px solid var(--line); padding: 2.5rem 0 1.5rem; position: relative; overflow: hidden; }
+  .ghostmark {
+    position: absolute; inset: 0; pointer-events: none; user-select: none; overflow: hidden;
+  }
+  .ghostmark span {
+    position: absolute; top: -0.32em; right: -0.04em;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: clamp(8rem, 22vw, 15rem); font-weight: 700; letter-spacing: -0.06em;
+    color: var(--ghost); line-height: 1;
+  }
+  .eye {
+    font-size: 0.6875rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0 0 1.4rem;
+  }
+  .eye .chip {
+    color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    padding: 0.15rem 0.5rem; border-radius: 2px; letter-spacing: 0.18em;
+  }
+  h1 {
+    margin: 0 0 0.9rem; font-weight: 700;
+    font-size: clamp(2.1rem, 1.2rem + 3.4vw, 3.4rem);
+    line-height: 0.98; letter-spacing: -0.015em; max-width: 60rem;
+  }
+  h1 .x { color: var(--accent); font-style: italic; }
+  .standfirst { max-width: 52rem; margin: 0; color: var(--muted); font-size: 1.0625rem; line-height: 1.55; }
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; align-items: center;
+    margin: 1.3rem 0 0; font-size: 0.6875rem; letter-spacing: 0.08em; color: var(--muted);
+  }
+  .legend .k { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .legend .swatch { width: 0.85rem; height: 0.2rem; display: inline-block; }
+  .legend .swatch.gold { background: var(--gold-bar); }
+  .legend .swatch.acc { background: var(--accent); }
+
+  /* ---------- jump rail ---------- */
+  .rail { border-bottom: 1px solid var(--line-soft); padding: 0.8rem 0; }
+  .rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 0.4rem; }
+  .rail a {
+    display: inline-block; font-size: 0.6875rem; letter-spacing: 0.06em; text-decoration: none;
+    color: var(--muted); border: 1px solid var(--line-soft); border-radius: 2px;
+    padding: 0.22rem 0.5rem; background: var(--paper);
+  }
+  .rail a:hover, .rail a:focus-visible { color: var(--accent); border-color: var(--accent); }
+  .rail a b { color: var(--accent); font-weight: 700; margin-right: 0.35rem; }
+
+  /* ---------- card wall ---------- */
+  main.wrap { padding-top: 1.6rem; padding-bottom: 2.5rem; }
+  .wall {
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22.5rem), 1fr));
+  }
+  .card {
+    background: var(--paper); border: 1px solid var(--line-soft); border-radius: 3px;
+    padding: 1.1rem 1.2rem 1.15rem; scroll-margin-top: 1rem;
+  }
+  .card:target { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .card-head { display: flex; align-items: baseline; gap: 0.7rem; margin: 0 0 0.65rem; }
+  .card-head .idx {
+    font-size: 1.55rem; font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.04em; line-height: 1;
+  }
+  .card-head h2 {
+    margin: 0; font-family: inherit; font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); line-height: 1.4;
+  }
+  .doctrine {
+    margin: 0 0 0.85rem; padding: 0.1rem 0 0.1rem 0.75rem;
+    border-left: 3px solid var(--gold-bar);
+    font-style: italic; color: var(--gold); font-size: 0.9375rem; line-height: 1.4;
+  }
+  .card dl { margin: 0; }
+  .card dt {
+    font-size: 0.8125rem; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.01em; margin: 0.6rem 0 0.1rem;
+  }
+  .card dt::before { content: '▸ '; color: color-mix(in srgb, var(--accent) 55%, transparent); }
+  .card dt:first-of-type { margin-top: 0; }
+  .card dd { margin: 0 0 0 1.05rem; font-size: 0.9375rem; line-height: 1.42; color: var(--muted); }
+  .card dd strong { color: var(--ink); font-weight: 600; }
+  .card code {
+    font-size: 0.85em; background: var(--accent-soft); border-radius: 2px; padding: 0.05em 0.3em;
+    color: var(--ink);
+  }
+
+  /* ---------- principle strip ---------- */
+  .principle {
+    margin: 1.6rem 0 0; background: var(--paper); border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--gold-bar); border-radius: 3px; padding: 1.2rem 1.4rem;
+  }
+  .principle .eye { margin-bottom: 0.55rem; }
+  .principle p {
+    margin: 0; font-style: italic; font-size: 1.125rem; line-height: 1.55; max-width: 62rem;
+  }
+  .principle p b { color: var(--accent); font-style: normal; font-weight: 400; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--line); margin-top: 2.5rem; padding: 1.4rem 0 3rem; }
+  .foot { font-size: 0.75rem; line-height: 1.9; color: var(--muted); letter-spacing: 0.02em; }
+  .foot h3 {
+    font-family: inherit; font-size: 0.6875rem; letter-spacing: 0.22em; text-transform: uppercase;
+    margin: 1.2rem 0 0.2rem; color: var(--ink);
+  }
+  .foot h3:first-child { margin-top: 0; }
+  .foot ul { list-style: none; margin: 0; padding: 0; }
+
+  @media print {
+    :root { --ground: #fff; --paper: #fff; --ink: #111; --muted: #444;
+            --accent: #08514e; --gold: #6a5600; --gold-bar: #8a6d00;
+            --line: #999; --line-soft: #ccc; --ghost: transparent; --accent-soft: #eee; }
+    .rail, .sibling-nav { display: none; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ghostmark" aria-hidden="true"><span>CS</span></div>
+  <div class="wrap">
+    <p class="eye">
+      <span>DINNAGA // FIELD CROSSWALK</span>
+      <span class="chip">SHEET 2 OF 2 · COPILOT STUDIO</span>
+      <span>2026-09-09</span>
+    </p>
+    <h1>LLM Best Practices <span class="x">×&nbsp;Copilot Studio</span></h1>
+    <p class="standfirst">
+      The <strong>hermes doctrine</strong> for building and using LLM systems, resolved into
+      Microsoft Copilot Studio's actual control surface. Twelve clauses; every entry is a literal
+      setting, policy, or panel you can set today. Sibling sheet:
+      <a href="/artifacts/llm-best-practices-github-copilot" target="_top">GitHub&nbsp;Copilot</a>.
+    </p>
+    <p class="legend">
+      <span class="k"><span class="swatch gold" aria-hidden="true"></span> doctrine — constant across both sheets</span>
+      <span class="k"><span class="swatch acc" aria-hidden="true"></span> platform control — the product's own name for it</span>
+    </p>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Clauses">
+  <div class="wrap">
+    <ol>
+      <li><a href="#c01"><b>01</b>problem</a></li>
+      <li><a href="#c02"><b>02</b>context</a></li>
+      <li><a href="#c03"><b>03</b>verify</a></li>
+      <li><a href="#c04"><b>04</b>evals</a></li>
+      <li><a href="#c05"><b>05</b>humans</a></li>
+      <li><a href="#c06"><b>06</b>agency</a></li>
+      <li><a href="#c07"><b>07</b>zero-trust</a></li>
+      <li><a href="#c08"><b>08</b>side-effects</a></li>
+      <li><a href="#c09"><b>09</b>observe</a></li>
+      <li><a href="#c10"><b>10</b>change</a></li>
+      <li><a href="#c11"><b>11</b>privacy</a></li>
+      <li><a href="#c12"><b>12</b>trust</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="wall">
+
+    <section class="card" id="c01" aria-labelledby="h01">
+      <div class="card-head"><span class="idx" aria-hidden="true">01</span><h2 id="h01">Problem first</h2></div>
+      <p class="doctrine">Least complicated architecture that works.</p>
+      <dl>
+        <dt>topics</dt><dd>Known intents get deterministic dialogs. Start here.</dd>
+        <dt>generative answers</dt><dd>Only for the long tail, over named knowledge.</dd>
+        <dt>tools — connectors / flows</dt><dd>When the agent must act, not just answer.</dd>
+        <dt>generative orchestration</dt><dd>Turn on only when routing genuinely needs a model.</dd>
+        <dt>autonomous triggers</dt><dd>Event-driven runs: <strong>last rung, most guardrails.</strong></dd>
+        <dt>Copilot Credits</dt><dd>The ladder is also the meter — classic &lt; generative &lt; actions &lt; AI tools.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c02" aria-labelledby="h02">
+      <div class="card-head"><span class="idx" aria-hidden="true">02</span><h2 id="h02">Focused context</h2></div>
+      <p class="doctrine">Only relevant, authoritative context — retrieved, cited, fresh.</p>
+      <dl>
+        <dt>named knowledge sources</dt><dd>The authoritative SharePoint site, Dataverse tables, files. Never "everything".</dd>
+        <dt>general knowledge: off</dt><dd>When answers must come from your sources only.</dd>
+        <dt>agent instructions</dt><dd>Short and authoritative — retrieval happens per query, not in the prompt.</dd>
+        <dt>citations on</dt><dd>Generative answers cite their sources. Keep them visible.</dd>
+        <dt>per-topic knowledge</dt><dd>Scope sources to the topics that need them.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c03" aria-labelledby="h03">
+      <div class="card-head"><span class="idx" aria-hidden="true">03</span><h2 id="h03">Generate ≠ verify</h2></div>
+      <p class="doctrine">Fluent is not verified: retrieve → generate → validate → review → act.</p>
+      <dl>
+        <dt>entities + slot filling</dt><dd>Parse structured inputs deterministically before acting.</dd>
+        <dt>connectors read the record</dt><dd>Answer from the system of record, never model memory.</dd>
+        <dt>content moderation: high</dt><dd>On every generative answers node.</dd>
+        <dt>flows do the math</dt><dd>Deterministic work lives in Power Automate, not in prose.</dd>
+        <dt>adaptive cards</dt><dd>Constrain output shape where shape matters.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c04" aria-labelledby="h04">
+      <div class="card-head"><span class="idx" aria-hidden="true">04</span><h2 id="h04">Evals before scale</h2></div>
+      <p class="doctrine">A representative eval set: common, hard, adversarial, previously failed.</p>
+      <dl>
+        <dt>Copilot Studio Kit</dt><dd>Automated test sets: utterance → expected topic and answer.</dd>
+        <dt>adversarial rows</dt><dd>Off-topic, injection, and should-refuse cases belong in the set.</dd>
+        <dt>transcripts → fixtures</dt><dd>Mine failed conversations; add them to the suite.</dd>
+        <dt>analytics as gates</dt><dd>Resolution, escalation, abandonment, CSAT — release criteria, not trivia.</dd>
+        <dt>re-test before publish</dt><dd>Every time.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c05" aria-labelledby="h05">
+      <div class="card-head"><span class="idx" aria-hidden="true">05</span><h2 id="h05">Human checkpoints</h2></div>
+      <p class="doctrine">Review where direction is cheap to change.</p>
+      <dl>
+        <dt>Approvals</dt><dd>A Power Automate approval before any consequential action.</dd>
+        <dt>escalate topic</dt><dd>Hand off to a live agent with full conversation context.</dd>
+        <dt>test pane first</dt><dd>Publish is a deliberate act, not a save button.</dd>
+        <dt>autonomous review queue</dt><dd>Triggered runs propose; humans dispose.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c06" aria-labelledby="h06">
+      <div class="card-head"><span class="idx" aria-hidden="true">06</span><h2 id="h06">Least agency</h2></div>
+      <p class="doctrine">No more capability, autonomy, duration, or access than the task requires.</p>
+      <dl>
+        <dt>Entra Agent ID</dt><dd>Per-agent identity scopes Conditional Access and DLP to one agent.</dd>
+        <dt>end-user authentication</dt><dd>The agent acts as the user — never as the maker.</dd>
+        <dt>maker-credential lockdown</dt><dd>Forbid maker-credential passthrough on shared agents.</dd>
+        <dt>connector allowlists</dt><dd>DLP / Advanced Connector Policies: deny by default.</dd>
+        <dt>endpoint filtering</dt><dd>Custom connector + MCP egress pinned to known hosts.</dd>
+        <dt>capability toggles</dt><dd>Hosted browser and computer use stay off unless the task demands them.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c07" aria-labelledby="h07">
+      <div class="card-head"><span class="idx" aria-hidden="true">07</span><h2 id="h07">Zero trust</h2></div>
+      <p class="doctrine">Model output and retrieved content are potentially hostile.</p>
+      <dl>
+        <dt>require authentication</dt><dd>A no-auth agent over sensitive knowledge is the classic hole.</dd>
+        <dt>sensitivity labels</dt><dd>Labels travel with data; encrypted content stays unprocessable.</dd>
+        <dt>Purview DLP</dt><dd>Block responses that match sensitive-info types.</dd>
+        <dt>MCP = supply chain</dt><dd>External servers and agents: allowlist, review, monitor.</dd>
+        <dt>built-in injection defense</dt><dd>Classifiers exist. Never rely on them alone.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c08" aria-labelledby="h08">
+      <div class="card-head"><span class="idx" aria-hidden="true">08</span><h2 id="h08">Recoverable side effects</h2></div>
+      <p class="doctrine">Side effects visible, approved, reversible; success read back from the system.</p>
+      <dl>
+        <dt>show inputs</dt><dd>The user confirms tool inputs before the call runs.</dd>
+        <dt>Approvals on irreversibles</dt><dd>Payment, deletion, external mail: gated.</dd>
+        <dt>draft-then-publish flows</dt><dd>Stage writes; a human flips them live.</dd>
+        <dt>read-back</dt><dd>After a write, query the record and answer from it.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c09" aria-labelledby="h09">
+      <div class="card-head"><span class="idx" aria-hidden="true">09</span><h2 id="h09">Observability</h2></div>
+      <p class="doctrine">Record enough to reconstruct what happened.</p>
+      <dl>
+        <dt>Purview audit</dt><dd>Interaction metadata plus lifecycle events — who edited, who published.</dd>
+        <dt>DSPM for AI</dt><dd>Prompt/response content and sensitive-data detection.</dd>
+        <dt>Application Insights</dt><dd>Per-agent telemetry: topic hits, latency, errors.</dd>
+        <dt>Dataverse transcripts</dt><dd>Full text, 30-day default retention — set yours deliberately.</dd>
+        <dt>PPAC consumption</dt><dd>Credit burn per agent.</dd>
+        <dt>Sentinel</dt><dd>Alerting and automated response on agent signals.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c10" aria-labelledby="h10">
+      <div class="card-head"><span class="idx" aria-hidden="true">10</span><h2 id="h10">Plan for change</h2></div>
+      <p class="doctrine">Models time out, drift, regress, and get replaced. Build for it.</p>
+      <dl>
+        <dt>fallback topic</dt><dd>"I don't know" is an answer. Never freewheel.</dd>
+        <dt>solutions + pipelines</dt><dd>Dev → test → prod; rollback is an import away.</dd>
+        <dt>model updates = releases</dt><dd>Re-run the test kit when the platform rotates models.</dd>
+        <dt>credit alerts</dt><dd>High-traffic generative channels are cost surprises. Watch PPAC.</dd>
+        <dt>escalation survives outages</dt><dd>The human path works when the model doesn't.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c11" aria-labelledby="h11">
+      <div class="card-head"><span class="idx" aria-hidden="true">11</span><h2 id="h11">Privacy &amp; IP</h2></div>
+      <p class="doctrine">Know where your data goes; minimize and redact before it leaves.</p>
+      <dl>
+        <dt>no training on your data</dt><dd>Enterprise content doesn't train foundation models.</dd>
+        <dt>service boundary</dt><dd>Processing stays in the Microsoft 365 trust boundary; EU Data Boundary where applicable.</dd>
+        <dt>transcripts are records</dt><dd>Retention, eDiscovery, and Communication Compliance apply.</dd>
+        <dt>minimum knowledge</dt><dd>Connect what the agent needs. Nothing more.</dd>
+        <dt>maker visibility toggles</dt><dd>Decide deliberately who can read user conversations.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c12" aria-labelledby="h12">
+      <div class="card-head"><span class="idx" aria-hidden="true">12</span><h2 id="h12">Calibrated trust</h2></div>
+      <p class="doctrine">Confidence and polish are not correctness.</p>
+      <dl>
+        <dt>test pane ≠ production</dt><dd>Channels, auth, and DLP all change behavior. Test published.</dd>
+        <dt>teach the citations</dt><dd>Users click sources; confident prose isn't evidence.</dd>
+        <dt>CSAT + escalation trend</dt><dd>Your live trust meters — watch the trend, not the demo.</dd>
+        <dt>credentials never in chat</dt><dd>Auth flows exist; prose is not a login form.</dd>
+      </dl>
+    </section>
+
+  </div>
+
+  <aside class="principle">
+    <p class="eye">OPERATING PRINCIPLE</p>
+    <p>Topics before orchestration, orchestration before autonomy <b>·</b> every answer grounded in
+    named knowledge <b>·</b> connectors and flows touch systems of record, never the model directly
+    <b>·</b> one agent, one identity, one scope <b>·</b> watch transcripts, credits, and audits
+    <b>·</b> every model rotation gets its tests re-run.</p>
+  </aside>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <h3>Provenance</h3>
+    <ul>
+      <li>Doctrine: <a href="https://gist.github.com/weytani/e779090fdd8bca8b1dfed1a210493ad4" target="_blank" rel="noopener noreferrer">Best Practices for Implementing and Using AI LLMs</a> — hermes, 2026-08-16.</li>
+      <li>Control names verified against Microsoft Learn, 2026-09-09. Surfaces move fast — re-check before wiring policy to them.</li>
+    </ul>
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/whats-new" target="_blank" rel="noopener noreferrer">What's new in Copilot Studio</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener noreferrer">Purview for Copilot Studio data security &amp; compliance</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/" target="_blank" rel="noopener noreferrer">Microsoft Copilot Studio documentation</a></li>
+    </ul>
+    <h3 class="sibling-nav">Elsewhere</h3>
+    <ul class="sibling-nav">
+      <li>Sibling sheet: <a href="/artifacts/llm-best-practices-github-copilot" target="_top">Applying LLM Best Practices in GitHub Copilot</a></li>
+      <li>Shelf: <a href="/artifacts" target="_top">all artifacts</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

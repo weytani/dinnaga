@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Cheat sheet: the hermes LLM best-practices doctrine resolved into GitHub Copilot's actual control surface — instructions files, the cloud agent's fences, CI as verifier, the premium-request meter." />
+<title>Applying LLM Best Practices in GitHub Copilot</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --ground: #e9e6dc;
+    --paper: #f6f4ec;
+    --ink: #1c1b17;
+    --muted: #6a6558;
+    --line: rgba(28, 27, 23, 0.16);
+    --line-soft: rgba(28, 27, 23, 0.08);
+    --accent: #6a3bc4;      /* platform: merge purple */
+    --accent-soft: rgba(106, 59, 196, 0.1);
+    --gold: #7a6410;        /* doctrine: constant across siblings */
+    --gold-bar: #b57f00;
+    --ghost: rgba(28, 27, 23, 0.045);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #121210;
+      --paper: #1a1a17;
+      --ink: #d9d3c4;
+      --muted: #98917e;
+      --line: rgba(217, 211, 196, 0.2);
+      --line-soft: rgba(217, 211, 196, 0.09);
+      --accent: #b6a1f7;
+      --accent-soft: rgba(182, 161, 247, 0.12);
+      --gold: #d9ab1a;
+      --gold-bar: #d9ab1a;
+      --ghost: rgba(217, 211, 196, 0.05);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #121210;
+    --paper: #1a1a17;
+    --ink: #d9d3c4;
+    --muted: #98917e;
+    --line: rgba(217, 211, 196, 0.2);
+    --line-soft: rgba(217, 211, 196, 0.09);
+    --accent: #b6a1f7;
+    --accent-soft: rgba(182, 161, 247, 0.12);
+    --gold: #d9ab1a;
+    --gold-bar: #d9ab1a;
+    --ghost: rgba(217, 211, 196, 0.05);
+  }
+  :root[data-theme="light"] {
+    --ground: #e9e6dc;
+    --paper: #f6f4ec;
+    --ink: #1c1b17;
+    --muted: #6a6558;
+    --line: rgba(28, 27, 23, 0.16);
+    --line-soft: rgba(28, 27, 23, 0.08);
+    --accent: #6a3bc4;
+    --accent-soft: rgba(106, 59, 196, 0.1);
+    --gold: #7a6410;
+    --gold-bar: #b57f00;
+    --ghost: rgba(28, 27, 23, 0.045);
+  }
+
+  html { background: var(--ground); }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Charter, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  code, .mono, .eye, .chip, .rail a, .card dt, .card-head, .foot, .legend {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  .wrap { max-width: 76rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  a { color: var(--accent); text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 2px; }
+  a:hover { text-decoration-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    a { transition: text-decoration-color 120ms ease-out; }
+  }
+
+  /* ---------- header ---------- */
+  header { border-bottom: 1px solid var(--line); padding: 2.5rem 0 1.5rem; position: relative; overflow: hidden; }
+  .ghostmark {
+    position: absolute; inset: 0; pointer-events: none; user-select: none; overflow: hidden;
+  }
+  .ghostmark span {
+    position: absolute; top: -0.32em; right: -0.04em;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: clamp(8rem, 22vw, 15rem); font-weight: 700; letter-spacing: -0.06em;
+    color: var(--ghost); line-height: 1;
+  }
+  .eye {
+    font-size: 0.6875rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0 0 1.4rem;
+  }
+  .eye .chip {
+    color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    padding: 0.15rem 0.5rem; border-radius: 2px; letter-spacing: 0.18em;
+  }
+  h1 {
+    margin: 0 0 0.9rem; font-weight: 700;
+    font-size: clamp(2.1rem, 1.2rem + 3.4vw, 3.4rem);
+    line-height: 0.98; letter-spacing: -0.015em; max-width: 60rem;
+  }
+  h1 .x { color: var(--accent); font-style: italic; }
+  .standfirst { max-width: 52rem; margin: 0; color: var(--muted); font-size: 1.0625rem; line-height: 1.55; }
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; align-items: center;
+    margin: 1.3rem 0 0; font-size: 0.6875rem; letter-spacing: 0.08em; color: var(--muted);
+  }
+  .legend .k { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .legend .swatch { width: 0.85rem; height: 0.2rem; display: inline-block; }
+  .legend .swatch.gold { background: var(--gold-bar); }
+  .legend .swatch.acc { background: var(--accent); }
+
+  /* ---------- jump rail ---------- */
+  .rail { border-bottom: 1px solid var(--line-soft); padding: 0.8rem 0; }
+  .rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 0.4rem; }
+  .rail a {
+    display: inline-block; font-size: 0.6875rem; letter-spacing: 0.06em; text-decoration: none;
+    color: var(--muted); border: 1px solid var(--line-soft); border-radius: 2px;
+    padding: 0.22rem 0.5rem; background: var(--paper);
+  }
+  .rail a:hover, .rail a:focus-visible { color: var(--accent); border-color: var(--accent); }
+  .rail a b { color: var(--accent); font-weight: 700; margin-right: 0.35rem; }
+
+  /* ---------- card wall ---------- */
+  main.wrap { padding-top: 1.6rem; padding-bottom: 2.5rem; }
+  .wall {
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22.5rem), 1fr));
+  }
+  .card {
+    background: var(--paper); border: 1px solid var(--line-soft); border-radius: 3px;
+    padding: 1.1rem 1.2rem 1.15rem; scroll-margin-top: 1rem;
+  }
+  .card:target { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .card-head { display: flex; align-items: baseline; gap: 0.7rem; margin: 0 0 0.65rem; }
+  .card-head .idx {
+    font-size: 1.55rem; font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.04em; line-height: 1;
+  }
+  .card-head h2 {
+    margin: 0; font-family: inherit; font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); line-height: 1.4;
+  }
+  .doctrine {
+    margin: 0 0 0.85rem; padding: 0.1rem 0 0.1rem 0.75rem;
+    border-left: 3px solid var(--gold-bar);
+    font-style: italic; color: var(--gold); font-size: 0.9375rem; line-height: 1.4;
+  }
+  .card dl { margin: 0; }
+  .card dt {
+    font-size: 0.8125rem; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.01em; margin: 0.6rem 0 0.1rem;
+  }
+  .card dt::before { content: '▸ '; color: color-mix(in srgb, var(--accent) 55%, transparent); }
+  .card dt:first-of-type { margin-top: 0; }
+  .card dd { margin: 0 0 0 1.05rem; font-size: 0.9375rem; line-height: 1.42; color: var(--muted); }
+  .card dd strong { color: var(--ink); font-weight: 600; }
+  .card code {
+    font-size: 0.85em; background: var(--accent-soft); border-radius: 2px; padding: 0.05em 0.3em;
+    color: var(--ink);
+  }
+
+  /* ---------- principle strip ---------- */
+  .principle {
+    margin: 1.6rem 0 0; background: var(--paper); border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--gold-bar); border-radius: 3px; padding: 1.2rem 1.4rem;
+  }
+  .principle .eye { margin-bottom: 0.55rem; }
+  .principle p {
+    margin: 0; font-style: italic; font-size: 1.125rem; line-height: 1.55; max-width: 62rem;
+  }
+  .principle p b { color: var(--accent); font-style: normal; font-weight: 400; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--line); margin-top: 2.5rem; padding: 1.4rem 0 3rem; }
+  .foot { font-size: 0.75rem; line-height: 1.9; color: var(--muted); letter-spacing: 0.02em; }
+  .foot h3 {
+    font-family: inherit; font-size: 0.6875rem; letter-spacing: 0.22em; text-transform: uppercase;
+    margin: 1.2rem 0 0.2rem; color: var(--ink);
+  }
+  .foot h3:first-child { margin-top: 0; }
+  .foot ul { list-style: none; margin: 0; padding: 0; }
+
+  @media print {
+    :root { --ground: #fff; --paper: #fff; --ink: #111; --muted: #444;
+            --accent: #4a2a8a; --gold: #6a5600; --gold-bar: #8a6d00;
+            --line: #999; --line-soft: #ccc; --ghost: transparent; --accent-soft: #eee; }
+    .rail, .sibling-nav { display: none; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ghostmark" aria-hidden="true"><span>GH</span></div>
+  <div class="wrap">
+    <p class="eye">
+      <span>DINNAGA // FIELD CROSSWALK</span>
+      <span class="chip">SHEET 1 OF 2 · GITHUB COPILOT</span>
+      <span>2026-09-09</span>
+    </p>
+    <h1>LLM Best Practices <span class="x">×&nbsp;GitHub Copilot</span></h1>
+    <p class="standfirst">
+      The <strong>hermes doctrine</strong> for building and using LLM systems, resolved into GitHub
+      Copilot's actual control surface. Twelve clauses; every entry is a literal knob, file, or fence
+      you can set today. Sibling sheet: <a href="/artifacts/llm-best-practices-copilot-studio" target="_top">Copilot&nbsp;Studio</a>.
+    </p>
+    <p class="legend">
+      <span class="k"><span class="swatch gold" aria-hidden="true"></span> doctrine — constant across both sheets</span>
+      <span class="k"><span class="swatch acc" aria-hidden="true"></span> platform control — the product's own name for it</span>
+    </p>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Clauses">
+  <div class="wrap">
+    <ol>
+      <li><a href="#c01"><b>01</b>problem</a></li>
+      <li><a href="#c02"><b>02</b>context</a></li>
+      <li><a href="#c03"><b>03</b>verify</a></li>
+      <li><a href="#c04"><b>04</b>evals</a></li>
+      <li><a href="#c05"><b>05</b>humans</a></li>
+      <li><a href="#c06"><b>06</b>agency</a></li>
+      <li><a href="#c07"><b>07</b>zero-trust</a></li>
+      <li><a href="#c08"><b>08</b>side-effects</a></li>
+      <li><a href="#c09"><b>09</b>observe</a></li>
+      <li><a href="#c10"><b>10</b>change</a></li>
+      <li><a href="#c11"><b>11</b>privacy</a></li>
+      <li><a href="#c12"><b>12</b>trust</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="wall">
+
+    <section class="card" id="c01" aria-labelledby="h01">
+      <div class="card-head"><span class="idx" aria-hidden="true">01</span><h2 id="h01">Problem first</h2></div>
+      <p class="doctrine">Least complicated architecture that works.</p>
+      <dl>
+        <dt>completions / next edit</dt><dd>Mechanical, in-flow changes. Start here.</dd>
+        <dt>chat — ask mode</dt><dd>Questions and explanations. No edits yet.</dd>
+        <dt>edit mode</dt><dd>Scoped multi-file changes you watch land.</dd>
+        <dt>agent mode / Copilot CLI</dt><dd>Goal-driven local runs, tool approvals on.</dd>
+        <dt>cloud agent</dt><dd>Assign an issue, get a draft PR. <strong>Last rung, not first.</strong></dd>
+        <dt>premium requests</dt><dd>The ladder is also the meter — each rung and model bills differently.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c02" aria-labelledby="h02">
+      <div class="card-head"><span class="idx" aria-hidden="true">02</span><h2 id="h02">Focused context</h2></div>
+      <p class="doctrine">Only relevant, authoritative context — retrieved, cited, fresh.</p>
+      <dl>
+        <dt><code>.github/copilot-instructions.md</code></dt><dd>Repo-wide. Short and authoritative — it rides in every request.</dd>
+        <dt><code>.github/instructions/*.instructions.md</code></dt><dd>Path-scoped rules via <code>applyTo</code> globs.</dd>
+        <dt><code>AGENTS.md</code></dt><dd>Root + nested; the cloud agent reads these (and <code>CLAUDE.md</code>).</dd>
+        <dt><code>*.prompt.md</code></dt><dd>Reusable task prompts, versioned like code.</dd>
+        <dt>Copilot Spaces</dt><dd>Curated grounding bundle per subject — not the whole org.</dd>
+        <dt>content exclusion</dt><dd>Keep secrets and noise out of context entirely.</dd>
+        <dt>new chat</dt><dd>Session gone noisy? Distill, then start clean.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c03" aria-labelledby="h03">
+      <div class="card-head"><span class="idx" aria-hidden="true">03</span><h2 id="h03">Generate ≠ verify</h2></div>
+      <p class="doctrine">Fluent is not verified: retrieve → generate → validate → review → act.</p>
+      <dl>
+        <dt>draft PR</dt><dd>Cloud-agent output is a proposal, never a landing.</dd>
+        <dt>required status checks</dt><dd>CI is the deterministic verifier. Make it required.</dd>
+        <dt>Approve and run workflows</dt><dd>Actions stay off until a human with write access clicks.</dd>
+        <dt>Copilot code review</dt><dd>A first pass — never the approving review.</dd>
+        <dt><code>copilot-setup-steps.yml</code></dt><dd>Preinstall deps so the agent iterates against real tests, not vibes.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c04" aria-labelledby="h04">
+      <div class="card-head"><span class="idx" aria-hidden="true">04</span><h2 id="h04">Evals before scale</h2></div>
+      <p class="doctrine">A representative eval set: common, hard, adversarial, previously failed.</p>
+      <dl>
+        <dt>golden suite</dt><dd>Agent work passes the same required checks you do.</dd>
+        <dt>regression prompts</dt><dd>Issues it fumbled become fixtures. Re-run them.</dd>
+        <dt>metrics API / usage reports</dt><dd>Acceptance rate and premium spend, per model.</dd>
+        <dt>review-comment rate</dt><dd>Human corrections per Copilot PR is your real quality metric.</dd>
+        <dt>instructions are code</dt><dd>PR and review every change to instructions and prompt files.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c05" aria-labelledby="h05">
+      <div class="card-head"><span class="idx" aria-hidden="true">05</span><h2 id="h05">Human checkpoints</h2></div>
+      <p class="doctrine">Review where direction is cheap to change.</p>
+      <dl>
+        <dt>the issue</dt><dd>Acceptance criteria before assigning — the spec is the first checkpoint.</dd>
+        <dt>session logs</dt><dd>Watch the plan form early; steer with PR comments while it's cheap.</dd>
+        <dt>ready for review</dt><dd>The agent can't flip it. A human promotes the draft.</dd>
+        <dt>required approvals</dt><dd>The requester can't approve the agent's PR — four eyes survive.</dd>
+        <dt>merge</dt><dd>Always yours. The agent cannot.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c06" aria-labelledby="h06">
+      <div class="card-head"><span class="idx" aria-hidden="true">06</span><h2 id="h06">Least agency</h2></div>
+      <p class="doctrine">No more capability, autonomy, duration, or access than the task requires.</p>
+      <dl>
+        <dt><code>copilot/*</code> branches</dt><dd>The only place it can push. Protections still apply.</dd>
+        <dt>no Actions secrets</dt><dd>The runtime has none — don't hand them back via MCP config.</dd>
+        <dt>per-repo enablement</dt><dd>Turn the cloud agent on where needed, not org-wide.</dd>
+        <dt>custom agents</dt><dd>Scope toolsets per job in <code>.github/agents/*.md</code>.</dd>
+        <dt>tool approvals</dt><dd>Agent mode: allowlist narrowly. No blanket auto-approve.</dd>
+        <dt>org policy</dt><dd>Gate features and models centrally. Instructions are not access controls.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c07" aria-labelledby="h07">
+      <div class="card-head"><span class="idx" aria-hidden="true">07</span><h2 id="h07">Zero trust</h2></div>
+      <p class="doctrine">Model output and retrieved content are potentially hostile.</p>
+      <dl>
+        <dt>injection surfaces</dt><dd>Issue bodies, comments, docs, MCP tool descriptions — all untrusted input.</dd>
+        <dt>firewall</dt><dd>Outbound net is allowlisted by default. Extend it; don't disable it.</dd>
+        <dt>MCP allowlist</dt><dd>Third-party servers are supply chain: registry, pin, review.</dd>
+        <dt>secret scanning + push protection</dt><dd>Backstops behind the agent, not instead of care.</dd>
+        <dt>diff review for exfil</dt><dd>New URLs, encoded blobs, odd test fetches — read the diff.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c08" aria-labelledby="h08">
+      <div class="card-head"><span class="idx" aria-hidden="true">08</span><h2 id="h08">Recoverable side effects</h2></div>
+      <p class="doctrine">Side effects visible, approved, reversible; success read back from the system.</p>
+      <dl>
+        <dt>everything is a diff</dt><dd>The draft PR is the staging area; recovery is <code>git revert</code>.</dd>
+        <dt>no self-merge</dt><dd>Nothing lands without a human.</dd>
+        <dt>green before done</dt><dd>Read back the checks, not the model's claim of success.</dd>
+        <dt>edit checkpoints</dt><dd>In VS Code, keep/undo per file — review before keep.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c09" aria-labelledby="h09">
+      <div class="card-head"><span class="idx" aria-hidden="true">09</span><h2 id="h09">Observability</h2></div>
+      <p class="doctrine">Record enough to reconstruct what happened.</p>
+      <dl>
+        <dt>audit log</dt><dd>Copilot events land in the org audit log.</dd>
+        <dt>session logs</dt><dd>Step-by-step transcript of every cloud-agent run.</dd>
+        <dt>usage reports</dt><dd>Premium requests by user, model, and feature.</dd>
+        <dt>git provenance</dt><dd>Co-authored commits; instructions at a SHA. The whole chain replays.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c10" aria-labelledby="h10">
+      <div class="card-head"><span class="idx" aria-hidden="true">10</span><h2 id="h10">Plan for change</h2></div>
+      <p class="doctrine">Models time out, drift, regress, and get replaced. Build for it.</p>
+      <dl>
+        <dt>budgets</dt><dd>Cap premium spend; hard-stop at the cap.</dd>
+        <dt>model policies</dt><dd>Pin the roster — defaults drift under you.</dd>
+        <dt>re-run the goldens</dt><dd>Every model swap is a release. Test it like one.</dd>
+        <dt>downshift</dt><dd>Timeouts and refusals: drop a rung, not your standards.</dd>
+        <dt>no-Copilot path</dt><dd>CI + humans must still ship when the model is down.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c11" aria-labelledby="h11">
+      <div class="card-head"><span class="idx" aria-hidden="true">11</span><h2 id="h11">Privacy &amp; IP</h2></div>
+      <p class="doctrine">Know where your data goes; minimize and redact before it leaves.</p>
+      <dl>
+        <dt>Business / Enterprise plans</dt><dd>Prompts and suggestions stay out of model training.</dd>
+        <dt>content exclusion</dt><dd>Sensitive paths never enter a prompt.</dd>
+        <dt>public code filter</dt><dd>Block matches; code referencing for license hygiene.</dd>
+        <dt>no secrets in chat</dt><dd>Redact before prompting — scanning is the net, not the norm.</dd>
+      </dl>
+    </section>
+
+    <section class="card" id="c12" aria-labelledby="h12">
+      <div class="card-head"><span class="idx" aria-hidden="true">12</span><h2 id="h12">Calibrated trust</h2></div>
+      <p class="doctrine">Confidence and polish are not correctness.</p>
+      <dl>
+        <dt>read before accept</dt><dd>Completions are drafts, not decisions.</dd>
+        <dt>demand grounding</dt><dd>Attach files; ask for line citations; verify them.</dd>
+        <dt>"done" isn't</dt><dd>Run it. Green checks plus your eyes decide.</dd>
+        <dt>spec quality in, PR quality out</dt><dd>Teach issue-writing — the issue is the prompt.</dd>
+      </dl>
+    </section>
+
+  </div>
+
+  <aside class="principle">
+    <p class="eye">OPERATING PRINCIPLE</p>
+    <p>Smallest Copilot surface that solves it <b>·</b> versioned, authoritative instructions
+    <b>·</b> CI and humans declare success, never the model <b>·</b> the agent stays fenced to
+    draft PRs on its own branch <b>·</b> watch the meters <b>·</b> re-test on every model change.</p>
+  </aside>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <h3>Provenance</h3>
+    <ul>
+      <li>Doctrine: <a href="https://gist.github.com/weytani/e779090fdd8bca8b1dfed1a210493ad4" target="_blank" rel="noopener noreferrer">Best Practices for Implementing and Using AI LLMs</a> — hermes, 2026-08-16.</li>
+      <li>Control names verified against GitHub Docs, 2026-09-09. Surfaces move fast — re-check before wiring policy to them.</li>
+    </ul>
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent" target="_blank" rel="noopener noreferrer">About GitHub Copilot cloud agent</a></li>
+      <li><a href="https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations" target="_blank" rel="noopener noreferrer">Risks and mitigations for Copilot cloud agent</a></li>
+      <li><a href="https://docs.github.com/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot" target="_blank" rel="noopener noreferrer">Adding repository custom instructions</a></li>
+      <li><a href="https://github.blog/changelog/2025-08-28-copilot-coding-agent-now-supports-agents-md-custom-instructions/" target="_blank" rel="noopener noreferrer">Changelog: AGENTS.md support</a></li>
+    </ul>
+    <h3 class="sibling-nav">Elsewhere</h3>
+    <ul class="sibling-nav">
+      <li>Sibling sheet: <a href="/artifacts/llm-best-practices-copilot-studio" target="_top">Applying LLM Best Practices in Microsoft Copilot Studio</a></li>
+      <li>Shelf: <a href="/artifacts" target="_top">all artifacts</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
