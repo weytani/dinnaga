@@ -34,6 +34,13 @@
       "windowLabel": "this week (since 2026-08-31)",
       "summary": "The week was anchored by one deep arxiv-prospector triage session that ran a committee of parallel review lenses over ~20 AI-agent research papers, surfacing recurring themes in multi-agent harness design, cognitive-architecture framing, and LLM inference efficiency; the rest of the week was recurring automated nightly-report and session-reflection runs plus one interrupted agent-fleet review thread.",
       "docPath": "/artifact-docs/weekly/2026-09-05.html"
+    },
+    {
+      "date": "2026-09-12",
+      "windowStart": "2026-09-07",
+      "windowLabel": "this week (since 2026-09-07)",
+      "summary": "The operator's week split between a daily arxiv research-triage pipeline surfacing recurring themes in agent memory, RLVR verification, and multi-agent orchestration, a deep multi-agent debate on how to keep a personal knowledge graph from losing information to naive staleness weighting, and two applied-teaching projects distilling LLM and test-automation knowledge into publishable artifacts.",
+      "docPath": "/artifact-docs/weekly/2026-09-12.html"
     }
   ]
 }

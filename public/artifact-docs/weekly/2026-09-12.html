@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week in Review — this week (since 2026-09-07)</title>
+<style>
+:root {
+  --bg:#f7f7f8; --card:#ffffff; --ink:#1c1c1f; --muted:#6b6b74;
+  --line:#e6e6ea; --accent:#5b5bd6; --accent2:#0e9f6e; --accent3:#d97706;
+  --chip:#efeff3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#111114; --card:#1a1a1f; --ink:#ececf1; --muted:#9a9aa6;
+    --line:#2a2a32; --accent:#8b8bf0; --accent2:#34d399; --accent3:#fbbf24;
+    --chip:#25252d;
+  }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+header.top { margin-bottom:28px; }
+header.top h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.02em; }
+header.top .range { color:var(--muted); font-size:14px; }
+.summary { margin:14px 0 22px; font-size:16px; color:var(--ink); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; }
+.chip { background:var(--chip); border:1px solid var(--line); border-radius:10px;
+  padding:10px 14px; min-width:96px; }
+.chip .n { font-size:20px; font-weight:650; letter-spacing:-.01em; }
+.chip .l { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; margin-bottom:20px; }
+h2 { font-size:16px; margin:0 0 14px; letter-spacing:-.01em; }
+.area { border-top:1px solid var(--line); padding:16px 0; }
+.area:first-of-type { border-top:none; padding-top:2px; }
+.area h3 { font-size:17px; margin:0 0 6px; }
+.area .why { color:var(--muted); margin:0 0 10px; font-size:14px; }
+.learnings { margin:8px 0; padding-left:20px; }
+.learnings li { margin:5px 0; }
+.links { margin-top:10px; padding:10px 12px; background:var(--chip); border-radius:10px; }
+.links-h { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:6px; }
+.links ul { margin:0; padding-left:18px; }
+.links a { color:var(--accent); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:640px) { .grid2 { grid-template-columns:1fr; } }
+.bar-row { display:grid; grid-template-columns:130px 1fr 42px; align-items:center; gap:10px; margin:6px 0; }
+.bar-label { font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bar-track { background:var(--chip); border-radius:6px; height:14px; overflow:hidden; }
+.bar-fill { display:block; height:100%; border-radius:6px; }
+.bar-count { font-size:12px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:7px 8px; text-align:left; border-bottom:1px solid var(--line); }
+th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+.dim { color:var(--muted); }
+.empty { color:var(--muted); font-style:italic; font-size:13px; }
+.curios li { margin:6px 0; }
+footer { color:var(--muted); font-size:12px; text-align:center; margin-top:30px; }
+.note { font-size:12px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>📓 Your Week in Review</h1>
+    <div class="range">this week (since 2026-09-07) &middot; generated 2026-09-12 08:38</div>
+  </header>
+
+  <p class="summary">The operator&#x27;s week split between a daily arxiv research-triage pipeline surfacing recurring themes in agent memory, RLVR verification, and multi-agent orchestration, a deep multi-agent debate on how to keep a personal knowledge graph from losing information to naive staleness weighting, and two applied-teaching projects distilling LLM and test-automation knowledge into publishable artifacts.</p>
+
+  <div class="chips">
+    <div class="chip"><div class="n">20</div><div class="l">Sessions</div></div>
+    <div class="chip"><div class="n">6</div><div class="l">Active days</div></div>
+    <div class="chip"><div class="n">2</div><div class="l">Projects</div></div>
+    <div class="chip"><div class="n">6.7M</div><div class="l">Output tokens</div></div>
+    <div class="chip"><div class="n">66.5M</div><div class="l">Input tokens</div></div>
+  </div>
+
+  <section class="card">
+    <h2>💡 What you explored &amp; learned</h2>
+    
+        <article class="area">
+          <h3>Applying LLM Best Practices to GitHub Copilot &amp; Copilot Studio</h3>
+          <p class="why">The operator asked for general LLM best practices from a prior reading session to be turned into two separate, publishable HTML guides — one for GitHub Copilot, one for Copilot Studio.</p>
+          <ul class="learnings"><li>GitHub Copilot (inline/chat coding assistant) and Copilot Studio (low-code conversational agent builder) are different products that need separately tailored best-practice guidance, not one shared cheat sheet.</li><li>Copilot prompt quality improves with local context: comments directly above the target code, explicit #file/#codebase references, and breaking large asks into smaller prompts.</li><li>Copilot Studio guidance centers on topic design, trigger-phrase clarity, slot filling, and defining measurable success criteria up front.</li><li>Distilling a reading session into a publishable artifact (HTML page on a personal site) is a lightweight way to formalize and reuse what was learned.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://docs.github.com/en/copilot/get-started/best-practices" target="_blank" rel="noopener">Best practices for using GitHub Copilot - GitHub Docs</a></li><li><a href="https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering" target="_blank" rel="noopener">Prompt engineering for GitHub Copilot Chat - GitHub Docs</a></li><li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/" target="_blank" rel="noopener">Microsoft Copilot Studio guidance documentation</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Designing a Non-Technical Playwright Testing Curriculum for Salesforce</h3>
+          <p class="why">The operator wanted an 8-session, half-hour-paced lesson plan that teaches a non-technical Salesforce tester to use an existing Playwright cheatsheet, published as a public gist.</p>
+          <ul class="learnings"><li>Official Playwright guidance favors user-facing locators (getByRole, getByText, getByLabel) over brittle CSS/XPath selectors — a natural anchor for teaching non-engineers, since it mirrors how a person actually reads the page.</li><li>Playwright&#x27;s locators auto-wait and re-evaluate on every use, which removes a whole class of timing bugs that would otherwise be hard to explain to a non-technical audience.</li><li>The built-in Playwright test generator (codegen) can pick reasonable role/text/test-id locators automatically, making it a good hands-on entry point before teaching manual locator authoring.</li><li>Salesforce&#x27;s dynamic, shadow-DOM-heavy UI is a known friction point for locator strategies, so a Salesforce-specific curriculum needs dedicated coverage beyond generic Playwright docs.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://playwright.dev/docs/best-practices" target="_blank" rel="noopener">Best Practices | Playwright</a></li><li><a href="https://playwright.dev/docs/locators" target="_blank" rel="noopener">Locators | Playwright</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Knowledge Graph Maintenance &amp; Belief Revision Theory</h3>
+          <p class="why">The operator asked how to maintain a personal LLM-curated knowledge graph so that new and old information don&#x27;t silently conflict, and a multi-agent debate then grounded the answer in formal belief-revision and temporal-database theory.</p>
+          <ul class="learnings"><li>AGM belief revision and Katsuno-Mendelzon belief update are formally distinct operations: revision handles &quot;we learned more about a static world,&quot; update handles &quot;the world itself changed&quot; — collapsing both into one staleness/relevance scalar forces the wrong operation on some fraction of edits.</li><li>Bitemporal modeling (separate valid-time and transaction-time axes) resolves most apparent &quot;new contradicts old&quot; cases by adding a time dimension instead of overwriting or deleting — a claim from last year and a claim from this year can coexist as history rather than conflict.</li><li>A verification-status model (checked / stale / contradicted) is a more principled substitute for decay weights: staleness should describe how recently a claim&#x27;s check last ran, not be baked into the claim&#x27;s own weight.</li><li>Many &quot;conflicts&quot; are really addressing failures — two claims that never get juxtaposed never trigger any resolution mechanism, so reliable routing/colocation of related claims matters as much as the resolution rule itself.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://www.researchgate.net/publication/220837929_Revision_vs_Update_Taking_a_Closer_Look" target="_blank" rel="noopener">Revision vs. Update: Taking a Closer Look (Katsuno &amp; Mendelzon)</a></li><li><a href="https://contact-rajeshvinayagam.medium.com/bi-temporal-data-modeling-an-overview-cbba335d1947" target="_blank" rel="noopener">Bi-Temporal Data Modeling: An Overview</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>AI Agent Memory Systems: Lifecycle, Forgetting &amp; Supersession</h3>
+          <p class="why">The week&#x27;s arxiv-prospector triage repeatedly surfaced high-scoring papers on how agents should store, forget, and supersede memory (Fortunate Recall, RD-Forget, ConvMem, kernel-managed shared memory), a recurring theme worth tracking.</p>
+          <ul class="learnings"><li>Simple deterministic lifecycle primitives — supersession, expiry, retraction — can carry most of an agent memory system&#x27;s correctness gains; elaborate memory-type ontologies mainly buy calibration and confabulation reduction, not raw accuracy, per one paper&#x27;s own ablation.</li><li>Training-free, rule-based memory/forgetting scaffolds can rival RL-trained memory agents on some benchmarks, but the literature has a recurring veracity weakness: judges from the same model family scoring same-family outputs, and complexity-class claims (e.g. O(log N) latency) asserted without wall-clock measurement.</li><li>Memory-lifecycle research increasingly separates the phases explicitly (formation/extraction, evolution/consolidation, retrieval) — under-studied phases like store/share/forget-rollback are where security and correctness gaps tend to hide.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/html/2609.10413" target="_blank" rel="noopener">Fortunate Recall: Ontology-Driven Memory Lifecycle Management for Persistent Coherence in LLMs</a></li><li><a href="https://github.com/Shichun-Liu/Agent-Memory-Paper-List" target="_blank" rel="noopener">Agent-Memory-Paper-List (Memory in the Age of AI Agents: A Survey)</a></li></ul></div>
+        </article>
+
+        <article class="area">
+          <h3>Verifying AI Capability Claims: RLVR, Reward Hacking &amp; Multi-Agent Judging</h3>
+          <p class="why">Several triaged papers this week focused on how to trust — or debunk — capability claims in agentic AI research: simulator-as-verifier training, judge-panel distillation, and deterministic multi-agent merging.</p>
+          <ul class="learnings"><li>Reinforcement learning with verifiable rewards (RLVR) is vulnerable to reward hacking even without overt cheating: policies exploit whatever the verifier fails to enforce, and simulator-as-verifier setups risk overfitting to their own benchmark (&quot;home-field advantage&quot;).</li><li>Distilling an expensive multi-agent judge panel into a single smaller fine-tuned judge can match or beat much larger judge ensembles at a fraction of the cost — but recurring rigor gaps in this literature include missing confidence intervals/seeds on single RL runs and same-family judge bias.</li><li>Newer multi-agent orchestration work favors replacing a generative &quot;manager&quot; agent with a deterministic, order-free merge step (assemble/allocate/stop) over parallel subagent outputs — more auditable and reproducible than letting an LLM arbitrate.</li></ul>
+          <div class="links"><div class="links-h">Further reading</div><ul><li><a href="https://arxiv.org/abs/2604.15149" target="_blank" rel="noopener">LLMs Gaming Verifiers: RLVR can Lead to Reward Hacking</a></li><li><a href="https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1748735/full" target="_blank" rel="noopener">ORCH: a deterministic multi-agent orchestrator for discrete-choice reasoning</a></li></ul></div>
+        </article>
+  </section>
+
+  
+        <section class="card">
+          <h2>🧭 Flagged for a deeper dive later</h2>
+          <ul class="curios"><li>Whether an explicit verification-status model (checked/stale/contradicted) can replace staleness-weighting in the personal knowledge graph without adding manual upkeep burden.</li><li>Whether Playwright&#x27;s role-based locators and codegen fully cover Salesforce&#x27;s dynamic, shadow-DOM-heavy UI, or whether the non-technical curriculum will still need custom locator strategies.</li><li>Whether the &#x27;deterministic merge over generative arbitration&#x27; pattern from recent multi-agent orchestration papers could be retrofitted into the operator&#x27;s own fan-out/judge-board agent tooling.</li><li>Whether simulator-as-verifier RLVR techniques generalize past their benchmark or share the same overfitting risk being raised elsewhere in the reward-hacking literature.</li></ul>
+        </section>
+  
+
+  <section class="card">
+    <h2>📊 Token usage by model</h2>
+    <table>
+      <thead><tr><th>Model</th><th class="num">Output</th><th class="num">Input</th><th class="num">Cache write</th><th class="num">Cache read</th></tr></thead>
+      <tbody><tr><td class='mono'>claude-opus-4-8</td><td class='num'>4.5M</td><td class='num'>6.7K</td><td class='num'>55.9M</td><td class='num dim'>297.3M</td></tr>
+<tr><td class='mono'>claude-fable-5</td><td class='num'>1.5M</td><td class='num'>1.2K</td><td class='num'>5.9M</td><td class='num dim'>72.6M</td></tr>
+<tr><td class='mono'>claude-opus-5</td><td class='num'>493.1K</td><td class='num'>700</td><td class='num'>1.8M</td><td class='num dim'>26.0M</td></tr>
+<tr><td class='mono'>claude-sonnet-5</td><td class='num'>255.0K</td><td class='num'>540</td><td class='num'>2.9M</td><td class='num dim'>7.6M</td></tr></tbody>
+    </table>
+    <p class="note">Output + Input are fresh generation/prompt tokens (the real work). Cache read is context re-served from prompt cache — large but cheap, shown dimmed.</p>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>⌨️ Slash commands</h2>
+      <div class="bar-row"><span class="bar-label">clear</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">13</span></div>
+<div class="bar-row"><span class="bar-label">effort</span><span class="bar-track"><span class="bar-fill" style="width:31%;background:var(--accent)"></span></span><span class="bar-count">4</span></div>
+<div class="bar-row"><span class="bar-label">model</span><span class="bar-track"><span class="bar-fill" style="width:15%;background:var(--accent)"></span></span><span class="bar-count">2</span></div>
+<div class="bar-row"><span class="bar-label">deliberation:deliberation</span><span class="bar-track"><span class="bar-fill" style="width:15%;background:var(--accent)"></span></span><span class="bar-count">2</span></div>
+    </section>
+    <section class="card">
+      <h2>🧰 Skills invoked</h2>
+      <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">6</span></div>
+<div class="bar-row"><span class="bar-label">web-design-forge</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">fresh-eyes-review:fresh-eyes-review</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">superpowers:verification-before-completion</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">ingest</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">superpowers:finishing-a-development-branch</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+<div class="bar-row"><span class="bar-label">session-reflection-analysis</span><span class="bar-track"><span class="bar-fill" style="width:17%;background:var(--accent2)"></span></span><span class="bar-count">1</span></div>
+    </section>
+    <section class="card">
+      <h2>🗂️ ctx stack usage</h2>
+      <p class="empty">Nothing recorded this week.</p>
+    </section>
+    <section class="card">
+      <h2>🛠️ Top tools</h2>
+      <div class="bar-row"><span class="bar-label">Bash</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent)"></span></span><span class="bar-count">784</span></div>
+<div class="bar-row"><span class="bar-label">Read</span><span class="bar-track"><span class="bar-fill" style="width:87%;background:var(--accent)"></span></span><span class="bar-count">679</span></div>
+<div class="bar-row"><span class="bar-label">Agent</span><span class="bar-track"><span class="bar-fill" style="width:23%;background:var(--accent)"></span></span><span class="bar-count">178</span></div>
+<div class="bar-row"><span class="bar-label">Write</span><span class="bar-track"><span class="bar-fill" style="width:22%;background:var(--accent)"></span></span><span class="bar-count">174</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_add_tags_to_document</span><span class="bar-track"><span class="bar-fill" style="width:16%;background:var(--accent)"></span></span><span class="bar-count">128</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_list_documents</span><span class="bar-track"><span class="bar-fill" style="width:9%;background:var(--accent)"></span></span><span class="bar-count">74</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_move_documents</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">31</span></div>
+<div class="bar-row"><span class="bar-label">ToolSearch</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">26</span></div>
+<div class="bar-row"><span class="bar-label">Skill</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">12</span></div>
+<div class="bar-row"><span class="bar-label">mcp__readwise__reader_bulk_edit_document_metadata</span><span class="bar-track"><span class="bar-fill" style="width:4%;background:var(--accent)"></span></span><span class="bar-count">10</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>📁 Projects touched</h2>
+    <div class="bar-row"><span class="bar-label">arxiv-prospector</span><span class="bar-track"><span class="bar-fill" style="width:100%;background:var(--accent2)"></span></span><span class="bar-count">6882</span></div>
+<div class="bar-row"><span class="bar-label">~</span><span class="bar-track"><span class="bar-fill" style="width:28%;background:var(--accent2)"></span></span><span class="bar-count">1959</span></div>
+  </section>
+
+  <footer>Generated by the <strong>week-in-review</strong> skill &middot; 64 prompts &middot; 875 transcripts scanned</footer>
+</div>
+</body>
+</html>
